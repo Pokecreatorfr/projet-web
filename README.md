@@ -1,10 +1,6 @@
 # projet-web
 
-##Structure des pull request
-|--------------------------------------------------|
+Structure des pull request
 | Type : ( correctif , nouvelle fonctionalité ...) |
-|--------------------------------------------------|
 | description :                                    |
-|--------------------------------------------------|
 | notes supplementaires :                          |
-|--------------------------------------------------|
