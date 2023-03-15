@@ -9,10 +9,21 @@
   width: 50px;
   height: 10px;
 } */
+
 .logo {
   color: #707070;
   font-size: 50px;
   font-family: "OCR A Extended", sans-serif;
+}
+.login-name {
+  font-family: "OCR A Extended", sans-serif;
+  text-align: center;
+  font-size: 50px;
+  margin: 50px;
+}
+.form-container {
+  text-align: center;
+  margin: 10rem;
 }
 
 .nav-link {
@@ -20,7 +31,7 @@
   font-size: 35px;
 }
 
-.btn {
+.btn-header {
   width: 250px;
   background-color: #e6ff00;
   font-size: 30px;

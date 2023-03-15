@@ -9,25 +9,18 @@
       <link rel="stylesheet" href="./assets/vendors/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" href="./assets/vendors/fontawesome/css/all.min.css" />
       <link rel="stylesheet" href="./assets/style.css" />
+      <?php
+      echo '<link rel="stylesheet" href="./style.css" type="text/css"/>';
+      ?>
 </head>
 
 <body>
 
-
-      <footer class="text-center text-white">
+      <footer class="text-center">
             <div class="container p-4 pb-2">
                   <div class="row me-3">
-                        <div class="col-lg-3 col-md-3 col-sm-3 facebook">
-                              <i class="fab fa-facebook"></i> Facebook
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 insta">
-                              <i class="fab fa-instagram"></i> Instagram
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 twitter">
-                              <i class="fab fa-twitter"></i> Twitter
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 youtube">
-                              <i class="fab fa-youtube"></i> Youtube
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                              CESI
                         </div>
                   </div>
             </div>

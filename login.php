@@ -89,52 +89,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            font: 14px sans-serif;
-        }
-
-        .wrapper {
-            width: 360px;
-            padding: 20px;
-        }
-    </style>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0 " />
+      <title>Connexion</title>
+      <link rel="stylesheet" href="./assets/vendors/bootstrap/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="./assets/vendors/fontawesome/css/all.min.css" />
+      <?php
+    echo '<link rel="stylesheet" href="style.css" type="text/css"/>';
+    ?>
 </head>
 
 <body>
-    <div class="wrapper">
-        <h2>Login</h2>
-        <p>Please fill in your credentials to login.</p>
+      <h2 class="login-name">AUTHENTIFICATION</h2>
+      <div class="row g-3 align-items-center form-container">
 
-        <?php
-        if (!empty($login_err)) {
-            echo '<div class="alert alert-danger">' . $login_err . '</div>';
-        }
-        ?>
+            <div>
+                  <?php
+            if (!empty($login_err)) {
+                echo '<div class="alert alert-danger">' . $login_err . '</div>';
+            }
+            ?>
+            </div>
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
-                <span class="invalid-feedback"><?php echo $username_err; ?></span>
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
-                <span class="invalid-feedback"><?php echo $password_err; ?></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
-            </div>
-            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
-        </form>
-    </div>
+
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                  <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Identification</label>
+                        <div class="col-sm-8">
+                              <input type="text" name="username"
+                                    class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"
+                                    value="<?php echo $username; ?>">
+                        </div>
+                        <span class="invalid-feedback"><?php echo $username_err; ?></span>
+                  </div>
+                  <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Mot de passe</label>
+                        <div class="col-sm-8">
+                              <input type="password" name="password"
+                                    class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                              <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                        </div>
+                  </div>
+                  <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Se connecter">
+                  </div>
+                  <p>Pas encore inscrit? <a href="register.php">S'inscrire</a>.</p>
+            </form>
+      </div>
+      <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
+      <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
