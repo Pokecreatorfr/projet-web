@@ -1,15 +1,16 @@
 CREATE TABLE Personne(
-   id_p INT,
+   id_personne INT,
    Nom VARCHAR(50),
    Prenom VARCHAR(50),
-   PRIMARY KEY(id_p)
+   PRIMARY KEY(id_personne)
 );
 
 CREATE TABLE Entreprise(
-   id_e INT,
+   id_entreprise INT,
    nom VARCHAR(50) NOT NULL,
    photo_profil VARCHAR(50),
-   PRIMARY KEY(id_e)
+   validite VARCHAR(50),
+   PRIMARY KEY(id_entreprise)
 );
 
 CREATE TABLE ville(
@@ -24,16 +25,16 @@ CREATE TABLE type_compte(
    PRIMARY KEY(id_type)
 );
 
-CREATE TABLE Secteur_d_activité(
-   id_sec INT,
+CREATE TABLE Secteur_activité(
+   id_secteur INT,
    secteur VARCHAR(50),
-   PRIMARY KEY(id_sec)
+   PRIMARY KEY(id_secteur)
 );
 
 CREATE TABLE Promotion(
-   id_promo INT,
+   id_promotion INT,
    nom_promo VARCHAR(50),
-   PRIMARY KEY(id_promo)
+   PRIMARY KEY(id_promotion)
 );
 
 CREATE TABLE compte(
@@ -41,27 +42,24 @@ CREATE TABLE compte(
    login VARCHAR(50),
    photo_profil VARCHAR(50),
    mdp VARCHAR(50),
-   id_promo INT,
-   id_ville INT,
-   id_e INT,
-   id_p INT NOT NULL,
+   validite VARCHAR(50),
+   id_entreprise INT,
+   id_personne INT NOT NULL,
    id_type INT NOT NULL,
    PRIMARY KEY(id_c),
    UNIQUE(login),
-   FOREIGN KEY(id_promo) REFERENCES Promotion(id_promo),
-   FOREIGN KEY(id_ville) REFERENCES ville(id_ville),
-   FOREIGN KEY(id_e) REFERENCES Entreprise(id_e),
-   FOREIGN KEY(id_p) REFERENCES Personne(id_p),
+   FOREIGN KEY(id_entreprise) REFERENCES Entreprise(id_entreprise),
+   FOREIGN KEY(id_personne) REFERENCES Personne(id_personne),
    FOREIGN KEY(id_type) REFERENCES type_compte(id_type)
 );
 
 CREATE TABLE Site(
    id_site INT,
    id_ville INT NOT NULL,
-   id_e INT NOT NULL,
+   id_entreprise INT NOT NULL,
    PRIMARY KEY(id_site),
    FOREIGN KEY(id_ville) REFERENCES ville(id_ville),
-   FOREIGN KEY(id_e) REFERENCES Entreprise(id_e)
+   FOREIGN KEY(id_entreprise) REFERENCES Entreprise(id_entreprise)
 );
 
 CREATE TABLE Offre(
@@ -72,6 +70,7 @@ CREATE TABLE Offre(
    Date_post DATE,
    nombre_places SMALLINT,
    Remuneration FLOAT,
+   valide BOOLEAN,
    id_site INT NOT NULL,
    PRIMARY KEY(id_offre),
    FOREIGN KEY(id_site) REFERENCES Site(id_site)
@@ -96,21 +95,37 @@ CREATE TABLE WishList(
 );
 
 CREATE TABLE avoir(
-   id_e INT,
-   id_sec INT,
-   PRIMARY KEY(id_e, id_sec),
-   FOREIGN KEY(id_e) REFERENCES Entreprise(id_e),
-   FOREIGN KEY(id_sec) REFERENCES Secteur_d_activité(id_sec)
+   id_entreprise INT,
+   id_secteur INT,
+   PRIMARY KEY(id_entreprise, id_secteur),
+   FOREIGN KEY(id_entreprise) REFERENCES Entreprise(id_entreprise),
+   FOREIGN KEY(id_secteur) REFERENCES Secteur_activité(id_secteur)
 );
 
-CREATE TABLE evalue(
+CREATE TABLE evaluation(
    id_c INT,
-   id_e INT,
-   note INT,
+   id_entreprise INT,
+   note SMALLINT,
    commentaire TEXT,
-   PRIMARY KEY(id_c, id_e),
+   PRIMARY KEY(id_c, id_entreprise),
    FOREIGN KEY(id_c) REFERENCES compte(id_c),
-   FOREIGN KEY(id_e) REFERENCES Entreprise(id_e)
+   FOREIGN KEY(id_entreprise) REFERENCES Entreprise(id_entreprise)
+);
+
+CREATE TABLE centre(
+   id_c INT,
+   id_ville INT,
+   PRIMARY KEY(id_c, id_ville),
+   FOREIGN KEY(id_c) REFERENCES compte(id_c),
+   FOREIGN KEY(id_ville) REFERENCES ville(id_ville)
+);
+
+CREATE TABLE etre_promo(
+   id_c INT,
+   id_promotion INT,
+   PRIMARY KEY(id_c, id_promotion),
+   FOREIGN KEY(id_c) REFERENCES compte(id_c),
+   FOREIGN KEY(id_promotion) REFERENCES Promotion(id_promotion)
 );
 
 CREATE TABLE accepter(
