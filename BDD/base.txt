@@ -9,6 +9,7 @@ CREATE TABLE Entreprise(
    id_entreprise INT,
    nom VARCHAR(50) NOT NULL,
    photo_profil VARCHAR(50),
+   validite VARCHAR(50),
    PRIMARY KEY(id_entreprise)
 );
 
@@ -41,6 +42,7 @@ CREATE TABLE compte(
    login VARCHAR(50),
    photo_profil VARCHAR(50),
    mdp VARCHAR(50),
+   validite VARCHAR(50),
    id_entreprise INT,
    id_personne INT NOT NULL,
    id_type INT NOT NULL,
@@ -68,7 +70,7 @@ CREATE TABLE Offre(
    Date_post DATE,
    nombre_places SMALLINT,
    Remuneration FLOAT,
-   valide boolean,
+   valide BOOLEAN,
    id_site INT NOT NULL,
    PRIMARY KEY(id_offre),
    FOREIGN KEY(id_site) REFERENCES Site(id_site)
