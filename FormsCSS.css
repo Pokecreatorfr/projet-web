@@ -1,0 +1,45 @@
+h1{
+    text-align: center;
+    margin-bottom: 10%;
+}
+
+.form-label{
+    margin-left: 45%;
+}
+
+.form-control{
+   margin-left: 25%;
+    max-width: 50%;
+}
+
+.btn{
+    margin-left: 45%;
+}
+
+.civ {
+    margin-left: 100px;
+}
+
+#NbEtu{
+    margin-left:40%;
+}
+
+#secAc{
+    margin-left:45%;
+}
+
+.Offre{
+    margin-bottom: 2%;
+}
+
+.Poste{
+    margin: 5%;
+}
+
+.input-group{
+   margin: 2%;
+}
+
+.fichiers{
+    margin-left: -4%;
+}
