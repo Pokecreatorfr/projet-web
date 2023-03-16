@@ -1,15 +1,13 @@
 <?php
 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', '');
- 
-/* Connection à la base de données */
-$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
- 
-// Vérifier la connexion
-if($link === false){
-    die("ERROR: Connexion échouée " . mysqli_connect_error());
+$servername = "localhost";
+$username = "root";
+$password = "";
+
+try {
+    $pdo = new PDO("mysql:host=$servername;dbname=workshop8", $username, $password);
+    // set the PDO error mode to exception
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
 }
-?>
