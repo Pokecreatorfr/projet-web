@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CréationEntreprise</title>
+    <title>Création Candidature</title>
     <link rel="stylesheet" href="./assets/vendors/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="./assets/vendors/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="FormsCSS.css">
@@ -26,22 +26,22 @@
         </div>
         <div class="row">
 
-            <div class="col fichiers">
+            <div class="col lettre">
                 <div class="input-group mb-3">
                     <input type="file" class="form-control" id="inputGroupFile02">
-                    <label class="input-group-text" for="inputGroupFile02">Charger</label>
+                    <label class="input-group-text" for="inputGroupFile02">Charger Lettre</label>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col CV ">
                 <div class="input-group mb-3">
                     <input type="file" class="form-control" id="inputGroupFile02">
-                    <label class="input-group-text" for="inputGroupFile02">Charger</label>
+                    <label class="input-group-text" for="inputGroupFile02">Charger CV</label>
                 </div>
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary">Soumettre</button>
+        <button type="button" class="btn btn-primary candidat">Candidater</button>
     
     <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
     <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>    

@@ -40,6 +40,15 @@ h1{
    margin: 2%;
 }
 
-.fichiers{
-    margin-left: -4%;
+.lettre{
+    margin-left: -10%;
+    margin-right: -16%;
+}
+
+.CV{
+    margin-left: -8%;
+}
+
+.candidat{
+    margin-left: 47%;
 }
