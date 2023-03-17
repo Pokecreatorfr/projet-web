@@ -15,7 +15,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       <meta charset="UTF-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0 " />
-      <title>Welcome</title>
+      <title>Profil</title>
       <link rel="stylesheet" href="../../assets/vendors/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" href="../../assets/vendors/fontawesome/css/all.min.css" />
       <link rel="stylesheet" href="../../style.css" type="text/css" />
@@ -30,8 +30,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
       <!-- Navbar -->
       <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-white">
-                  <!-- Container wrapper -->
+            <nav class="navbar navbar-expand-lg navbar-light">
+
                   <div class="container-fluid">
                         <!-- Toggle button -->
                         <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
@@ -50,7 +50,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                               <div class="navbar-nav">
                                     <a class="nav-link" href="../homePage.php">Acceuil</a>
                                     <a class="nav-link" href="../offres/listOffre.php">Offres</a>
-                                    <a class="nav-link active" href="#">Entreprises</a>
+                                    <a class="nav-link" href="../entreprise/listEntreprise.php">Entreprises</a>
                               </div>
                         </div>
 
@@ -60,7 +60,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     <?php echo htmlspecialchars($_SESSION["username"]); ?>
                               </button>
                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="../comptes/profil.php">Profil</a></li>
+                                    <li><a class="dropdown-item" href="#">Profil</a></li>
                                     <li><a class="dropdown-item" href="../logout.php" class="">Se déconnecter</a></li>
                               </ul>
                         </div>
@@ -68,6 +68,51 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             </nav>
       </div>
 
+      <div class="bg-secondary">
+            <div class="container">
+                  <div class="card text-center mb-5">
+                        <div class="row g-0">
+                              <div class="col-md-4">
+                                    <img src="" alt="" class="img-fluid rounded-start" />
+                              </div>
+                              <div class="col-md-8">
+                                    <div class="card-body">
+                                          <h2 class="card-title"><?php echo htmlspecialchars($_SESSION["username"]); ?>
+                                          </h2>
+                                          <p class="card-text">
+                                                Centre :
+                                          </p>
+                                          <p class="card-text">
+                                                Promotion :
+                                          </p>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="card text-center mb-5">
+                        <div class="card-header">Liste des candidatures</div>
+                        <div class="card-body">
+                              <h5 class="card-title">1</h5>
+                              <h5 class="card-title">1</h5>
+                              <h5 class="card-title">1</h5>
+                              <h5 class="card-title">1</h5>
+                              <p class="card-text"></p>
+                        </div>
+                        <div class="card-footer text-muted"></div>
+                  </div>
+                  <div class="card text-center mb-5">
+                        <div class="card-header">WishList</div>
+                        <div class="card-body">
+                              <h5 class="card-title">1</h5>
+                              <h5 class="card-title">1</h5>
+                              <h5 class="card-title">1</h5>
+                              <h5 class="card-title">1</h5>
+                              <p class="card-text"></p>
+                        </div>
+                        <div class="card-footer text-muted"></div>
+                  </div>
+            </div>
+      </div>
       <?php
       include '../footer.php';
       ?>
