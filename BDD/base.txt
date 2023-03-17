@@ -1,12 +1,12 @@
 CREATE TABLE Personne(
-   id_personne INT,
+   id_personne INT AUTO_INCREMENT,
    Nom VARCHAR(50),
    Prenom VARCHAR(50),
    PRIMARY KEY(id_personne)
 );
 
 CREATE TABLE Entreprise(
-   id_entreprise INT,
+   id_entreprise INT AUTO_INCREMENT,
    nom VARCHAR(50) NOT NULL,
    photo_profil VARCHAR(50),
    validite VARCHAR(50),
@@ -14,31 +14,31 @@ CREATE TABLE Entreprise(
 );
 
 CREATE TABLE ville(
-   id_ville INT,
+   id_ville INT AUTO_INCREMENT,
    ville VARCHAR(50),
    PRIMARY KEY(id_ville)
 );
 
 CREATE TABLE type_compte(
-   id_type INT,
+   id_type INT AUTO_INCREMENT,
    type VARCHAR(50),
    PRIMARY KEY(id_type)
 );
 
 CREATE TABLE Secteur_activité(
-   id_secteur INT,
+   id_secteur INT AUTO_INCREMENT,
    secteur VARCHAR(50),
    PRIMARY KEY(id_secteur)
 );
 
 CREATE TABLE Promotion(
-   id_promotion INT,
+   id_promotion INT AUTO_INCREMENT,
    nom_promo VARCHAR(50),
    PRIMARY KEY(id_promotion)
 );
 
 CREATE TABLE compte(
-   id_c INT,
+   id_c INT AUTO_INCREMENT,
    login VARCHAR(50),
    photo_profil VARCHAR(50),
    mdp VARCHAR(50),
@@ -54,7 +54,7 @@ CREATE TABLE compte(
 );
 
 CREATE TABLE Site(
-   id_site INT,
+   id_site INT AUTO_INCREMENT,
    id_ville INT NOT NULL,
    id_entreprise INT NOT NULL,
    PRIMARY KEY(id_site),
@@ -63,7 +63,7 @@ CREATE TABLE Site(
 );
 
 CREATE TABLE Offre(
-   id_offre INT,
+   id_offre INT AUTO_INCREMENT,
    Titre VARCHAR(50),
    Compétences TEXT,
    Durée VARCHAR(50),
