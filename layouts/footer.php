@@ -17,13 +17,46 @@
 <body>
 
       <footer class="text-center">
-            <div class="container p-4 pb-2">
-                  <div class="row me-3">
-                        <div class="col-lg-3 col-md-3 col-sm-3">
-                              CESI
+            <footer class="bg-light text-center text-lg-start">
+                  <!-- Grid container -->
+                  <div class="container p-4">
+                        <!--Grid row-->
+                        <div class="row">
+                              <!--Grid column-->
+                              <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                                    <h5 class="text-uppercase">CESI Ecole d'ingénieurs</h5>
+
+                                    <p>
+                                          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+                                          molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
+                                          aliquam voluptatem veniam, est atque cumque eum delectus sint!
+                                    </p>
+                              </div>
+                              <!--Grid column-->
+
+                              <!--Grid column-->
+                              <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                                    <h5 class="text-uppercase">Recherche de stage</h5>
+
+                                    <p>
+                                          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+                                          molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
+                                          aliquam voluptatem veniam, est atque cumque eum delectus sint!
+                                    </p>
+                              </div>
+                              <!--Grid column-->
                         </div>
+                        <!--Grid row-->
                   </div>
-            </div>
+                  <!-- Grid container -->
+
+                  <!-- Copyright -->
+                  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                        © 2023 Copyright:
+                        <a class="text-dark" href="https://www.cesi.fr/">cesi.fr</a>
+                  </div>
+                  <!-- Copyright -->
+            </footer>
       </footer>
       <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
       <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>

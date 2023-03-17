@@ -52,3 +52,37 @@ body {
   margin: 10rem;
   background-color: #a6a6a6;
 }
+
+/* Hero section */
+.hero-container {
+  background-color: #000000;
+}
+.hero-section {
+  padding-left: 200px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+  color: white;
+  width: 100%;
+}
+.hero-section h1,
+.hero-section p {
+  font-size: 100px;
+}
+.hero-section h1 span,
+.hero-section p span {
+  color: #e6ff00;
+}
+.hero-section p {
+  font-size: 50px;
+}
+.home .text {
+  text-align: center;
+  font-size: 30px;
+  padding: 50px 200px 50px 200px;
+}
+
+.search-form {
+  padding: 80px;
+  background-color: #cdcdcd;
+}
