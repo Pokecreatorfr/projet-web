@@ -4,8 +4,8 @@ session_start();
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("Location: layouts/homePage.php");
-    exit;
+      header("Location: layouts/homePage.php");
+      exit;
 }
 
 // Include config file
@@ -17,42 +17,44 @@ $username_err = $password_err = $login_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check if username is empty
-    if (empty($_POST['username']) || empty($_POST['password'])) {
-        $login_err = "Identifiant ou mot de passe incorrect";
-    }
-    // Validate credentials
-    else {
-        // Prepare a select statement
-        $sql = "SELECT * FROM users WHERE username = :username and password = :password";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':username', $param_username, PDO::PARAM_STR);
-        $stmt->bindParam(':password', $param_password, PDO::PARAM_STR);
-        // Attempt to execute the prepared statement
-        $stmt->execute(
-            array(
-                'username' => $_POST['username'],
-                'password' => $_POST['password'],
-            )
-        );
-
-        $count = $stmt->rowCount();
-
-        if ($count) {
-            // Store data in session variables
-            $_SESSION["loggedin"] = true;
-            $_SESSION["username"] = $_POST["username"];
-            // Redirect user to welcome page
-            header("Location: layouts/homePage.php");
-            exit();
-        } else {
+      // Check if username is empty
+      if (empty($_POST['username']) || empty($_POST['password'])) {
             $login_err = "Identifiant ou mot de passe incorrect";
-        }
-        // Close statement
-        unset($stmt);
-    }
-    // Close connection
-    unset($pdo);
+      }
+      // Validate credentials
+      else {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            // Prepare a select statement
+            $sql = "SELECT * FROM users WHERE username = :username and password = :password";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':username', $param_username, PDO::PARAM_STR);
+            $stmt->bindParam(':password', $param_password, PDO::PARAM_STR);
+            // Attempt to execute the prepared statement
+            $stmt->execute(
+                  array(
+                        'username' =>  $username,
+                        'password' =>  $password,
+                  )
+            );
+
+            $count = $stmt->rowCount();
+
+            if ($count) {
+                  // Store data in session variables
+                  $_SESSION["loggedin"] = true;
+                  $_SESSION["username"] =  $username;
+                  // Redirect user to welcome page
+                  header("Location: layouts/homePage.php");
+                  exit();
+            } else {
+                  $login_err = "Identifiant ou mot de passe incorrect";
+            }
+            // Close statement
+            unset($stmt);
+      }
+      // Close connection
+      unset($pdo);
 }
 
 ?>
@@ -76,10 +78,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="row g-3 align-items-center">
                   <div>
                         <?php
-                if (!empty($login_err)) {
-                    echo '<div class="alert alert-danger">' . $login_err . '</div>';
-                }
-                ?>
+                        if (!empty($login_err)) {
+                              echo '<div class="alert alert-danger">' . $login_err . '</div>';
+                        }
+                        ?>
                   </div>
 
                   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -103,8 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                               </div>
                         </div>
                         <div class="form-group">
-                              <input type="submit" name="login" class="btn btn-primary btn-header"
-                                    value="Se connecter" />
+                              <input type="submit" name="login" class="btn btn-primary btn-header" value="Connexion" />
                         </div>
                         <p>Pas encore inscrit? <a href="register.php">S'inscrire</a></p>
                   </form>

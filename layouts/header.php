@@ -9,6 +9,9 @@
       <link rel="stylesheet" href="./assets/vendors/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" href="./assets/vendors/fontawesome/css/all.min.css" />
       <link rel="stylesheet" href="assets/style.css" type="text/css" />
+      <?php
+      echo '<link rel="stylesheet" href="./style.css" type="text/css"/>';
+      ?>
 </head>
 
 <body>
@@ -25,10 +28,12 @@
                               <div class="navbar-nav">
                                     <a class="nav-link active" aria-current="page" href="">Offres</a>
                                     <a class="nav-link" href="">Entreprises</a>
-                                    <a class="nav-link" href=""><button
-                                                class="btn btn-primary btn-header">S'inscrire</button></a>
+                                    <a class="nav-link" href="">
+                                          <button class="btn btn-primary btn-header">S'inscrire</button>
+                                    </a>
                                     <a class="nav-link " href="login.php">
-                                          <button class="btn btn-primary btn-header">Se connecter</button></a>
+                                          <button class="btn btn-primary btn-header">Se connecter</button>
+                                    </a>
                               </div>
                         </div>
                   </div>

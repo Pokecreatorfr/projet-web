@@ -21,10 +21,10 @@
             </div>
             <div class="search-form">
                   <form class="row g-3">
-                        <div class="col-md-11">
+                        <div class="col-md-10">
                               <input type="text" class="form-control" id="" placeholder="Mots clés">
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-2 d-grid gap-2 col-6 mx-auto">
                               <input type="submit" name="login" class="btn btn-primary" value="Rechercher" />
                         </div>
                         <div class="col-md-4">
@@ -48,7 +48,6 @@
                                     <option>...</option>
                               </select>
                         </div>
-
                   </form>
             </div>
             <div class="text">
