@@ -107,7 +107,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="form-group">
                               <input type="submit" name="login" class="btn btn-primary btn-header" value="Connexion" />
                         </div>
-                        <p>Pas encore inscrit? <a href="register.php">S'inscrire</a></p>
                   </form>
             </div>
       </div>
