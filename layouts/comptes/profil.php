@@ -57,6 +57,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                               </button>
                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li><a class="dropdown-item" href="#">Profil</a></li>
+                                    <li><a class="dropdown-item" href="#">Gestion</a></li>
                                     <li><a class="dropdown-item" href="../logout.php" class="">Se déconnecter</a></li>
                               </ul>
                         </div>
@@ -84,16 +85,25 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     </div>
                               </div>
                         </div>
+                  </div>
 
-                        <div class="row">
-                              <div class="col-6">
-                                    <button type="button" class="btn btn-warning">Modifier</button>
-                              </div>
-                              <div class="col-6">
-                                    <button type="button" class="btn btn-danger">Supprimer</button>
+                  <div class="card text-center mb-5">
+                        <div class="card-body">
+                              <div class="row">
+                                    <div class="col-4">
+                                          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ModificationProfil">Modifier</button>
+                                    </div>
+                                    <div class="col-4">
+                                          <a href="./listComptes.php">
+                                                <button type="button" class="btn btn-warning">Liste des
+                                                      comptes</button>
+                                          </a>
+                                    </div>
+                                    <div class="col-4">
+                                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Supprimerprofil">Supprimer</button>
+                                    </div>
                               </div>
                         </div>
-
                   </div>
 
                   <div class="card text-center mb-5">
@@ -120,6 +130,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                   </div>
             </div>
       </div>
+
       <?php
       include '../footer.php';
       ?>
@@ -129,3 +140,39 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 </body>
 
 </html>
+
+<div class="modal fade" id="ModificationProfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+            <div class="modal-content">
+                  <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modification du profil</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                        ...
+                  </div>
+                  <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-primary">Sauvegarder</button>
+                  </div>
+            </div>
+      </div>
+</div>
+
+<div class="modal fade" id="Supprimerprofil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+            <div class="modal-content">
+                  <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Suppression</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                        Voulez-vous vraiment supprimer ce profil?
+                  </div>
+                  <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-danger">Supprimer</button>
+                  </div>
+            </div>
+      </div>
+</div>
