@@ -10,7 +10,7 @@ CREATE TABLE Entreprise(
    id_entreprise INT AUTO_INCREMENT,
    nom VARCHAR(50) NOT NULL,
    photo_profil VARCHAR(50),
-   validite VARCHAR(50),
+   validite BOOLEAN,
    nombre_etudiant INT,
    PRIMARY KEY(id_entreprise)
 );
@@ -46,7 +46,7 @@ CREATE TABLE compte(
    login VARCHAR(50),
    photo_profil VARCHAR(50),
    mdp VARCHAR(50),
-   validite VARCHAR(50),
+   validite BOOLEAN,
    id_entreprise INT,
    id_personne INT NOT NULL,
    id_type INT NOT NULL,
@@ -141,3 +141,7 @@ CREATE TABLE accepter(
 );
 
 INSERT INTO type_compte (type) VALUES ('Admin'), ('Pro'), ('Etudiant') , ('Pilote');
+
+INSERT INTO personne (Nom , Prenom , sexe) VALUES ( 'Vignaud' , 'Mathéo' , 'H') , ( 'Amallah' ,  'Youssef' , 'H') , ('Hounkpati' , 'Guillaume' , 'H') , ('Yohann-Sterling' , 'Nsome' , 'H') ; 
+
+INSERT INTO compte (login , mdp , validite , id_type , id_personne)  VALUES ('mvignaud' , 'azerty' , 1 , (SELECT id_type FROM type_compte WHERE type = 'Admin') , (SELECT id_personne FROM personne WHERE Nom = 'Vignaud' AND Prenom = 'Mathéo')) , ('yamallah' , 'rololo' , 1 , (SELECT id_type FROM type_compte WHERE type = 'Admin') , (SELECT id_personne FROM personne WHERE Nom = 'Amallah' AND Prenom = 'Youssef')) ,('ghounkpati' , 'mrsérieux' , 1 , (SELECT id_type FROM type_compte WHERE type = 'Admin') , (SELECT id_personne FROM personne WHERE Nom = 'Hounkpati' AND Prenom = 'Guillaume')) , ('ynsome' , 'lepetitfarceur' , 1 , (SELECT id_type FROM type_compte WHERE type = 'Admin') , (SELECT id_personne FROM personne WHERE Nom = 'Yohann-Sterling' AND Prenom = 'Nsome'));
