@@ -57,6 +57,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                               </button>
                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li><a class="dropdown-item" href="./comptes/profil.php">Profil</a></li>
+                                    <?php
+                                    if ($_SESSION['username'] == 'root') {
+                                          echo '<li><a class="dropdown-item" href="./admin/adminPage.php">Paramètres</a></li>';
+                                    } ?>
                                     <li><a class="dropdown-item" href="logout.php" class="">Se déconnecter</a></li>
                               </ul>
                         </div>

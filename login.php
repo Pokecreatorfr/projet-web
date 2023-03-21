@@ -91,7 +91,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <input type="text" name="username"
                                           class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>"
                                           value="<?php echo $username; ?>" />
-
                               </div>
 
                         </div>
