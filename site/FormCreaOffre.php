@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CréationEntreprise</title>
+    <title>Création Offre</title>
     <link rel="stylesheet" href="./assets/vendors/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="./assets/vendors/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="FormsCSS.css">
