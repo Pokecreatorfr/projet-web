@@ -80,16 +80,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                               <div class="col-12">
                                     <div class="mt-5 mb-3">
                                           <h2 class="pull-left">
-                                                <div class="dropdown mb-3">
-                                                      <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                                            Profil
-                                                      </button>
-                                                      <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item" href="#">Pilotes</a></li>
-                                                            <li><a class="dropdown-item" href="#">Etudiants</a>
-                                                      </ul>
-                                                </div>
                                                 <div>
                                                       <form class="d-flex" role="search">
                                                             <input class="form-control me-2" type="search"
@@ -103,7 +93,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                           <?php
 
                                           if ($_SESSION['username'] == 'root') {
-                                                echo '<a href="createCompte.php" class="btn btn-primary pull-right"><i
+                                                echo '<a href="createOffre.php" class="btn btn-primary pull-right"><i
                                                       class="fa fa-plus"></i>
                                                 Créer une offre</a>';
                                           } ?>
@@ -114,26 +104,35 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     require_once "../../config.php";
 
                                     // Attempt select query execution
-                                    $sql = "SELECT * FROM users";
+                                    $sql = "SELECT * FROM offre";
                                     if ($result = $pdo->query($sql)) {
                                           if ($result->rowCount() > 0) {
                                                 echo '<table class="table table-bordered table-striped">';
                                                 echo "<thead>";
                                                 echo "<tr>";
                                                 echo "<th>#</th>";
-                                                echo "<th>Identifiants</th>";
-                                                echo "<th>Action</th>";
+                                                echo "<th>Titre</th>";
+                                                echo "<th>Compétence</th>";
+                                                echo "<th>Durée</th>";
+                                                echo "<th>Date</th>";
+                                                echo "<th>Nombre de places</th>";
+                                                echo "<th>Rémunération</th>";
                                                 echo "</tr>";
                                                 echo "</thead>";
                                                 echo "<tbody>";
                                                 while ($row = $result->fetch()) {
                                                       echo "<tr>";
-                                                      echo "<td>" . $row['id'] . "</td>";
-                                                      echo "<td>" . $row['username'] . "</td>";
+                                                      echo "<td>" . $row['id_offre'] . "</td>";
+                                                      echo "<td>" . $row['Titre'] . "</td>";
+                                                      echo "<td>" . $row['Compétences'] . "</td>";
+                                                      echo "<td>" . $row['Durée'] . "</td>";
+                                                      echo "<td>" . $row['Date_post'] . "</td>";
+                                                      echo "<td>" . $row['nombre_places'] . "</td>";
+                                                      echo "<td>" . $row['Remuneration'] . "</td>";
                                                       echo "<td>";
-                                                      echo '<a href="profil.php?id=' . $row['id'] . '" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                                      echo '<a href="update.php?id=' . $row['id'] . '" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                                      echo '<a href="delete.php?id=' . $row['id'] . '" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                                      echo '<a href="profil.php?id=' . $row['id_offre'] . '" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                                      echo '<a href="update.php?id=' . $row['id_offre'] . '" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                                      echo '<a href="delete.php?id=' . $row['idid_offre'] . '" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                                       echo "</td>";
                                                       echo "</tr>";
                                                 }
@@ -142,10 +141,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                 // Free result set
                                                 unset($result);
                                           } else {
-                                                echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+                                                echo '<div class="alert alert-danger"><em>Aucune donnée</em></div>';
                                           }
                                     } else {
-                                          echo "Oops! Something went wrong. Please try again later.";
+                                          echo "Oops! Réessayer plus tard";
                                     }
                                     // Close connection
                                     unset($pdo);

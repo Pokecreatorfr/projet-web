@@ -23,7 +23,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+            integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
       </script>
 </head>
 
@@ -34,7 +35,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
                   <div class="container-fluid">
                         <!-- Toggle button -->
-                        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                              data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                              aria-expanded="false" aria-label="Toggle navigation">
                               <i class="fas fa-bars"></i>
                         </button>
 
@@ -53,13 +56,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         </div>
 
                         <div class="dropdown">
-                              <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              <button class="btn btn-outline-info dropdown-toggle" type="button"
+                                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <?php echo htmlspecialchars($_SESSION["username"]); ?>
                               </button>
                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li><a class="dropdown-item" href="./profil.php">Profil</a></li>
                                     <?php
-
                                     if ($_SESSION['username'] == 'root') {
                                           echo '<li><a class="dropdown-item" href="../admin/adminPage.php">Paramètres</a></li>';
                                     } ?>
@@ -78,7 +81,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     <div class="mt-5 mb-3">
                                           <h2 class="pull-left">
                                                 <div class="dropdown mb-3">
-                                                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                      <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
                                                             Profil
                                                       </button>
                                                       <ul class="dropdown-menu">
@@ -88,8 +92,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                 </div>
                                                 <div>
                                                       <form class="d-flex" role="search">
-                                                            <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
-                                                            <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i>
+                                                            <input class="form-control me-2" type="search"
+                                                                  placeholder="" aria-label="Search">
+                                                            <button class="btn btn-outline-success" type="submit"><i
+                                                                        class="fa fa-search"></i>
                                                             </button>
                                                       </form>
                                                 </div>
@@ -108,26 +114,30 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     require_once "../../config.php";
 
                                     // Attempt select query execution
-                                    $sql = "SELECT * FROM users";
+                                    $sql = "SELECT * FROM personne";
                                     if ($result = $pdo->query($sql)) {
                                           if ($result->rowCount() > 0) {
                                                 echo '<table class="table table-bordered table-striped">';
                                                 echo "<thead>";
                                                 echo "<tr>";
                                                 echo "<th>#</th>";
-                                                echo "<th>Identifiants</th>";
+                                                echo "<th>Nom</th>";
+                                                echo "<th>Prénom</th>";
+                                                echo "<th>Sexe</th>";
                                                 echo "<th>Action</th>";
                                                 echo "</tr>";
                                                 echo "</thead>";
                                                 echo "<tbody>";
                                                 while ($row = $result->fetch()) {
                                                       echo "<tr>";
-                                                      echo "<td>" . $row['id'] . "</td>";
-                                                      echo "<td>" . $row['username'] . "</td>";
+                                                      echo "<td>" . $row['id_personne'] . "</td>";
+                                                      echo "<td>" . $row['Nom'] . "</td>";
+                                                      echo "<td>" . $row['Prenom'] . "</td>";
+                                                      echo "<td>" . $row['sexe'] . "</td>";
                                                       echo "<td>";
-                                                      echo '<a href="profil.php?id=' . $row['id'] . '" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                                      echo '<a href="update.php?id=' . $row['id'] . '" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                                      echo '<a href="delete.php?id=' . $row['id'] . '" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                                      echo '<a href="profil.php?id=' . $row['id_personne'] . '" class="mr-6" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                                      echo '<a href="update.php?id=' . $row['id_personne'] . '" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                                      echo '<a href="delete.php?id=' . $row['id_personne'] . '" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                                       echo "</td>";
                                                       echo "</tr>";
                                                 }
