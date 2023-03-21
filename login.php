@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $username = $_POST['username'];
             $password = $_POST['password'];
             // Prepare a select statement
-            $sql = "SELECT * FROM users WHERE username = :username and password = :password";
+            $sql = "SELECT * FROM compte WHERE login = :username and mdp = :password";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':username', $param_username, PDO::PARAM_STR);
             $stmt->bindParam(':password', $param_password, PDO::PARAM_STR);
@@ -44,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   // Store data in session variables
                   $_SESSION["loggedin"] = true;
                   $_SESSION["username"] =  $username;
+                  $_SESSION["id"] =  $stmt->fetch()['id_type'];
                   // Redirect user to welcome page
                   header("Location: layouts/homePage.php");
                   exit();
