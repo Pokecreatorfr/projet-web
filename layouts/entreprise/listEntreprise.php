@@ -20,12 +20,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       <link rel="stylesheet" href="../../assets/vendors/bootstrap/css/bootstrap.min.css" />
       <link rel="stylesheet" href="../../assets/vendors/fontawesome/css/all.min.css" />
       <link rel="stylesheet" href="../../style.css" type="text/css" />
+
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-            integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
-      </script>
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css" />
 </head>
 
 <body>
@@ -80,83 +79,62 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                               <div class="col-12">
                                     <div class="mt-5 mb-3">
                                           <h2 class="pull-left">
-                                                <div>
-                                                      <form class="d-flex" role="search">
-                                                            <input class="form-control me-2" type="search"
-                                                                  placeholder="" aria-label="Search">
-                                                            <button class="btn btn-outline-success" type="submit"><i
-                                                                        class="fa fa-search"></i>
-                                                            </button>
-                                                      </form>
-                                                </div>
-                                          </h2>
-                                          <?php
+                                                <?php
 
-                                          if ($_SESSION['id'] == 1) {
-                                                echo '<a href="createEntreprise.php" class="btn btn-primary pull-right"><i
+                                                if ($_SESSION['id'] == 1) {
+                                                      echo '<a href="createEntreprise.php" class="btn btn-primary"><i
                                                       class="fa fa-plus"></i>
                                                 Créer une entreprise</a>';
-                                          } ?>
-
+                                                } ?>
+                                          </h2>
                                     </div>
-                                    <?php
-                                    // Include config file
-                                    require_once "../../config.php";
-
-                                    // Attempt select query execution
-                                    $sql = "SELECT * FROM users";
-                                    if ($result = $pdo->query($sql)) {
-                                          if ($result->rowCount() > 0) {
-                                                echo '<table class="table table-bordered table-striped">';
-                                                echo "<thead>";
-                                                echo "<tr>";
-                                                echo "<th>#</th>";
-                                                echo "<th>Identifiants</th>";
-                                                echo "<th>Action</th>";
-                                                echo "</tr>";
-                                                echo "</thead>";
-                                                echo "<tbody>";
-                                                while ($row = $result->fetch()) {
-                                                      echo "<tr>";
-                                                      echo "<td>" . $row['id'] . "</td>";
-                                                      echo "<td>" . $row['username'] . "</td>";
-                                                      echo "<td>";
-                                                      echo '<a href="profil.php?id=' . $row['id'] . '" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                                      echo '<a href="update.php?id=' . $row['id'] . '" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                                      echo '<a href="delete.php?id=' . $row['id'] . '" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
-                                                      echo "</td>";
-                                                      echo "</tr>";
-                                                }
-                                                echo "</tbody>";
-                                                echo "</table>";
-                                                // Free result set
-                                                unset($result);
-                                          } else {
-                                                echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
-                                          }
-                                    } else {
-                                          echo "Oops! Something went wrong. Please try again later.";
-                                    }
-                                    // Close connection
-                                    unset($pdo);
-                                    ?>
                               </div>
+                              <?php
+                              // Include config file
+                              require_once "../../config.php";
+
+                              // Attempt select query execution
+                              $sql = "SELECT * FROM entreprise";
+                              if ($result = $pdo->query($sql)) {
+                                    if ($result->rowCount() > 0) {
+                                          echo '<div class="col-md-12">';
+                                          echo '<table id="dataList" class="table table-bordered table-striped">';
+                                          echo "<thead>";
+                                          echo "<tr>";
+                                          echo "<th>#</th>";
+                                          echo "<th>Nom de l'entreprise</th>";
+                                          echo "<th>Nombre d'étudiants</th>";
+                                          echo "<th>Action</th>";
+                                          echo "</tr>";
+                                          echo "</thead>";
+                                          echo "<tbody>";
+                                          while ($row = $result->fetch()) {
+                                                echo "<tr>";
+                                                echo "<td>" . $row['id_entreprise'] . "</td>";
+                                                echo "<td>" . $row['nom'] . "</td>";
+                                                echo "<td>" . $row['nombre_etudiant'] . "</td>";
+                                                echo "<td>";
+                                                echo '<a href="profil.php?id=' . $row['id_entreprise'] . '" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                                echo '<a href="update.php?id=' . $row['id_entreprise'] . '" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                                echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                                echo "</td>";
+                                                echo "</tr>";
+                                          }
+                                          echo "</tbody>";
+                                          echo "</table>";
+                                          echo "</div>";
+                                          // Free result set
+                                          unset($result);
+                                    } else {
+                                          echo '<div class="alert alert-danger"><em>Aucune donnée</em></div>';
+                                    }
+                              } else {
+                                    echo "Oops! Réessayer plus tard.";
+                              }
+                              // Close connection
+                              unset($pdo);
+                              ?>
                         </div>
-                        <nav aria-label="...">
-                              <ul class="pagination">
-                                    <li class="page-item disabled">
-                                          <span class="page-link">Précédent</span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active" aria-current="page">
-                                          <span class="page-link">2</span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                          <a class="page-link" href="#">Suivant</a>
-                                    </li>
-                              </ul>
-                        </nav>
                   </div>
             </div>
       </div>
@@ -167,6 +145,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
       <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
       <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+      <!-- Script datatable -->
+      <?php
+      include '../../datatable.php'
+      ?>
 </body>
 
 </html>

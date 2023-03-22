@@ -7,11 +7,11 @@
 </script>
 <script>
 $(document).ready(function() {
-      $('#listCompte').DataTable({
+      $('#dataList').DataTable({
             "language": {
                   "decimal": "",
                   "emptyTable": "Aucune donnée",
-                  "info": " _START_ à _END_ de _TOTAL_ données",
+                  "info": " _START_  - _END_ / _TOTAL_ données",
                   "infoEmpty": "Showing 0 to 0 of 0 entries",
                   "infoFiltered": "",
                   "infoPostFix": "",

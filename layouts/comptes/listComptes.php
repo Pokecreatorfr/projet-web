@@ -122,7 +122,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     if ($result = $pdo->query($sql)) {
                                           if ($result->rowCount() > 0) {
                                                 echo '<div class="col-md-12">';
-                                                echo '<table id="listCompte" class="table table-bordered table-striped">';
+                                                echo '<table id="dataList" class="table table-bordered table-striped">';
                                                 echo "<thead>";
                                                 echo "<tr>";
                                                 echo "<th>#</th>";
