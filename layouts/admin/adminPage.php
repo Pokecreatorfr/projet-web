@@ -64,7 +64,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
                                     <?php
 
-                                    if ($_SESSION['username'] == 'root') {
+                                    if ($_SESSION['id'] == 1) {
                                           echo '<li><a class="dropdown-item" href="#">Paramètres</a></li>';
                                     } ?>
                                     <li><a class="dropdown-item" href="../logout.php" class="">Se déconnecter</a></li>
@@ -78,96 +78,108 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             <div class="container">
                   <!-- Begin Page Content -->
                   <div class="container-fluid">
-
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                               <h1 class="h1 mb-0">PARAMETRES</h1>
                         </div>
                         <div class="row">
                               <div class="col-xl-3 col-md-6 mb-4">
-                                    <a href="../comptes/listComptes.php">
-                                          <div class="card border-left-primary shadow h-100 py-2">
-                                                <div class="card-body">
-                                                      <div class="row no-gutters align-items-center">
-                                                            <div class="col mr-2">
-                                                                  <div
-                                                                        class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                                        Gérer des comptes</div>
-                                                                  <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                                        100
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                          <div class="card-body">
+                                                <div class="row no-gutters">
+                                                      <div class="col mr-2">
+                                                            <div
+                                                                  class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                                  <a href="../comptes/listComptes.php"
+                                                                        class="btn btn-primary"> Gérer les
+                                                                        comptes</a>
+                                                                  <div class="h2 mb-0 font-weight-bold text-gray-800">
+                                                                        50
                                                                   </div>
                                                             </div>
-                                                            <div class="col-auto">
-                                                                  <i class="fas fa-users fa-2x text-gray-300"></i>
+                                                      </div>
+                                                      <div class="col-auto">
+                                                            <i class="fas fa-users fa-3x text-gray-300"></i>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+
+                              <div class="col-xl-3 col-md-6 mb-4">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                          <div class="card-body">
+                                                <div class="row no-gutters">
+                                                      <div class="col mr-2">
+                                                            <div
+                                                                  class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                                  <a href="../entreprise/listEntreprise.php"
+                                                                        class="btn btn-primary">
+                                                                        Gérer les entreprises
+                                                                  </a>
+                                                                  <div class="h2 mb-0 font-weight-bold text-gray-800">
+                                                                        50
+                                                                  </div>
                                                             </div>
                                                       </div>
-                                                </div>
-                                    </a>
-                              </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-6 mb-4">
-                              <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                          <div class="row no-gutters align-items-center">
-                                                <div class="col mr-2">
-                                                      <div
-                                                            class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                            Gérer les entreprises</div>
-                                                      <div class="h5 mb-0 font-weight-bold text-gray-800">50
+                                                      <div class="col-auto">
+                                                            <i class="fas fa-building fa-3x text-gray-300"></i>
                                                       </div>
-                                                </div>
-                                                <div class="col-auto">
-                                                      <i class="fas fa-building fa-2x text-gray-300"></i>
                                                 </div>
                                           </div>
                                     </div>
                               </div>
-                        </div>
 
-                        <div class="col-xl-3 col-md-6 mb-4">
-                              <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                          <div class="row no-gutters align-items-center">
-                                                <div class="col mr-2">
-                                                      <div
-                                                            class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                            Gérer les stages</div>
-                                                      <div class="h5 mb-0 font-weight-bold text-gray-800">50
+                              <div class="col-xl-3 col-md-6 mb-4">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                          <div class="card-body">
+                                                <div class="row no-gutters">
+                                                      <div class="col mr-2">
+                                                            <div
+                                                                  class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                                  <a href="../offres/listOffre.php"
+                                                                        class="btn btn-primary">
+                                                                        Gérer les stages</a>
+                                                                  <div class="h2 mb-0 font-weight-bold text-gray-800">
+                                                                        50
+                                                                  </div>
+                                                            </div>
                                                       </div>
-                                                </div>
-                                                <div class="col-auto">
-                                                      <i class="fas fa-pin fa-2x text-gray-300"></i>
+                                                      <div class="col-auto">
+                                                            <i class="fas fa-calendar-check fa-3x text-gray-300">
+                                                            </i>
+                                                      </div>
                                                 </div>
                                           </div>
                                     </div>
                               </div>
-                        </div>
 
-                        <div class="col-xl-3 col-md-6 mb-4">
-                              <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                          <div class="row no-gutters align-items-center">
-                                                <div class="col mr-2">
-                                                      <div
-                                                            class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                            Gérer les candidatures</div>
-                                                      <div class="h5 mb-0 font-weight-bold text-gray-800">50
+                              <div class="col-xl-3 col-md-6 mb-4">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                          <div class="card-body">
+                                                <div class="row no-gutters">
+                                                      <div class="col mr-2">
+                                                            <div
+                                                                  class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                                  <a href="../comptes/listComptes.php"
+                                                                        class="btn btn-primary">
+                                                                        Gérer les candidatures</a>
+                                                            </div>
+                                                            <div class="h2 mb-0 font-weight-bold text-gray-800"> 50
+                                                            </div>
+                                                      </div>
+                                                      <div class="col-auto">
+                                                            <i class="fas fa-calendar-check fa-3x text-gray-300"></i>
                                                       </div>
                                                 </div>
-                                                <div class="col-auto">
-                                                      <i class="fas fa-clipboard fa-2x text-gray-300"></i>
-                                                </div>
                                           </div>
+
                                     </div>
                               </div>
                         </div>
-
                   </div>
-
             </div>
             <!-- /.container-fluid -->
-      </div>
       </div>
 
       <?php

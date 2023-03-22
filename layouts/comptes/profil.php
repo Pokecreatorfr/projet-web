@@ -63,7 +63,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     <li><a class="dropdown-item" href="#">Profil</a></li>
                                     <?php
 
-                                    if ($_SESSION['username'] == 'root') {
+                                    if ($_SESSION['id'] == 1) {
                                           echo '<li><a class="dropdown-item" href="../admin/adminPage.php">Paramètres</a></li>';
                                     } ?>
                                     <li><a class="dropdown-item" href="../logout.php" class="">Se déconnecter</a></li>
@@ -105,7 +105,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     <div class="col-6">
 
                                           <?php
-                                          if ($_SESSION['username'] == 'root') {
+                                          if ($_SESSION['id'] == 1) {
                                                 echo '<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Supprimerprofil">Supprimer</button>';
                                           } ?>
                                     </div>

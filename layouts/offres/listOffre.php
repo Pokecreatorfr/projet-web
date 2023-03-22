@@ -63,7 +63,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li><a class="dropdown-item" href="../comptes/profil.php">Profil</a></li>
                                     <?php
-                                    if ($_SESSION['username'] == 'root') {
+                                    if ($_SESSION['id'] == 1) {
                                           echo '<li><a class="dropdown-item" href="../admin/adminPage.php">Paramètres</a></li>';
                                     } ?>
                                     <li><a class="dropdown-item" href="../logout.php" class="">Se déconnecter</a></li>
@@ -92,7 +92,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                           </h2>
                                           <?php
 
-                                          if ($_SESSION['username'] == 'root') {
+                                          if ($_SESSION['id'] == 1) {
                                                 echo '<a href="createOffre.php" class="btn btn-primary pull-right"><i
                                                       class="fa fa-plus"></i>
                                                 Créer une offre</a>';

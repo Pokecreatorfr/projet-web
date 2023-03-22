@@ -18,96 +18,100 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0 " />
       <title>Liste des Comptes</title>
       <link rel="stylesheet" href="../../assets/vendors/bootstrap/css/bootstrap.min.css" />
-      <link rel="stylesheet" href="../../assets/vendors/fontawesome/css/all.min.css" />
       <link rel="stylesheet" href="../../style.css" type="text/css" />
+
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-            integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
-      </script>
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css" />
 </head>
 
 <body>
-      <!-- Navbar -->
-      <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light">
+      </head>
 
-                  <div class="container-fluid">
-                        <!-- Toggle button -->
-                        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                              data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                              aria-expanded="false" aria-label="Toggle navigation">
-                              <i class="fas fa-bars"></i>
-                        </button>
+      <body>
+            <!-- Navbar -->
+            <div class="container">
+                  <nav class="navbar navbar-expand-lg navbar-light">
 
-                        <!-- Collapsible wrapper -->
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                              <!-- Navbar brand -->
-                              <a class="navbar-brand logo">CESITAGE</a>
-                        </div>
-                        <!-- Collapsible wrapper -->
-                        <div class="" id="navbarNavAltMarkup">
-                              <div class="navbar-nav">
-                                    <a class="nav-link" href="../homePage.php">Acceuil</a>
-                                    <a class="nav-link" href="../offres/listOffre.php">Offres</a>
-                                    <a class="nav-link" href="../entreprise/listEntreprise.php">Entreprises</a>
+                        <div class="container-fluid">
+                              <!-- Toggle button -->
+                              <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                    <i class="fas fa-bars"></i>
+                              </button>
+
+                              <!-- Collapsible wrapper -->
+                              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <!-- Navbar brand -->
+                                    <a class="navbar-brand logo">CESITAGE</a>
+                              </div>
+                              <!-- Collapsible wrapper -->
+                              <div class="" id="navbarNavAltMarkup">
+                                    <div class="navbar-nav">
+                                          <a class="nav-link" href="../homePage.php">Acceuil</a>
+                                          <a class="nav-link" href="../offres/listOffre.php">Offres</a>
+                                          <a class="nav-link" href="../entreprise/listEntreprise.php">Entreprises</a>
+                                    </div>
+                              </div>
+
+                              <div class="dropdown">
+                                    <button class="btn btn-outline-info dropdown-toggle" type="button"
+                                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                          <?php echo htmlspecialchars($_SESSION["username"]); ?>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                          <li><a class="dropdown-item" href="./profil.php">Profil</a></li>
+                                          <?php
+                                          if ($_SESSION['id'] == 1) {
+                                                echo '<li><a class="dropdown-item" href="../admin/adminPage.php">Paramètres</a></li>';
+                                          } ?>
+                                          <li><a class="dropdown-item" href="../logout.php" class="">Se déconnecter</a>
+                                          </li>
+                                    </ul>
                               </div>
                         </div>
+                  </nav>
+            </div>
 
-                        <div class="dropdown">
-                              <button class="btn btn-outline-info dropdown-toggle" type="button"
-                                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?php echo htmlspecialchars($_SESSION["username"]); ?>
-                              </button>
-                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="./profil.php">Profil</a></li>
-                                    <?php
-                                    if ($_SESSION['username'] == 'root') {
-                                          echo '<li><a class="dropdown-item" href="../admin/adminPage.php">Paramètres</a></li>';
-                                    } ?>
-                                    <li><a class="dropdown-item" href="../logout.php" class="">Se déconnecter</a></li>
-                              </ul>
-                        </div>
-                  </div>
-            </nav>
-      </div>
-
-      <div class="container">
-            <div class="wrapper">
-                  <div class="container-fluid">
-                        <div class="row">
-                              <div class="col-12">
-                                    <div class="mt-5 mb-3">
-                                          <h2 class="pull-left">
-                                                <div class="dropdown mb-3">
-                                                      <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                                            Profil
-                                                      </button>
-                                                      <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item" href="#">Pilotes</a></li>
-                                                            <li><a class="dropdown-item" href="#">Etudiants</a>
-                                                      </ul>
-                                                </div>
-                                                <div>
-                                                      <form class="d-flex" role="search">
-                                                            <input class="form-control me-2" type="search"
-                                                                  placeholder="" aria-label="Search">
-                                                            <button class="btn btn-outline-success" type="submit"><i
-                                                                        class="fa fa-search"></i>
+            <div class="container">
+                  <div class="wrapper">
+                        <div class="container-fluid">
+                              <div class="row">
+                                    <div class="col-12">
+                                          <div class="mt-5 mb-3">
+                                                <h2 class="pull-left">
+                                                      <div class="dropdown mb-3">
+                                                            <button class="btn btn-secondary dropdown-toggle"
+                                                                  type="button" data-bs-toggle="dropdown"
+                                                                  aria-expanded="false">
+                                                                  Profil
                                                             </button>
-                                                      </form>
-                                                </div>
-                                          </h2>
-                                          <?php
+                                                            <ul class="dropdown-menu">
+                                                                  <li><a class="dropdown-item" href="#">Pilotes</a></li>
+                                                                  <li><a class="dropdown-item" href="#">Etudiants</a>
+                                                            </ul>
+                                                      </div>
+                                                      <!--<div>
+                                                            <form class="d-flex" role="search">
+                                                                  <input class="form-control me-2" type="search"
+                                                                        placeholder="" aria-label="Search">
+                                                                  <button class="btn btn-outline-success"
+                                                                        type="submit"><i class="fa fa-search"></i>
+                                                                  </button>
+                                                            </form>
+                                                      </div>-->
+                                                </h2>
+                                                <?php
 
-                                          if ($_SESSION['username'] == 'root') {
-                                                echo '<a href="createCompte.php" class="btn btn-primary pull-right"><i
+                                                if ($_SESSION['id'] == 1) {
+                                                      echo '<a href="createCompte.php" class="btn btn-primary pull-right"><i
                                                       class="fa fa-plus"></i>
                                                 Créer un compte</a>';
-                                          } ?>
+                                                } ?>
 
+                                          </div>
                                     </div>
                                     <?php
                                     // Include config file
@@ -117,7 +121,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     $sql = "SELECT * FROM personne";
                                     if ($result = $pdo->query($sql)) {
                                           if ($result->rowCount() > 0) {
-                                                echo '<table class="table table-bordered table-striped">';
+                                                echo '<div class="col-md-12">';
+                                                echo '<table id="listCompte" class="table table-bordered table-striped">';
                                                 echo "<thead>";
                                                 echo "<tr>";
                                                 echo "<th>#</th>";
@@ -143,6 +148,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                 }
                                                 echo "</tbody>";
                                                 echo "</table>";
+                                                echo "</div>";
                                                 // Free result set
                                                 unset($result);
                                           } else {
@@ -154,34 +160,24 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     // Close connection
                                     unset($pdo);
                                     ?>
+
                               </div>
                         </div>
-                        <nav aria-label="...">
-                              <ul class="pagination">
-                                    <li class="page-item disabled">
-                                          <span class="page-link">Précédent</span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active" aria-current="page">
-                                          <span class="page-link">2</span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                          <a class="page-link" href="#">Suivant</a>
-                                    </li>
-                              </ul>
-                        </nav>
                   </div>
             </div>
-      </div>
 
-      <?php
-      include '../footer.php';
-      ?>
+            <?php
+            include '../footer.php';
+            ?>
 
-      <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
-      <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
-</body>
+            <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
+            <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+            <!-- Script datatable -->
+            <?php
+            include '../../datatable.php'
+            ?>
+      </body>
 
 </html>
 
