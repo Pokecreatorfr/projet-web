@@ -140,11 +140,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                       echo "<td>" . $row['Prenom'] . "</td>";
                                                       echo "<td>" . $row['sexe'] . "</td>";
                                                       echo "<td>";
-                                                      echo '<a href="profil.php?id=' . $row['id_personne'] . '" class="mr-6" title="View Record" data-toggle="tooltip" data-bs-toggle="modal"
-                                                data-bs-target="#compte"><span class="fa fa-eye"></span></a>';
-                                                      echo '<a href="update.php?id=' . $row['id_personne'] . '" class="mr-3" title="Update Record" data-toggle="tooltip" data-bs-toggle="modal"
+                                                      echo '<a href="viewProfil.php?id=' . $row['id_personne'] . '" class="mr-3" title="Details"
+                                                      data-bs-target="#compte"><span class="fa fa-eye"></span></a>';
+                                                      echo '<a href="update.php?id=' . $row['id_personne'] . '" class="mr-3" title="Modifier" data-toggle="tooltip" data-bs-toggle="modal"
                                                       data-bs-target="#ModificationProfil"><span class="fa fa-pencil"></span></a>';
-                                                      echo '<a href="delete.php?id=' . $row['id_personne'] . '" title="Delete Record" data-toggle="tooltip" data-bs-toggle="modal"
+                                                      echo '<a href="delete.php?id=' . $row['id_personne'] . '" title="Supprimer" data-toggle="tooltip" data-bs-toggle="modal"
                                                       data-bs-target="#Supprimerprofil"><span class="fa fa-trash"></span></a>';
                                                       echo "</td>";
                                                       echo "</tr>";

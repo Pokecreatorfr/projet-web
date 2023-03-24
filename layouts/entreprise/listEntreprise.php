@@ -50,7 +50,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                               <div class="navbar-nav">
                                     <a class="nav-link" href="../homePage.php">Acceuil</a>
                                     <a class="nav-link" href="../offres/listOffre.php">Offres</a>
-                                    <a class="nav-link active" href="../entreprise/listEntreprise.php">Entreprises</a>
+                                    <a class="nav-link active" href="#">Entreprises</a>
                               </div>
                         </div>
 
@@ -73,23 +73,22 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       </div>
 
       <div class="container">
-            <div class="wrapper">
-                  <div class="container-fluid">
-                        <div class="row">
-                              <div class="col-12">
-                                    <div class="mt-5 mb-3">
-                                          <h2 class="pull-left">
-                                                <?php
+            <div class="container-fluid">
+                  <div class="row">
+                        <div class="col-12">
+                              <div class="mt-5 mb-3">
+                                    <h2 class="pull-left">
+                                          <?php
 
                                                 if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
                                                       echo '<a href="createEntreprise.php" class="btn btn-primary"><i
                                                       class="fa fa-plus"></i>
                                                 Créer une entreprise</a>';
                                                 } ?>
-                                          </h2>
-                                    </div>
+                                    </h2>
                               </div>
-                              <?php
+                        </div>
+                        <?php
                               // Include config file
                               require_once "../../config.php";
 
@@ -139,7 +138,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                               // Close connection
                               unset($pdo);
                               ?>
-                        </div>
                   </div>
             </div>
       </div>
@@ -148,13 +146,15 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       include '../footer.php';
       ?>
 
-      <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
-      <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
-
       <!-- Script datatable -->
       <?php
       include '../../datatable.php'
       ?>
+
+      <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
+      <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
 </body>
 
 </html>

@@ -49,7 +49,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         <div class="" id="navbarNavAltMarkup">
                               <div class="navbar-nav">
                                     <a class="nav-link" href="../homePage.php">Acceuil</a>
-                                    <a class="nav-link active" href="../offres/listOffre.php">Offres</a>
+                                    <a class="nav-link active" href="#">Offres</a>
                                     <a class="nav-link" href="../entreprise/listEntreprise.php">Entreprises</a>
                               </div>
                         </div>
@@ -122,15 +122,17 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                 echo "<td>" . $row['Remuneration'] . "</td>";
                                                 echo "<td>" . $row['id_site'] . "</td>";
                                                 echo "<td>";
-                                                echo '<a href="profil.php?id=' . $row['id_offre'] . '" class="mr-3" title="View Record" data-toggle="tooltip" data-bs-toggle="modal"
-                                                data-bs-target="#Offre" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                                echo '<a href="viewOffre.php?id=' . $row['id_offre'] . '" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                                 if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
-                                                      echo '<a href="update.php?id=' . $row['id_offre'] . '" class="mr-3" title="Update Record"  data-toggle="tooltip" data-bs-toggle="modal"
+                                                      echo '<a href="update.php?id=' . $row['id_offre'] . '" class="ms-3" title="Modifier"  data-toggle="tooltip" data-bs-toggle="modal"
                                                       data-bs-target="#Modifier" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                                      echo '<a href="delete.php?id=' . $row['id_offre'] . '" title="Delete Record"  data-toggle="tooltip" data-bs-toggle="modal"
-                                                      data-bs-target="#Supprimer" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                                      echo '<a href="delete.php?id=' . $row['id_offre'] . '" title="Supprimer" data-bs-toggle="modal"
+                                                      data-bs-target="#Supprimer" data-toggle="tooltip" class="ms-3"><span class="fa fa-trash"></span></a>';
                                                 }
-                                                echo '<a href="delete.php?id=' . $row['id_offre'] . '" title="Delete Record" data-toggle="tooltip">Stats</a>';
+                                                echo '<a href="delete.php?id=' . $row['id_offre'] . '" title="Supprimer" class="ms-3"><span class="fa fa-signal"></span></a>';
+                                                echo "</td>";
+                                                echo "<td>";
+                                                echo '<a href="delete.php?id=' . $row['id_offre'] . '" title="Delete Record"><button type="button" class="btn btn-outline-primary">POSTULER</button></a>';
                                                 echo "</td>";
                                                 echo "</tr>";
                                           }
@@ -156,35 +158,18 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       <?php
       include '../footer.php';
       ?>
-
-      <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
-      <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
-
       <!-- Script datatable -->
       <?php
       include '../../datatable.php'
       ?>
+
+      <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
+      <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
 </body>
 
 </html>
-
-<div class="modal fade" id="Offre" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-            <div class="modal-content">
-                  <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modification du profil</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                        ...
-                  </div>
-                  <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-primary">Sauvegarder</button>
-                  </div>
-            </div>
-      </div>
-</div>
 
 <div class="modal fade" id="Modifier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
