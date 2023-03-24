@@ -1,4 +1,4 @@
-CREATE TABLE Personne(
+CREATE TABLE personne(
    id_personne INT AUTO_INCREMENT,
    Nom VARCHAR(50),
    Prenom VARCHAR(50),
