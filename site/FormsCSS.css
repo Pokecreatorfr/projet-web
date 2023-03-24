@@ -1,19 +1,36 @@
 h1{
     text-align: center;
     margin-bottom: 10%;
+    margin-top: 5%;
 }
 
+.colproright{
+margin-left: -20px ;
+}
+
+.row{
+margin-top:10px ;
+}
+
+.col{
+max-width: 50%;
+margin-left: -3%;
+}
+
+
 .form-label{
+    text-align: center;
     margin-left: 45%;
 }
+
+#Compte{
+margin-top: 5%;
+}
+
 
 .form-control{
    margin-left: 25%;
     max-width: 50%;
-}
-
-.btn{
-    margin-left: 45%;
 }
 
 .civ {
@@ -40,15 +57,66 @@ h1{
    margin: 2%;
 }
 
+/*ligne bouton insert lettre creacandidature */
 .lettre{
-    margin-left: -10%;
+    margin-left: -4%;
     margin-right: -16%;
 }
 
-.CV{
-    margin-left: -8%;
+/*ligne bouton insert cv creacandidature */
+.cv{
+    margin-left: 12%;
 }
 
 .candidat{
     margin-left: 47%;
+}
+
+.btn-primary{
+    width: 25%;
+    margin-left: 37.5%;
+    margin-top : 0.8%
+}
+
+.loc{
+   width: 40px;
+   margin-left: 15px;
+}
+
+
+label{
+    margin-top: 0px;
+    text-align: center;
+}
+
+.pro{
+    margin-bottom:50px ;
+}
+
+.inpt {
+    color: #ffffff !important;
+    background-color: #2d292e !important;
+    border-color: #2d292e !important; 
+    width: 40% !important;
+    margin-left:35%;
+    margin-top: 0%;
+}
+
+.profile_img{
+    margin-left: 35%;
+    width: 40%;
+}
+
+#promo-select{
+    margin-left:30%;
+    
+    padding:0% 5% 3% ;
+}
+
+.Ent{
+    margin-left: -10%;
+}
+
+.Description{
+    padding-bottom: 15%;
 }

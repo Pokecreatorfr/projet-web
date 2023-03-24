@@ -11,37 +11,59 @@
     <link rel="stylesheet" href="FormsCSS.css">
 </head>
 <body>  
-        <h1 class="Offre"> Créer une Offre</h1>
-        <div class="mb-3">
-            <label for="FormInput" class="form-label" >Titre</label>
-            <input type="Titre" class="form-control" id="exampleFormControlInput1" placeholder="">
+    <h1 class="Offre"> Créer une Offre</h1>
+    <form action="insertion.php" method="post">
+    <div class="mb-3">
+            <label for="FormInput" class="form-label Offre" >Titre</label>
+            <input type="Text" class="form-control" id="exampleFormControlInput1" name="Titre" placeholder="">
         </div>
         <div class="mb-3">
-            <label for="FormInput" class="form-label" >Promotion</label>
-            <input type="Promotion" class="form-control" id="exampleFormControlInput1" placeholder="">
+            <label for="FormInput" class="form-label Offre" >Promotion</label>
+            <input type="Text" class="form-control" id="exampleFormControlInput1" name="Promotion" placeholder="">
         </div>
         <div class="mb-3">
-            <label for="FormInput" class="form-label" >Durée de Stage</label>
-            <input type="Durée de Stage" class="form-control" id="exampleFormControlInput1" placeholder="">
+            <label for="FormInput" class="form-label Offre" >Durée de Stage</label>
+            <input type="Text" class="form-control" id="exampleFormControlInput1"  name="Durée_de_Stage" placeholder="">
         </div>
         <div class="mb-3">
-            <label for="FormInput" class="form-label Cent" >Rémunération</label>
-            <input type="Rémunération" class="form-control" id="exampleFormControlInput1" placeholder="">
+            <label for="FormInput" class="form-label Offre" >Rémunération</label>
+            <input type="Text" class="form-control" id="exampleFormControlInput1" name="Rémunération"  placeholder="">
         </div>
         <div class="mb-3">
-            <label for="FormInput" class="form-label Cent" ">Date de l'Offre</label>
-            <input type="Date de l'Offre" class="form-control" id="exampleFormControlInput1" placeholder="">
+            <label for="FormInput" class="form-label Offre">Date de l'Offre</label>
+            <input type="Text" class="form-control" id="exampleFormControlInput1" name="Date_de_lOffre" placeholder="">
         </div>
         <div class="mb-3">
-            <label for="FormInput" class="form-label Cent" >Nombre de places</label>
-            <input type="Nombre de places" class="form-control" id="exampleFormControlInput1" placeholder="">
+            <label for="FormInput" class="form-label Offre" >Nombre de places</label>
+            <input type="Text" class="form-control" id="exampleFormControlInput1" name="Nombre_de_places" placeholder="">
         </div>
         <div class="mb-3">
-            <label for="FormInput" class="form-label Cent" ">Compétences</label>
-            <input type="Compétences" class="form-control" id="exampleFormControlInput1" placeholder="">
+            <label for="FormInput" class="form-label Offre">Compétences</label>
+            <input type="Text" class="form-control" id="exampleFormControlInput1" name="Compétences" placeholder="">
         </div>
-        <button type="button" class="btn btn-primary">Soumettre</button>
-    
+
+        <div class="mb-3">
+            <label for="FormInput Description" class="form-label Offre">Description</label>
+            <input type="Text" class="form-control Description" id="exampleFormControlInput1" name="Description" placeholder="">
+        </div>
+
+
+        <div class="mb-3">
+            <label for="FormInput" class="form-label Offre">Site</label>
+            <div class="row">
+            <div class="col loc ">
+                 <input type="text" class="form-control mr-1 w-60 " id="exampleFormControlInput2" name="CodePostal" placeholder="CodePostal">
+                </div>
+                <div class="col loc">
+                <input type="text" class="form-control mr-1 w-60" id="exampleFormControlInput2" name="Ville" placeholder="Ville">
+                </div>
+                <div class="col loc">
+                <input type="text" class="form-control mr- w-60" id="exampleFormControlInput2" name="Region" placeholder="Region">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Soumettre</button>
+    </form>
     <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
     <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>    
 </body>
