@@ -81,7 +81,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                           <h2 class="pull-left">
                                                 <?php
 
-                                                if ($_SESSION['id'] == 1) {
+                                                if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
                                                       echo '<a href="createEntreprise.php" class="btn btn-primary"><i
                                                       class="fa fa-plus"></i>
                                                 Créer une entreprise</a>';
@@ -114,9 +114,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                 echo "<td>" . $row['nom'] . "</td>";
                                                 echo "<td>" . $row['nombre_etudiant'] . "</td>";
                                                 echo "<td>";
-                                                echo '<a href="profil.php?id=' . $row['id_entreprise'] . '" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                                echo '<a href="update.php?id=' . $row['id_entreprise'] . '" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                                echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                                echo '<a href="viewEnt.php?id=' . $row['id_entreprise'] . '" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                                if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
+                                                      echo '<a href="update.php?id=' . $row['id_entreprise'] . '" class="mr-3" title="Update Record"  data-toggle="tooltip" data-bs-toggle="modal"
+                                                      data-bs-target="#Modifier" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                                      echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" title="Delete Record"  data-toggle="tooltip" data-bs-toggle="modal"
+                                                      data-bs-target="#Supprimer" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                                }
+                                                echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" title="Delete Record" data-toggle="tooltip">Evaluer</a>';
                                                 echo "</td>";
                                                 echo "</tr>";
                                           }
@@ -154,7 +159,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 </html>
 
-<div class="modal fade" id="ModificationProfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Modifier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
             <div class="modal-content">
                   <div class="modal-header">
@@ -172,7 +177,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       </div>
 </div>
 
-<div class="modal fade" id="Supprimerprofil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Supprimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
             <div class="modal-content">
                   <div class="modal-header">

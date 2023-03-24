@@ -140,9 +140,12 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                       echo "<td>" . $row['Prenom'] . "</td>";
                                                       echo "<td>" . $row['sexe'] . "</td>";
                                                       echo "<td>";
-                                                      echo '<a href="profil.php?id=' . $row['id_personne'] . '" class="mr-6" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                                      echo '<a href="update.php?id=' . $row['id_personne'] . '" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                                      echo '<a href="delete.php?id=' . $row['id_personne'] . '" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                                      echo '<a href="profil.php?id=' . $row['id_personne'] . '" class="mr-6" title="View Record" data-toggle="tooltip" data-bs-toggle="modal"
+                                                data-bs-target="#compte"><span class="fa fa-eye"></span></a>';
+                                                      echo '<a href="update.php?id=' . $row['id_personne'] . '" class="mr-3" title="Update Record" data-toggle="tooltip" data-bs-toggle="modal"
+                                                      data-bs-target="#ModificationProfil"><span class="fa fa-pencil"></span></a>';
+                                                      echo '<a href="delete.php?id=' . $row['id_personne'] . '" title="Delete Record" data-toggle="tooltip" data-bs-toggle="modal"
+                                                      data-bs-target="#Supprimerprofil"><span class="fa fa-trash"></span></a>';
                                                       echo "</td>";
                                                       echo "</tr>";
                                                 }
@@ -180,6 +183,23 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       </body>
 
 </html>
+
+<div class="modal fade" id="compte" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+            <div class="modal-content">
+                  <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Compte</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                        ...
+                  </div>
+                  <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                  </div>
+            </div>
+      </div>
+</div>
 
 <div class="modal fade" id="ModificationProfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">

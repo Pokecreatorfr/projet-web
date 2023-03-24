@@ -26,13 +26,14 @@
                         </button>
                         <div class="" id="navbarNavAltMarkup">
                               <div class="navbar-nav">
+                                    <!--
                                     <a class="nav-link active" aria-current="page" href="#">Acceuil</a>
                                     <a class="nav-link" aria-current="page" href="./offres/listOffre.php">Offres</a>
                                     <a class="nav-link" href="./entreprise/listEntreprise.php">Entreprises</a>
-                                    <!--
-                                           <a class="nav-link" href="">
+
+                                    <a class="nav-link" href="">
                                           <button class="btn btn-primary btn-header">S'inscrire</button>
-                                          </a> 
+                                    </a>
                                     -->
                                     <a class="nav-link " href="login.php">
                                           <button class="btn btn-primary btn-header">Se connecter</button>
