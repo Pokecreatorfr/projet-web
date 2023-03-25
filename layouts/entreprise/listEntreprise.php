@@ -81,68 +81,67 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     <h2 class="pull-left">
                                           <?php
 
-                                                if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
-                                                      echo '<a href="createEntreprise.php" class="btn btn-primary"><i
+                                          if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
+                                                echo '<a href="createEntreprise.php" class="btn btn-primary"><i
                                                       class="fa fa-plus"></i>
                                                 Créer une entreprise</a>';
-                                                } ?>
+                                          } ?>
                                     </h2>
                               </div>
                         </div>
                         <?php
-                              // Include config file
-                              require_once "../../config.php";
+                        // Include config file
+                        require_once "../../config.php";
 
-                              // Attempt select query execution
-                              $sql = "SELECT * FROM entreprise";
-                              if ($result = $pdo->query($sql)) {
-                                    if ($result->rowCount() > 0) {
-                                          echo '<div class="col-md-12">';
-                                          echo '<table id="dataList" class="table table-bordered table-striped">';
-                                          echo "<thead>";
+                        // Attempt select query execution
+                        $sql = "SELECT * FROM entreprise";
+                        if ($result = $pdo->query($sql)) {
+                              if ($result->rowCount() > 0) {
+                                    echo '<div class="col-md-12">';
+                                    echo '<table id="dataList" class="table table-bordered table-striped">';
+                                    echo "<thead>";
+                                    echo "<tr>";
+                                    echo "<th>#</th>";
+                                    echo "<th>Nom de l'entreprise</th>";
+                                    echo "<th>Nombre d'étudiants</th>";
+                                    echo "<th>Action</th>";
+                                    echo "<th></th>";
+                                    echo "</tr>";
+                                    echo "</thead>";
+                                    echo "<tbody>";
+                                    while ($row = $result->fetch()) {
                                           echo "<tr>";
-                                          echo "<th>#</th>";
-                                          echo "<th>Nom de l'entreprise</th>";
-                                          echo "<th>Nombre d'étudiants</th>";
-                                          echo "<th>Action</th>";
-                                          echo "<th></th>";
-                                          echo "</tr>";
-                                          echo "</thead>";
-                                          echo "<tbody>";
-                                          while ($row = $result->fetch()) {
-                                                echo "<tr>";
-                                                echo "<td>" . $row['id_entreprise'] . "</td>";
-                                                echo "<td>" . $row['nom'] . "</td>";
-                                                echo "<td>" . $row['nombre_etudiant'] . "</td>";
-                                                echo "<td>";
-                                                echo '<a href="viewEnt.php?id=' . $row['id_entreprise'] . '" title="Voir" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                                if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
-                                                      echo '<a href="update.php?id=' . $row['id_entreprise'] . '" class="ms-3" title="Modifier" data-toggle="tooltip" data-bs-toggle="modal"
+                                          echo "<td>" . $row['id_entreprise'] . "</td>";
+                                          echo "<td>" . $row['nom'] . "</td>";
+                                          echo "<td>" . $row['nombre_etudiant'] . "</td>";
+                                          echo "<td>";
+                                          echo '<a href="viewEnt.php?id=' . $row['id_entreprise'] . '" title="Voir" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                          if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
+                                                echo '<a href="update.php?id=' . $row['id_entreprise'] . '" class="ms-3" title="Modifier" data-toggle="tooltip" data-bs-toggle="modal"
                                                       data-bs-target="#Modifier" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                                      echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" title="Supprimer" data-toggle="tooltip" data-bs-toggle="modal"
-                                                      data-bs-target="#Supprimer" data-toggle="tooltip" class="ms-3"><span class="fa fa-trash"></span></a>';
-                                                }
-                                                echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" title="Statistique" class="ms-3"><span class="fa fa-signal"></span></a>';
-                                                echo "</td>";
-                                                echo "<td>";
-                                                echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" class="btn btn-outline-primary btn-sm">EVALUER</a>';
-                                                echo "</td>";
-                                                echo "</tr>";
+                                                echo '<a href="#" class="ms-3 deletebtn"><span class="fa fa-trash"></span></a>';
                                           }
-                                          echo "</tbody>";
-                                          echo "</table>";
-                                          echo "</div>";
-                                          // Free result set
-                                          unset($result);
-                                    } else {
-                                          echo '<div class="alert alert-danger"><em>Aucune donnée</em></div>';
+                                          echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" title="Statistique" class="ms-3"><span class="fa fa-signal"></span></a>';
+                                          echo "</td>";
+                                          echo "<td>";
+                                          echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" class="btn btn-outline-primary btn-sm">EVALUER</a>';
+                                          echo "</td>";
+                                          echo "</tr>";
                                     }
+                                    echo "</tbody>";
+                                    echo "</table>";
+                                    echo "</div>";
+                                    // Free result set
+                                    unset($result);
                               } else {
-                                    echo "Oops! Réessayer plus tard.";
+                                    echo '<div class="alert alert-danger"><em>Aucune donnée</em></div>';
                               }
-                              // Close connection
-                              unset($pdo);
-                              ?>
+                        } else {
+                              echo "Oops! Réessayer plus tard.";
+                        }
+                        // Close connection
+                        unset($pdo);
+                        ?>
                   </div>
             </div>
       </div>
@@ -158,6 +157,29 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
       <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
       <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+      <!-- SCRIPT js POUR LA SUPPRESSION -->
+      <script>
+      $(document).ready(function() {
+
+            $('.deletebtn').on('click', function() {
+
+                  $('#deletemodal').modal('show');
+
+                  $tr = $(this).closest('tr');
+
+                  var data = $tr.children("td").map(function() {
+                        return $(this).text();
+                  }).get();
+
+                  console.log(data);
+
+                  $('#id_entreprise').val(data[0]);
+
+            });
+      });
+      </script>
+
 
 
 </body>
@@ -182,20 +204,28 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       </div>
 </div>
 
-<div class="modal fade" id="Supprimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+
+<!--MODAL DE SUPPRESSION  -->
+<div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
             <div class="modal-content">
                   <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Suppression</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body">
-                        Voulez-vous vraiment supprimer ce profil?
-                  </div>
-                  <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
-                  </div>
+                  <form action="delete.php" method="POST">
+                        <div class="modal-body">
+                              <input type="hidden" name="delete_id" id="id_entreprise">
+                              <h4>Voulez-vous vraiment supprimer cette entreprise?</h4>
+                        </div>
+                        <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-secondary"
+                                    data-bs-dismiss="modal">Annuler</button>
+                              <button type="submit" name="deletedata" class="btn btn-danger"> Supprimer
+                              </button>
+                        </div>
+                  </form>
             </div>
       </div>
 </div>

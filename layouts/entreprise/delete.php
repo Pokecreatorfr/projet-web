@@ -10,9 +10,22 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 require_once "../../config.php";
 
-if(isset($_GET['id'])) {
-      $sql = "DELETE FROM entreprise WHERE id_entreprise = ".$_GET['id'];
-      $pdo->query($sql);
-      header("Location: listEntreprise.php");
-  }
+if(isset($_POST['deletedata']))
+{
+    $id = $_POST['delete_id'];
+
+    $sql = "DELETE FROM entreprise WHERE id_entreprise = '$id'";
+    $pdo->query($sql);
+
+    if($pdo->query($sql))
+    {
+        echo '<script> alert("Data Deleted"); </script>';
+        header("Location: listEntreprise.php");
+    }
+    else
+    {
+        echo '<script> alert("Data Not Deleted"); </script>';
+    }
+}
+
 ?>
