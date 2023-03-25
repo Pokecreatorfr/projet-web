@@ -148,8 +148,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                                   echo '<a href="listOffre.php" class="btn btn-primary">Postuler</a>';
                                                             } ?>
 
-                                          <a href="listOffre.php" class=" btn btn-outline-info"><i
-                                                      class=" fa fa-arrow-left"></i>Retourner</a>
+                                          <a href="listOffre.php" class=" btn btn-outline-info">
+                                                <i class=" fa fa-arrow-left">
+                                                </i>Retourner
+                                          </a>
                                     </div>
                               </div>
                         </div>
@@ -158,7 +160,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                   <?php }
                         } else {
                               echo 'Erreur de données, Veuillez contacter un administrateur';
-                              echo '<div class="card-footer text-muted"><a href="listOffre.php" class="btn btn-primary">Retourner</a></div>';
+                              echo '<div class="card-footer text-muted"><a href="listOffre.php" class="btn btn-info"><i class=" fa fa-arrow-left">
+                              </i>Retourner</a></div>';
                         }
                   } // Free result set
                   unset($result);

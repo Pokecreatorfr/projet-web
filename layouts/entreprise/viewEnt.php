@@ -74,94 +74,91 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
       <div class="container">
             <div class="container-fluid">
-                  <div class="">
-                        <?php
-
-                              require_once "../../config.php";
-                              if (isset($_GET['id'])) {
-                                    $sql = "SELECT e.nom, e.nombre_etudiant, v.ville, v.région, v.code_postal, se.secteur
+                  <?php
+                  require_once "../../config.php";
+                  if (isset($_GET['id'])) {
+                        $sql = "SELECT e.nom, e.nombre_etudiant, v.ville, v.région, v.code_postal, se.secteur
                                     FROM entreprise e
                                     INNER JOIN site s ON s.id_entreprise = e.id_entreprise 
                                     INNER JOIN ville v ON v.id_ville = s.id_ville 
                                     INNER JOIN avoir a ON a.id_entreprise = e.id_entreprise 
                                     INNER JOIN secteur_activité se ON se.id_secteur = a.id_secteur 
                                     Where e.id_entreprise = " . $_GET['id'];
-                              }
-                              if ($result = $pdo->query($sql)) {
-                                    if ($result->rowCount() > 0) {
-                                          while ($row = $result->fetch()) {
-                              ?>
+                  }
+                  if ($result = $pdo->query($sql)) {
+                        if ($result->rowCount() > 0) {
+                              while ($row = $result->fetch()) {
+                  ?>
 
-                        <div class="card text-center">
-                              <div class="card-header">
-                                    <h1><?php echo htmlspecialchars($row['nom']); ?></h1>
+                  <div class="card text-center">
+                        <div class="card-header">
+                              <h1><?php echo htmlspecialchars($row['nom']); ?></h1>
+                        </div>
+                        <div class="card-body">
+                              <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Nom</label>
+                                    <div class="col-sm-10">
+                                          <input class="form-control" type="text" value="<?= $row['nom'] ?>" disabled>
+                                    </div>
                               </div>
-                              <div class="card-body">
-                                    <div class="mb-3 row">
-                                          <label class="col-sm-2 col-form-label">Nom</label>
-                                          <div class="col-sm-10">
-                                                <input class="form-control" type="text" value="<?= $row['nom'] ?>"
-                                                      disabled>
-                                          </div>
+                              <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Nombre
+                                          etudiants Cesi</label>
+                                    <div class="col-sm-10">
+                                          <input class="form-control" type="text" value="<?= $row['nombre_etudiant'] ?>"
+                                                disabled>
                                     </div>
-                                    <div class="mb-3 row">
-                                          <label class="col-sm-2 col-form-label">Nombre
-                                                etudiants Cesi</label>
-                                          <div class="col-sm-10">
-                                                <input class="form-control" type="text"
-                                                      value="<?= $row['nombre_etudiant'] ?>" disabled>
-                                          </div>
 
+                              </div>
+                              <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Région</label>
+                                    <div class="col-sm-10">
+                                          <input class="form-control" type="text" value="<?= $row['région'] ?>"
+                                                disabled>
                                     </div>
-                                    <div class="mb-3 row">
-                                          <label class="col-sm-2 col-form-label">Région</label>
-                                          <div class="col-sm-10">
-                                                <input class="form-control" type="text" value="<?= $row['région'] ?>"
-                                                      disabled>
-                                          </div>
+                              </div>
+                              <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Ville</label>
+                                    <div class="col-sm-10">
+                                          <input class="form-control" type="text" value="<?= $row['ville'] ?>" disabled>
                                     </div>
-                                    <div class="mb-3 row">
-                                          <label class="col-sm-2 col-form-label">Ville</label>
-                                          <div class="col-sm-10">
-                                                <input class="form-control" type="text" value="<?= $row['ville'] ?>"
-                                                      disabled>
-                                          </div>
+                              </div>
+                              <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Code
+                                          Postal
+                                    </label>
+                                    <div class="col-sm-10">
+                                          <input class="form-control" type="text" value="<?= $row['code_postal'] ?>"
+                                                disabled>
                                     </div>
-                                    <div class="mb-3 row">
-                                          <label class="col-sm-2 col-form-label">Code
-                                                Postal
-                                          </label>
-                                          <div class="col-sm-10">
-                                                <input class="form-control" type="text"
-                                                      value="<?= $row['code_postal'] ?>" disabled>
-                                          </div>
+                              </div>
+                              <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Secteur d'activité</label>
+                                    <div class="col-sm-10">
+                                          <input class="form-control" type="text" value="<?= $row['secteur'] ?>"
+                                                disabled>
                                     </div>
-                                    <div class="mb-3 row">
-                                          <label class="col-sm-2 col-form-label">Secteur d'activité</label>
-                                          <div class="col-sm-10">
-                                                <input class="form-control" type="text" value="<?= $row['secteur'] ?>"
-                                                      disabled>
-                                          </div>
-                                    </div>
-                                    <div class="card-footer text-muted">
-                                          <div class="d-grid gap-2 col-3 mx-auto">
-                                                <a href="listEntreprise.php" class="btn btn-primary">Evaluer</a>
-                                                <a href="listEntreprise.php" class=" btn btn-outline-info"><i
-                                                            class=" fa fa-arrow-left"></i>Retourner</a>
-                                          </div>
+                              </div>
+                              <div class="card-footer text-muted">
+                                    <div class="d-grid gap-2 col-3 mx-auto">
+                                          <a href="listEntreprise.php" class="btn btn-primary">Evaluer</a>
+                                          <a href="listEntreprise.php" class=" btn btn-outline-info"><i
+                                                      class=" fa fa-arrow-left"></i>Retourner</a>
                                     </div>
                               </div>
                         </div>
                   </div>
 
                   <?php }
-                                    } else {
-                                          echo 'Erreur de données, Veuillez contacter un administrateur';
-                                          echo '<div class="card-footer text-muted"><a href="listEntreprise.php" class="btn btn-primary">Retourner</a></div>';
-                                    }
-                              } // Free result set
-                              unset($result);
-                              ?>
+                        } else {
+                              echo 'Erreur de données, Veuillez contacter un administrateur';
+                              echo '<div class="card-footer text-muted"><a href="listEntreprise.php" class="btn btn-info">
+                                          <i class=" fa fa-arrow-left">
+                                          </i>Retourner</a></div>';
+                        }
+                  } // Free result set
+                  unset($result);
+                  ?>
             </div>
       </div>
 

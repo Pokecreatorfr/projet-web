@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   // Store data in session variables
                   $_SESSION["loggedin"] = true;
                   $_SESSION["username"] =  $username;
-                  //get a user id
+                  //get a user type id
                   $_SESSION["id"] =  $stmt->fetch()['id_type'];
                   // Redirect user to welcome page
                   header("Location: layouts/homePage.php");
