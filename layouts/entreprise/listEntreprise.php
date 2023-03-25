@@ -76,6 +76,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             <div class="container-fluid">
                   <div class="row">
                         <div class="col-12">
+                              <h1>Liste des Entreprises</h1>
                               <div class="mt-5 mb-3">
                                     <h2 class="pull-left">
                                           <?php

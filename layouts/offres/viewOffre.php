@@ -74,97 +74,95 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
       <div class="container">
             <div class="container-fluid">
-                  <div class="">
-                        <?php
-
-                        require_once "../../config.php";
-                        if (isset($_GET['id'])) {
-                              $sql = "SELECT o.Titre, o.Durée, o.Durée, o.nombre_places,o.Remuneration,o.Date_post,o.Compétences, v.ville
+                  <?php
+                  require_once "../../config.php";
+                  if (isset($_GET['id'])) {
+                        $sql = "SELECT o.Titre, o.Durée, o.Durée, o.nombre_places,o.Remuneration,o.Date_post,o.Compétences, v.ville
                               FROM offre o
                               INNER JOIN site s ON s.id_site = o.id_site 
                               INNER JOIN ville v ON v.id_ville = s.id_ville Where o.id_site = " . $_GET['id'];
-                        }
-                        if ($result = $pdo->query($sql)) {
-                              if ($result->rowCount() > 0) {
-                                    while ($row = $result->fetch()) {
-                        ?>
-                        <div class="card text-center">
-                              <div class="card-header">
-                                    <h1><?php echo htmlspecialchars($row['Titre']); ?></h1>
+                  }
+                  if ($result = $pdo->query($sql)) {
+                        if ($result->rowCount() > 0) {
+                              while ($row = $result->fetch()) {
+                  ?>
+                  <div class="card text-center">
+                        <div class="card-header">
+                              <h1><?php echo htmlspecialchars($row['Titre']); ?></h1>
+                        </div>
+                        <div class="card-body">
+                              <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Titre</label>
+                                    <div class="col-sm-10">
+                                          <input class="form-control" type="text" value="<?= $row['Titre'] ?>" disabled>
+                                    </div>
                               </div>
-                              <div class="card-body">
-                                    <div class="mb-3 row">
-                                          <label class="col-sm-2 col-form-label">Titre</label>
-                                          <div class="col-sm-10">
-                                                <input class="form-control" type="text" value="<?= $row['Titre'] ?>"
-                                                      disabled>
-                                          </div>
+                              <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Durée</label>
+                                    <div class="col-sm-10">
+                                          <input class="form-control" type="text" value="<?= $row['Durée'] ?>" disabled>
                                     </div>
-                                    <div class="mb-3 row">
-                                          <label class="col-sm-2 col-form-label">Durée</label>
-                                          <div class="col-sm-10">
-                                                <input class="form-control" type="text" value="<?= $row['Durée'] ?>"
-                                                      disabled>
-                                          </div>
 
+                              </div>
+                              <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Places</label>
+                                    <div class="col-sm-10">
+                                          <input class="form-control" type="text" value="<?= $row['nombre_places'] ?>"
+                                                disabled>
                                     </div>
-                                    <div class="mb-3 row">
-                                          <label class="col-sm-2 col-form-label">Places</label>
-                                          <div class="col-sm-10">
-                                                <input class="form-control" type="text"
-                                                      value="<?= $row['nombre_places'] ?>" disabled>
-                                          </div>
+                              </div>
+                              <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Rémuneration</label>
+                                    <div class="col-sm-10">
+                                          <input class="form-control" type="text" value="<?= $row['Remuneration'] ?>"
+                                                disabled>
                                     </div>
-                                    <div class="mb-3 row">
-                                          <label class="col-sm-2 col-form-label">Rémuneration</label>
-                                          <div class="col-sm-10">
-                                                <input class="form-control" type="text"
-                                                      value="<?= $row['Remuneration'] ?>" disabled>
-                                          </div>
+                              </div>
+                              <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Date
+                                    </label>
+                                    <div class="col-sm-10">
+                                          <input class="form-control" type="text" value="<?= $row['Date_post'] ?>"
+                                                disabled>
                                     </div>
-                                    <div class="mb-3 row">
-                                          <label class="col-sm-2 col-form-label">Date
-                                          </label>
-                                          <div class="col-sm-10">
-                                                <input class="form-control" type="text" value="<?= $row['Date_post'] ?>"
-                                                      disabled>
-                                          </div>
+                              </div>
+                              <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Ville
+                                    </label>
+                                    <div class="col-sm-10">
+                                          <input class="form-control" type="text" value="<?= $row['ville'] ?>" disabled>
                                     </div>
-                                    <div class="mb-3 row">
-                                          <label class="col-sm-2 col-form-label">Ville
-                                          </label>
-                                          <div class="col-sm-10">
-                                                <input class="form-control" type="text" value="<?= $row['ville'] ?>"
-                                                      disabled>
-                                          </div>
+                              </div>
+                              <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Compétences
+                                    </label>
+                                    <div class="col-sm-10">
+                                          <input class="form-control" type="text" value="<?= $row['Compétences'] ?>"
+                                                disabled>
                                     </div>
-                                    <div class="mb-3 row">
-                                          <label class="col-sm-2 col-form-label">Compétences
-                                          </label>
-                                          <div class="col-sm-10">
-                                                <input class="form-control" type="text"
-                                                      value="<?= $row['Compétences'] ?>" disabled>
-                                          </div>
-                                    </div>
-                                    <div class="card-footer text-muted">
-                                          <div class="d-grid gap-2 col-3 mx-auto">
-                                                <a href="listOffre.php" class="btn btn-primary">Postuler</a>
-                                                <a href="listOffre.php" class=" btn btn-outline-info"><i
-                                                            class=" fa fa-arrow-left"></i>Retourner</a>
-                                          </div>
+                              </div>
+                              <div class="card-footer text-muted">
+                                    <div class="d-grid gap-2 col-3 mx-auto">
+                                          <?php
+                                                            if ($_SESSION['id'] == 1 || $_SESSION['id'] == 3) {
+                                                                  echo '<a href="listOffre.php" class="btn btn-primary">Postuler</a>';
+                                                            } ?>
+
+                                          <a href="listOffre.php" class=" btn btn-outline-info"><i
+                                                      class=" fa fa-arrow-left"></i>Retourner</a>
                                     </div>
                               </div>
                         </div>
                   </div>
 
                   <?php }
-                              } else {
-                                    echo 'Erreur de données, Veuillez contacter un administrateur';
-                                    echo '<div class="card-footer text-muted"><a href="listOffre.php" class="btn btn-primary">Retourner</a></div>';
-                              }
-                        } // Free result set
-                        unset($result);
-?>
+                        } else {
+                              echo 'Erreur de données, Veuillez contacter un administrateur';
+                              echo '<div class="card-footer text-muted"><a href="listOffre.php" class="btn btn-primary">Retourner</a></div>';
+                        }
+                  } // Free result set
+                  unset($result);
+                  ?>
             </div>
       </div>
 

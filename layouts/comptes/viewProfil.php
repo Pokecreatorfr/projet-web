@@ -116,9 +116,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         <div class="card-body">
                               <div class="row">
                                     <div class="col-12">
-                                          <a href="listComptes.php"><button type="button" class="btn btn-secondary"
-                                                      data-bs-toggle="modal"
-                                                      data-bs-target="#ModificationProfil">Retourner</button></a>
+                                          <a href="listEtudiant.php" class=" btn btn-outline-info"><i
+                                                      class=" fa fa-arrow-left"></i>Retourner</a>
                                     </div>
                               </div>
                         </div>
