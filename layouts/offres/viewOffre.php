@@ -79,7 +79,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
                         require_once "../../config.php";
                         if (isset($_GET['id'])) {
-                              $sql = "SELECT o.Titre, o.Durée, o.Durée, o.nombre_places,o.Remuneration,o.Date_post, v.ville
+                              $sql = "SELECT o.Titre, o.Durée, o.Durée, o.nombre_places,o.Remuneration,o.Date_post,o.Compétences, v.ville
                               FROM offre o
                               INNER JOIN site s ON s.id_site = o.id_site 
                               INNER JOIN ville v ON v.id_ville = s.id_ville Where o.id_site = " . $_GET['id'];
@@ -138,8 +138,20 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                       disabled>
                                           </div>
                                     </div>
+                                    <div class="mb-3 row">
+                                          <label class="col-sm-2 col-form-label">Compétences
+                                          </label>
+                                          <div class="col-sm-10">
+                                                <input class="form-control" type="text"
+                                                      value="<?= $row['Compétences'] ?>" disabled>
+                                          </div>
+                                    </div>
                                     <div class="card-footer text-muted">
-                                          <a href="listOffre.php" class="btn btn-primary">Retourner</a>
+                                          <div class="d-grid gap-2 col-3 mx-auto">
+                                                <a href="listOffre.php" class="btn btn-primary">Postuler</a>
+                                                <a href="listOffre.php" class=" btn btn-outline-info"><i
+                                                            class=" fa fa-arrow-left"></i>Retourner</a>
+                                          </div>
                                     </div>
                               </div>
                         </div>

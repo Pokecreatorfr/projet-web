@@ -104,6 +104,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                           echo "<th>Nom de l'entreprise</th>";
                                           echo "<th>Nombre d'étudiants</th>";
                                           echo "<th>Action</th>";
+                                          echo "<th></th>";
                                           echo "</tr>";
                                           echo "</thead>";
                                           echo "<tbody>";
@@ -113,14 +114,17 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                 echo "<td>" . $row['nom'] . "</td>";
                                                 echo "<td>" . $row['nombre_etudiant'] . "</td>";
                                                 echo "<td>";
-                                                echo '<a href="viewEnt.php?id=' . $row['id_entreprise'] . '" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                                echo '<a href="viewEnt.php?id=' . $row['id_entreprise'] . '" title="Voir" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                                 if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
-                                                      echo '<a href="update.php?id=' . $row['id_entreprise'] . '" class="mr-3" title="Update Record"  data-toggle="tooltip" data-bs-toggle="modal"
+                                                      echo '<a href="update.php?id=' . $row['id_entreprise'] . '" class="ms-3" title="Modifier" data-toggle="tooltip" data-bs-toggle="modal"
                                                       data-bs-target="#Modifier" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                                      echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" title="Delete Record"  data-toggle="tooltip" data-bs-toggle="modal"
-                                                      data-bs-target="#Supprimer" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                                      echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" title="Supprimer" data-toggle="tooltip" data-bs-toggle="modal"
+                                                      data-bs-target="#Supprimer" data-toggle="tooltip" class="ms-3"><span class="fa fa-trash"></span></a>';
                                                 }
-                                                echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" title="Delete Record" data-toggle="tooltip">Evaluer</a>';
+                                                echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" title="Statistique" class="ms-3"><span class="fa fa-signal"></span></a>';
+                                                echo "</td>";
+                                                echo "<td>";
+                                                echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" class="btn btn-outline-primary btn-sm">EVALUER</a>';
                                                 echo "</td>";
                                                 echo "</tr>";
                                           }

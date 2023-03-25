@@ -107,8 +107,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                           echo "<th>Date</th>";
                                           echo "<th>Nombre de place</th>";
                                           echo "<th>Rémunération</th>";
-                                          echo "<th>site</th>";
                                           echo "<th>Action</th>";
+                                          echo "<th></th>";
                                           echo "</tr>";
                                           echo "</thead>";
                                           echo "<tbody>";
@@ -120,19 +120,22 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                 echo "<td>" . $row['Date_post'] . "</td>";
                                                 echo "<td>" . $row['nombre_places'] . "</td>";
                                                 echo "<td>" . $row['Remuneration'] . "</td>";
-                                                echo "<td>" . $row['id_site'] . "</td>";
                                                 echo "<td>";
-                                                echo '<a href="viewOffre.php?id=' . $row['id_offre'] . '" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                                echo '<a href="viewOffre.php?id=' . $row['id_offre'] . '" title="Voir" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                                 if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
-                                                      echo '<a href="update.php?id=' . $row['id_offre'] . '" class="ms-3" title="Modifier"  data-toggle="tooltip" data-bs-toggle="modal"
+                                                      echo '<a href="update.php?id=' . $row['id_offre'] . '" class="ms-3" title="Modifier" data-toggle="tooltip" data-bs-toggle="modal"
                                                       data-bs-target="#Modifier" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
                                                       echo '<a href="delete.php?id=' . $row['id_offre'] . '" title="Supprimer" data-bs-toggle="modal"
                                                       data-bs-target="#Supprimer" data-toggle="tooltip" class="ms-3"><span class="fa fa-trash"></span></a>';
                                                 }
-                                                echo '<a href="delete.php?id=' . $row['id_offre'] . '" title="Supprimer" class="ms-3"><span class="fa fa-signal"></span></a>';
+                                                echo '<a href="delete.php?id=' . $row['id_offre'] . '" title="Statistique" class="ms-3"><span class="fa fa-signal"></span></a>';
                                                 echo "</td>";
+
                                                 echo "<td>";
-                                                echo '<a href="delete.php?id=' . $row['id_offre'] . '" title="Delete Record"><button type="button" class="btn btn-outline-primary">POSTULER</button></a>';
+                                                if ($_SESSION['id'] == 1 || $_SESSION['id'] == 3) {
+                                                      echo '<a href="delete.php?id=' . $row['id_offre'] . '" class="btn btn-outline-primary btn-sm ms-3">POSTULER</a>';
+                                                      echo '<a href="delete.php?id=' . $row['id_offre'] . '" class="btn btn-outline-primary btn-sm ms-3">WHISHLIST</a>';
+                                                }
                                                 echo "</td>";
                                                 echo "</tr>";
                                           }
