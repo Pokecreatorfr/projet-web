@@ -62,7 +62,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li><a class="dropdown-item" href="#">Profil</a></li>
                                     <?php
-
                                     if ($_SESSION['id'] == 1) {
                                           echo '<li><a class="dropdown-item" href="../admin/adminPage.php">Paramètres</a></li>';
                                     } ?>
@@ -78,7 +77,14 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                   <?php
                   require_once "../../config.php";
                   if (isset($_GET['id'])) {
-                        $sql = "SELECT * FROM personne Where id_personne = " . $_GET['id'];
+                        $sql = "SELECT p.Nom, pr.nom_promo, v.ville
+                        FROM personne p
+                        INNER JOIN compte c ON p.id_personne = c.id_personne 
+                        INNER JOIN etre_promo e ON c.id_c = e.id_c
+                        INNER JOIN promotion pr ON e.id_promotion = pr.id_promotion
+                        INNER JOIN centre ce ON ce.id_c = c.id_c
+                        INNER JOIN ville v ON v.id_ville = ce.id_ville
+                        WHERE p.id_personne = " . $_GET['id'];
                   }
                   if ($result = $pdo->query($sql)) {
                         if ($result->rowCount() > 0) {
@@ -91,14 +97,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                               </div>
                               <div class="col-md-8">
                                     <div class="card-body">
-                                          <h2 class="card-title"><?= $row['Nom'] ?>
+                                          <h1><?= $row['Nom'] ?></h1>
+                                          <h2>
+                                                Centre : <?= $row['ville'] ?>
                                           </h2>
-                                          <p class="card-text">
-                                                Centre :
-                                          </p>
-                                          <p class="card-text">
-                                                Promotion :
-                                          </p>
+                                          <h2 class="card-text">
+                                                Promotion : <?= $row['nom_promo'] ?>
+                                          </h2>
                                     </div>
                               </div>
                         </div>
@@ -109,16 +114,23 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                               <div class="row">
                                     <div class="col-12">
                                           <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#ModificationProfil">Modifier</button>
+                                                data-bs-target="#ModificationProfil">Modifier le profil</button>
                                     </div>
                               </div>
                         </div>
                         <div class="card-body">
                               <div class="row">
-                                    <div class="col-12">
-                                          <a href="listEtudiant.php" class=" btn btn-outline-info"><i
-                                                      class=" fa fa-arrow-left"></i>Retourner</a>
-                                    </div>
+                                    <?php if ($_SESSION['id'] == 4) {
+                                                            echo ' <div class="col-12">
+                                          <a href="listEtudiant.php" class=" btn btn-outline-info">
+                                          <i class=" fa fa-arrow-left"></i>Retourner</a></div>';
+                                                      } ?>
+                                    <?php
+                                                      if ($_SESSION['id'] == 1) {
+                                                            echo '<div class="col-12">
+                                          <a href="listComptes.php" class=" btn btn-outline-info">
+                                          <i class=" fa fa-arrow-left"></i>Retourner</a></div>';
+                                                      } ?>
                               </div>
                         </div>
                   </div>
@@ -126,11 +138,58 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                   <div class="card text-center mb-5">
                         <div class="card-header">Liste des candidatures</div>
                         <div class="card-body">
-                              <h5 class="card-title">1</h5>
-                              <h5 class="card-title">1</h5>
-                              <h5 class="card-title">1</h5>
-                              <h5 class="card-title">1</h5>
+                              <?php
+                              require_once "../../config.php";
+
+                                    $sql = 'SELECT p.id_offre, o.Titre, o.Date_post, o.Remuneration, o.nombre_places
+                                    FROM postule p 
+                                    INNER JOIN compte c ON c.id_c = p.id_c
+                                    INNER JOIN offre o ON o.id_offre = p.id_offre
+                                    WHERE p.login = "'.$_SESSION["username"].'"';
+                              
+                              if ($result = $pdo->query($sql)) {
+                                    if ($result->rowCount() > 0) {
+                                          while ($row = $result->fetch()) {
+                              ?>
+                              <table id="datatableid" class="table table-bordered table-striped">
+                                    <thead>
+                                          <tr>
+                                                <th>#</th>
+                                                <th>Titre</th>
+                                                <th>Date</th>
+                                                <th>Rémunération</th>
+                                                <th>Nombre de places</th>
+                                          </tr>
+                                    </thead>
+                                    <?php
+                                    ?>
+                                    <tbody>
+                                          <tr>
+                                                <td>
+                                                      <?= $row['id_offre']; ?>
+                                                </td>
+                                                <td>
+                                                      <?= $row['Titre']; ?>
+                                                </td>
+                                                <td>
+                                                      <?= $row['Date_post']; ?>
+                                                </td>
+                                                <td>
+                                                      <?= $row['Remuneration']; ?>
+                                                </td>
+                                                <td>
+                                                      <?= $row['nombre_places']; ?>
+                                                </td>
+                                          </tr>
+                                    </tbody>
+                              </table>
                               <p class="card-text"></p>
+                              <?php }
+                                          } 
+                                    }
+                                    // Free result set
+                                    unset($result);
+            ?>
                         </div>
                         <div class="card-footer text-muted"></div>
                   </div>
@@ -149,9 +208,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             <?php }
                         } else {
                               echo 'Erreur de données, Veuillez contacter un administrateur';
-                              echo '<div class="card-footer text-muted"><a href="listEntreprise.php" class="btn btn-primary">Retourner</a></div>';
+                              echo '<div class="card-footer text-muted"><a href="listComptes.php" class="btn btn-primary">Retourner</a></div>';
                         }
-                  } // Free result set
+                  } 
+                  // Free result set
                   unset($result);
 ?>
       </div>

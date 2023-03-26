@@ -21,7 +21,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       <link rel="stylesheet" href="../../style.css" type="text/css" />
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+            integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous">
       </script>
 </head>
 
@@ -33,7 +34,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
                   <div class="container-fluid">
                         <!-- Toggle button -->
-                        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                              data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                              aria-expanded="false" aria-label="Toggle navigation">
                               <i class="fas fa-bars"></i>
                         </button>
 
@@ -52,7 +55,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         </div>
 
                         <div class="dropdown">
-                              <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              <button class="btn btn-outline-info dropdown-toggle" type="button"
+                                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <?php echo htmlspecialchars($_SESSION["username"]); ?>
                               </button>
                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -95,7 +99,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         <div class="card-body">
                               <div class="row">
                                     <div class="col-12">
-                                          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ModificationProfil">Modifier</button>
+                                          <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                                data-bs-target="#ModificationProfil">Modifier</button>
                                     </div>
                               </div>
                         </div>
@@ -104,13 +109,59 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                   <div class="card text-center mb-5">
                         <div class="card-header">Liste des candidatures</div>
                         <div class="card-body">
-                              <h5 class="card-title">1</h5>
-                              <h5 class="card-title">1</h5>
-                              <h5 class="card-title">1</h5>
-                              <h5 class="card-title">1</h5>
+                              <?php
+                              require_once "../../config.php";
+
+                                    $sql = 'SELECT p.id_offre, o.Titre, o.Date_post, o.Remuneration, o.nombre_places
+                                    FROM postule p 
+                                    INNER JOIN compte c ON c.id_c = p.id_c
+                                    INNER JOIN offre o ON o.id_offre = p.id_offre
+                                    WHERE c.login = "'.$_SESSION["username"].'"';
+                              
+                              if ($result = $pdo->query($sql)) {
+                                    if ($result->rowCount() > 0) {
+                                          while ($row = $result->fetch()) {
+                              ?>
+                              <table id="datatableid" class="table table-bordered table-striped">
+                                    <thead>
+                                          <tr>
+                                                <th>#</th>
+                                                <th>Titre</th>
+                                                <th>Date</th>
+                                                <th>Rémunération</th>
+                                                <th>Nombre de places</th>
+                                          </tr>
+                                    </thead>
+                                    <?php
+                                    ?>
+                                    <tbody>
+                                          <tr>
+                                                <td>
+                                                      <?= $row['id_offre']; ?>
+                                                </td>
+                                                <td>
+                                                      <?= $row['Titre']; ?>
+                                                </td>
+                                                <td>
+                                                      <?= $row['Date_post']; ?>
+                                                </td>
+                                                <td>
+                                                      <?= $row['Remuneration']; ?>
+                                                </td>
+                                                <td>
+                                                      <?= $row['nombre_places']; ?>
+                                                </td>
+                                          </tr>
+                                    </tbody>
+                              </table>
                               <p class="card-text"></p>
+                              <?php }
+                                          } 
+                                    }
+                                    // Free result set
+                                    unset($result);
+            ?>
                         </div>
-                        <div class="card-footer text-muted"></div>
                   </div>
                   <div class="card text-center mb-5">
                         <div class="card-header">WishList</div>
