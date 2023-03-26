@@ -172,8 +172,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         return $(this).text();
                   }).get();
 
-                  console.log(data);
-
                   $('#id_entreprise').val(data[0]);
 
             });

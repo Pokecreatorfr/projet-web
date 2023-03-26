@@ -5,9 +5,9 @@ $username = "root";
 $password = "";
 
 try {
-    $pdo = new PDO("mysql:host=$servername;dbname=workshop8", $username, $password);
+    $pdo = new PDO("mysql:host=$servername;dbname=projetWeb", $username, $password);
     // set the PDO error mode to exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
+    echo "Erreur de connexion à la base de donnée: " . $e->getMessage();
 }

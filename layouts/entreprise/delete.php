@@ -19,8 +19,8 @@ if(isset($_POST['deletedata']))
 
     if($pdo->query($sql))
     {
-        echo '<script> alert("Data Deleted"); </script>';
-        header("Location: listEntreprise.php");
+          header("Location: listEntreprise.php");
+          echo '<script> alert("Data Deleted"); </script>';
     }
     else
     {

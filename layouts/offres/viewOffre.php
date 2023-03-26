@@ -80,7 +80,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         $sql = "SELECT o.Titre, o.Durée, o.Durée, o.nombre_places,o.Remuneration,o.Date_post,o.Compétences, v.ville
                               FROM offre o
                               INNER JOIN site s ON s.id_site = o.id_site 
-                              INNER JOIN ville v ON v.id_ville = s.id_ville Where o.id_site = " . $_GET['id'];
+                              INNER JOIN ville v ON v.id_ville = s.id_ville WHERE o.id_offre= " . $_GET['id'];
                   }
                   if ($result = $pdo->query($sql)) {
                         if ($result->rowCount() > 0) {
