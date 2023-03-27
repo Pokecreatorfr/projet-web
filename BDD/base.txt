@@ -69,7 +69,7 @@ CREATE TABLE Site(
 CREATE TABLE Offre(
    id_offre INT AUTO_INCREMENT,
    Titre VARCHAR(50),
-   Compétences TEXT,
+   Description TEXT,
    Durée VARCHAR(50),
    Date_post DATE,
    nombre_places SMALLINT,
