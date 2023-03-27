@@ -60,7 +60,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     <?php echo htmlspecialchars($_SESSION["username"]); ?>
                               </button>
                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="#">Profil</a></li>
+                                    <li><a class="dropdown-item" href="../comptes/profil.php">Profil</a></li>
                                     <?php
                                     if ($_SESSION['id'] == 1) {
                                           echo '<li><a class="dropdown-item" href="../admin/adminPage.php">Paramètres</a></li>';
@@ -138,58 +138,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                   <div class="card text-center mb-5">
                         <div class="card-header">Liste des candidatures</div>
                         <div class="card-body">
-                              <?php
-                              require_once "../../config.php";
-
-                                    $sql = 'SELECT p.id_offre, o.Titre, o.Date_post, o.Remuneration, o.nombre_places
-                                    FROM postule p 
-                                    INNER JOIN compte c ON c.id_c = p.id_c
-                                    INNER JOIN offre o ON o.id_offre = p.id_offre
-                                    WHERE p.login = "'.$_SESSION["username"].'"';
-                              
-                              if ($result = $pdo->query($sql)) {
-                                    if ($result->rowCount() > 0) {
-                                          while ($row = $result->fetch()) {
-                              ?>
-                              <table id="datatableid" class="table table-bordered table-striped">
-                                    <thead>
-                                          <tr>
-                                                <th>#</th>
-                                                <th>Titre</th>
-                                                <th>Date</th>
-                                                <th>Rémunération</th>
-                                                <th>Nombre de places</th>
-                                          </tr>
-                                    </thead>
-                                    <?php
-                                    ?>
-                                    <tbody>
-                                          <tr>
-                                                <td>
-                                                      <?= $row['id_offre']; ?>
-                                                </td>
-                                                <td>
-                                                      <?= $row['Titre']; ?>
-                                                </td>
-                                                <td>
-                                                      <?= $row['Date_post']; ?>
-                                                </td>
-                                                <td>
-                                                      <?= $row['Remuneration']; ?>
-                                                </td>
-                                                <td>
-                                                      <?= $row['nombre_places']; ?>
-                                                </td>
-                                          </tr>
-                                    </tbody>
-                              </table>
+                              <h5 class="card-title">1</h5>
+                              <h5 class="card-title">1</h5>
+                              <h5 class="card-title">1</h5>
+                              <h5 class="card-title">1</h5>
                               <p class="card-text"></p>
-                              <?php }
-                                          } 
-                                    }
-                                    // Free result set
-                                    unset($result);
-            ?>
                         </div>
                         <div class="card-footer text-muted"></div>
                   </div>

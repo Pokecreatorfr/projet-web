@@ -143,7 +143,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     <div class="d-grid gap-2 col-3 mx-auto">
                                           <a href="listEntreprise.php" class="btn btn-primary">Evaluer</a>
                                           <a href="listEntreprise.php" class=" btn btn-outline-info"><i
-                                                      class=" fa fa-arrow-left"></i>Retourner</a>
+                                                      class=" fa fa-arrow-left"></i> Liste des entreprises</a>
                                     </div>
                               </div>
                         </div>

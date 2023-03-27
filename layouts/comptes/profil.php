@@ -7,6 +7,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       header("Location: ../../login.php");
       exit;
 }
+ // Include config file
+require_once "../../config.php";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -75,6 +77,21 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
       <div class="bg-secondary">
             <div class="container">
+                  <?php
+                  require_once "../../config.php";
+                        $sql = 'SELECT p.Nom, p.Prenom, pr.nom_promo, v.ville
+                        FROM personne p
+                        INNER JOIN compte c ON p.id_personne = c.id_personne 
+                        INNER JOIN etre_promo e ON c.id_c = e.id_c
+                        INNER JOIN promotion pr ON e.id_promotion = pr.id_promotion
+                        INNER JOIN centre ce ON ce.id_c = c.id_c
+                        INNER JOIN ville v ON v.id_ville = ce.id_ville
+                        WHERE c.login = "' . $_SESSION["username"] . '"';
+                        
+                  if ($result = $pdo->query($sql)) {
+                        if ($result->rowCount() > 0) {
+                              while ($row = $result->fetch()) {
+                  ?>
                   <div class="card text-center mb-5">
                         <div class="row g-0">
                               <div class="col-md-4">
@@ -82,14 +99,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                               </div>
                               <div class="col-md-8">
                                     <div class="card-body">
-                                          <h2 class="card-title"><?php echo htmlspecialchars($_SESSION["username"]); ?>
+                                          <h1><?= $row['Nom'] ?> <?= $row['Prenom'] ?></h1>
+                                          <h2>
+                                                Centre : <?= $row['ville'] ?>
                                           </h2>
-                                          <p class="card-text">
-                                                Centre :
-                                          </p>
-                                          <p class="card-text">
-                                                Promotion :
-                                          </p>
+                                          <h2 class="card-text">
+                                                Promotion : <?= $row['nom_promo'] ?>
+                                          </h2>
                                     </div>
                               </div>
                         </div>
@@ -105,81 +121,123 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                               </div>
                         </div>
                   </div>
-
+                  <?php
+                  }}}
+                  ?>
                   <div class="card text-center mb-5">
-                        <div class="card-header">Liste des candidatures</div>
+                        <div class="card-header">
+                              <h2>Liste des candidatures</h2>
+                        </div>
                         <div class="card-body">
-                              <?php
-                              require_once "../../config.php";
+                              <?php    
+                              // Attempt select query execution
+                              $sql = 'SELECT p.id_offre, o.Titre, o.Date_post, o.Remuneration, o.nombre_places
+                              FROM postule p 
+                              INNER JOIN compte c ON c.id_c = p.id_c
+                              INNER JOIN offre o ON o.id_offre = p.id_offre
+                              WHERE c.login = "' . $_SESSION["username"] . '"';
 
-                                    $sql = 'SELECT p.id_offre, o.Titre, o.Date_post, o.Remuneration, o.nombre_places
-                                    FROM postule p 
-                                    INNER JOIN compte c ON c.id_c = p.id_c
-                                    INNER JOIN offre o ON o.id_offre = p.id_offre
-                                    WHERE c.login = "'.$_SESSION["username"].'"';
-                              
                               if ($result = $pdo->query($sql)) {
                                     if ($result->rowCount() > 0) {
+                                          echo '<div class="col-md-12">';
+                                          echo '<table id="dataList" class="table table-bordered table-striped">';
+                                          echo "<thead>";
+                                          echo "<tr>";
+                                          echo "<th>#</th>";
+                                          echo "<th>Titre</th>";
+                                          echo "<th>Date</th>";
+                                          echo "<th>Rémunération</th>";
+                                          echo "<th>Nombre de places</th>";
+                                          echo "</tr>";
+                                          echo "</thead>";
+                                          echo "<tbody>";
                                           while ($row = $result->fetch()) {
-                              ?>
-                              <table id="datatableid" class="table table-bordered table-striped">
-                                    <thead>
-                                          <tr>
-                                                <th>#</th>
-                                                <th>Titre</th>
-                                                <th>Date</th>
-                                                <th>Rémunération</th>
-                                                <th>Nombre de places</th>
-                                          </tr>
-                                    </thead>
-                                    <?php
-                                    ?>
-                                    <tbody>
-                                          <tr>
-                                                <td>
-                                                      <?= $row['id_offre']; ?>
-                                                </td>
-                                                <td>
-                                                      <?= $row['Titre']; ?>
-                                                </td>
-                                                <td>
-                                                      <?= $row['Date_post']; ?>
-                                                </td>
-                                                <td>
-                                                      <?= $row['Remuneration']; ?>
-                                                </td>
-                                                <td>
-                                                      <?= $row['nombre_places']; ?>
-                                                </td>
-                                          </tr>
-                                    </tbody>
-                              </table>
-                              <p class="card-text"></p>
-                              <?php }
-                                          } 
+                                                echo "<tr>";
+                                                echo "<td>" . $row['id_offre'] . "</td>";
+                                                echo "<td>" . $row['Titre'] . "</td>";
+                                                echo "<td>" . $row['Date_post'] . "</td>";
+                                                echo "<td>" . $row['Remuneration'] . "</td>";
+                                                echo "<td>" . $row['nombre_places'] . "</td>";
+                                                echo "</tr>";
+                                          }
+                                          echo "</tbody>";
+                                          echo "</table>";
+                                          echo "</div>";
+                                          // Free result set
+                                          unset($result);
+                                    } else {
+                                          echo '<div class="alert alert-danger"><em>Aucune donnée</em></div>';
                                     }
-                                    // Free result set
-                                    unset($result);
-            ?>
+                              } else {
+                                    echo "Oops! Réessayer plus tard.";
+                              }
+                              // Close connection
+                              unset($pdo);
+                              ?>
                         </div>
                   </div>
                   <div class="card text-center mb-5">
-                        <div class="card-header">WishList</div>
-                        <div class="card-body">
-                              <h5 class="card-title">1</h5>
-                              <h5 class="card-title">1</h5>
-                              <h5 class="card-title">1</h5>
-                              <h5 class="card-title">1</h5>
-                              <p class="card-text"></p>
+                        <div class="card-header">
+                              <h2>Liste des souhaits</h2>
                         </div>
-                        <div class="card-footer text-muted"></div>
+                        <div class="card-body">
+                              <?php      
+                               $pdo = new PDO("mysql:host=localhost;dbname=projetWeb","root", "");
+                              // Attempt select query execution
+                              $req = 'SELECT w.id_offre, o.Titre, o.Date_post, o.Remuneration, o.nombre_places
+                              FROM wishlist w
+                              INNER JOIN compte c ON c.id_c = w.id_c
+                              INNER JOIN offre o ON o.id_offre = w.id_offre
+                              WHERE c.login = "' . $_SESSION["username"] . '"';
+
+                              if ($data = $pdo->query($req)) {
+                                    if ($data->rowCount() > 0) {
+                                          echo '<div class="col-md-12">';
+                                          echo '<table id="dataList" class="table table-bordered table-striped">';
+                                          echo "<thead>";
+                                          echo "<tr>";
+                                          echo "<th>#</th>";
+                                          echo "<th>Titre</th>";
+                                          echo "<th>Date</th>";
+                                          echo "<th>Rémunération</th>";
+                                          echo "<th>Nombre de places</th>";
+                                          echo "<th>Action</th>";
+                                          echo "</tr>";
+                                          echo "</thead>";
+                                          echo "<tbody>";
+                                          while ($row = $data->fetch()) {
+                                                echo "<tr>";
+                                                echo "<td>" . $row['id_offre'] . "</td>";
+                                                echo "<td>" . $row['Titre'] . "</td>";
+                                                echo "<td>" . $row['Date_post'] . "</td>";
+                                                echo "<td>" . $row['Remuneration'] . "</td>";
+                                                echo "<td>" . $row['nombre_places'] . "</td>";
+                                                echo "<td>";
+                                                echo '<a href="../offres/viewOffre.php?id=' . $row['id_offre'] . '" title="Details"
+                                                data-bs-target="#compte"><span class="fa fa-eye"></span></a>';
+                                                echo '<a href="delete.php?id=' . $row['id_offre'] . '" class="ms-3" title="Supprimer" data-toggle="tooltip" data-bs-toggle="modal"
+                                                data-bs-target="#Supprimerprofil"><span class="fa fa-trash"></span></a>';
+                                                echo "</td>";
+                                                echo "</tr>";
+                                          }
+                                          echo "</tbody>";
+                                          echo "</table>";
+                                          echo "</div>";
+                                          // Free result set
+                                          unset($result);
+                                    } else {
+                                          echo '<div class="alert alert-danger"><em>Aucune donnée</em></div>';
+                                    }
+                              } else {
+                                    echo "Oops! Réessayer plus tard.";
+                              }
+                              // Close connection
+                              unset($pdo);
+                              ?>
+                        </div>
                   </div>
             </div>
       </div>
-
-      <?php
-      include '../footer.php';
-      ?>
 
       <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
       <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>

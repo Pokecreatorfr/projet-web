@@ -150,7 +150,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
                                           <a href="listOffre.php" class=" btn btn-outline-info">
                                                 <i class=" fa fa-arrow-left">
-                                                </i>Retourner
+                                                </i> Liste des offres
                                           </a>
                                     </div>
                               </div>
