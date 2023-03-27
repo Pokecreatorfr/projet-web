@@ -34,9 +34,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
                   <div class="container-fluid">
                         <!-- Toggle button -->
-                        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                              data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                              aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                               <i class="fas fa-bars"></i>
                         </button>
 
@@ -55,8 +53,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         </div>
 
                         <div class="dropdown">
-                              <button class="btn btn-outline-info dropdown-toggle" type="button"
-                                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <?php echo htmlspecialchars($_SESSION["username"]); ?>
                               </button>
                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -78,6 +75,16 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         <div class="row">
                               <div class="col-12">
                                     <h1>Liste des Offres</h1>
+                                    <?php
+                                    if (isset($_SESSION['status'])) {
+                                    ?>
+                                          <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <?php echo $_SESSION['status']; ?>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                          </div>
+                                    <?php unset($_SESSION['status']);
+                                    } ?>
+
                                     <div class="mt-5 mb-3">
                                           <h2 class="pull-left">
                                                 <?php
@@ -126,8 +133,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                 if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
                                                       echo '<a href="update.php?id=' . $row['id_offre'] . '" class="ms-3" title="Modifier" data-toggle="tooltip" data-bs-toggle="modal"
                                                       data-bs-target="#Modifier" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                                      echo '<a href="delete.php?id=' . $row['id_offre'] . '" title="Supprimer" data-bs-toggle="modal"
-                                                      data-bs-target="#Supprimer" data-toggle="tooltip" class="ms-3"><span class="fa fa-trash"></span></a>';
+                                                      echo '<a href="#" class="ms-3 deletebtn"><span class="fa fa-trash"></span></a>';
                                                 }
                                                 echo '<a href="delete.php?id=' . $row['id_offre'] . '" title="Statistique" class="ms-3"><span class="fa fa-signal"></span></a>';
                                                 echo "</td>";
@@ -170,6 +176,34 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
       <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+      <!-- SCRIPT js POUR LA SUPPRESSION -->
+      <script>
+            $(document).ready(function() {
+
+                  $('.deletebtn').on('click', function() {
+
+                        $('#deletemodal').modal('show');
+
+                        $tr = $(this).closest('tr');
+
+                        var data = $tr.children("td").map(function() {
+                              return $(this).text();
+                        }).get();
+
+                        $('#id_entreprise').val(data[0]);
+
+                  });
+            });
+      </script>
+
+      <script>
+            window.setTimeout(function() {
+                  $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                        $(this).remove();
+                  });
+            }, 3000);
+      </script>
+
 
 </body>
 
@@ -193,20 +227,25 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       </div>
 </div>
 
-<div class="modal fade" id="Supprimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+<!--MODAL DE SUPPRESSION  -->
+<div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
             <div class="modal-content">
                   <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Suppression</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body">
-                        Voulez-vous vraiment supprimer ce profil?
-                  </div>
-                  <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
-                  </div>
+                  <form action="delete.php" method="POST">
+                        <div class="modal-body">
+                              <input type="hidden" name="delete_id" id="id_entreprise">
+                              <h4>Voulez-vous vraiment supprimer cette offre?</h4>
+                        </div>
+                        <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
+                              <button type="submit" name="deletedata" class="btn btn-danger"> Supprimer
+                              </button>
+                        </div>
+                  </form>
             </div>
       </div>
 </div>

@@ -7,7 +7,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       header("Location: ../../login.php");
       exit;
 }
- // Include config file
+// Include config file
 require_once "../../config.php";
 ?>
 <!DOCTYPE html>
@@ -79,7 +79,7 @@ require_once "../../config.php";
             <div class="container">
                   <?php
                   require_once "../../config.php";
-                        $sql = 'SELECT p.Nom, p.Prenom, pr.nom_promo, v.ville
+                  $sql = 'SELECT p.Nom, p.Prenom, pr.nom_promo, v.ville
                         FROM personne p
                         INNER JOIN compte c ON p.id_personne = c.id_personne 
                         INNER JOIN etre_promo e ON c.id_c = e.id_c
@@ -87,7 +87,7 @@ require_once "../../config.php";
                         INNER JOIN centre ce ON ce.id_c = c.id_c
                         INNER JOIN ville v ON v.id_ville = ce.id_ville
                         WHERE c.login = "' . $_SESSION["username"] . '"';
-                        
+
                   if ($result = $pdo->query($sql)) {
                         if ($result->rowCount() > 0) {
                               while ($row = $result->fetch()) {
@@ -122,14 +122,20 @@ require_once "../../config.php";
                         </div>
                   </div>
                   <?php
-                  }}}
+                              }
+                        }
+                  }
                   ?>
+            </div>
+            <?php if ($_SESSION['id'] == 1 || $_SESSION['id'] == 3) {
+             ?>
+            <div class="container">
                   <div class="card text-center mb-5">
                         <div class="card-header">
                               <h2>Liste des candidatures</h2>
                         </div>
                         <div class="card-body">
-                              <?php    
+                              <?php
                               // Attempt select query execution
                               $sql = 'SELECT p.id_offre, o.Titre, o.Date_post, o.Remuneration, o.nombre_places
                               FROM postule p 
@@ -181,8 +187,8 @@ require_once "../../config.php";
                               <h2>Liste des souhaits</h2>
                         </div>
                         <div class="card-body">
-                              <?php      
-                               $pdo = new PDO("mysql:host=localhost;dbname=projetWeb","root", "");
+                              <?php
+                              $pdo = new PDO("mysql:host=localhost;dbname=projetWeb", "root", "");
                               // Attempt select query execution
                               $req = 'SELECT w.id_offre, o.Titre, o.Date_post, o.Remuneration, o.nombre_places
                               FROM wishlist w
@@ -237,6 +243,9 @@ require_once "../../config.php";
                         </div>
                   </div>
             </div>
+            <?php 
+            }
+            ?>
       </div>
 
       <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>

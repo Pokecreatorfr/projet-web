@@ -71,6 +71,37 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                   </div>
             </nav>
       </div>
+      <div class="search-form">
+            <form class="row g-3">
+                  <div class="col-md-10">
+                        <input type="text" class="form-control" id="" placeholder="Mots clés">
+                  </div>
+                  <div class="col-md-2 d-grid gap-2 col-6 mx-auto">
+                        <input type="submit" name="login" class="btn btn-primary" value="Rechercher" />
+                  </div>
+                  <div class="col-md-4">
+                        <label for="inputState" class="form-label">Localité</label>
+                        <select id="" class="form-select">
+                              <option selected>Choisir...</option>
+                              <option>...</option>
+                        </select>
+                  </div>
+                  <div class="col-md-4">
+                        <label for="" class="form-label">Durée</label>
+                        <select id="" class="form-select">
+                              <option selected>Choisir...</option>
+                              <option>...</option>
+                        </select>
+                  </div>
+                  <div class="col-md-4">
+                        <label for="" class="form-label">Rémunération</label>
+                        <select id="" class="form-select">
+                              <option selected>Choisir...</option>
+                              <option>...</option>
+                        </select>
+                  </div>
+            </form>
+      </div>
 
       <?php
       include 'home.php';

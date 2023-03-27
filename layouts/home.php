@@ -19,37 +19,60 @@
                         <p>Vous accompagner dans votre recherche de <span>STAGE</span></p>
                   </div>
             </div>
-            <div class="search-form">
-                  <form class="row g-3">
-                        <div class="col-md-10">
-                              <input type="text" class="form-control" id="" placeholder="Mots clés">
-                        </div>
-                        <div class="col-md-2 d-grid gap-2 col-6 mx-auto">
-                              <input type="submit" name="login" class="btn btn-primary" value="Rechercher" />
+
+            <div class="container mt-5 mb-3">
+                  <div class="row">
+                        <div class="col-md-4">
+                              <div class="card p-3 mb-2">
+                                    <div class="mt-5">
+                                          <h3 class="heading">CESI Ecole d'ingénieurs<br>Angouleme</h3>
+                                          <div class="mt-5">
+                                                <div class="progress" role="progressbar" aria-label="Example 1px high"
+                                                      aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+                                                      style="height: 1px">
+                                                      <div class="progress-bar" style="width: 100%"></div>
+                                                </div>
+                                                <div class="mt-3"> <span class="text1">16000 La couronne</span>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
                         </div>
                         <div class="col-md-4">
-                              <label for="inputState" class="form-label">Localité</label>
-                              <select id="" class="form-select">
-                                    <option selected>Choisir...</option>
-                                    <option>...</option>
-                              </select>
+                              <div class="card p-3 mb-2">
+                                    <div class="mt-5">
+                                          <h3 class="heading">CPI A2<br>Informatique</h3>
+                                          <div class="mt-5">
+                                                <div class="progress" role="progressbar" aria-label="Example 1px high"
+                                                      aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+                                                      style="height: 1px">
+                                                      <div class="progress-bar" style="width: 100%"></div>
+                                                </div>
+                                                <div class="mt-3"> <span class="text1">8 Prosit</span>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
                         </div>
                         <div class="col-md-4">
-                              <label for="" class="form-label">Durée</label>
-                              <select id="" class="form-select">
-                                    <option selected>Choisir...</option>
-                                    <option>...</option>
-                              </select>
+                              <div class="card p-3 mb-2">
+                                    <div class="mt-5">
+                                          <h3 class="heading">Développement WEB<br>Groupe 2</h3>
+                                          <div class="mt-5">
+                                                <div class="progress" role="progressbar" aria-label="Example 1px high"
+                                                      aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+                                                      style="height: 1px">
+                                                      <div class="progress-bar" style="width: 100%"></div>
+                                                </div>
+                                                <div class="mt-3"> <span class="text1">7 semaines</span>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
                         </div>
-                        <div class="col-md-4">
-                              <label for="" class="form-label">Rémunération</label>
-                              <select id="" class="form-select">
-                                    <option selected>Choisir...</option>
-                                    <option>...</option>
-                              </select>
-                        </div>
-                  </form>
+                  </div>
             </div>
+
             <div class="text">
                   <p>Lorem ipsum dolor sit amet. Qui quidem enim aut velit quibusdam eos perferendis earum quo enim
                         consequatur aut numquam molestiae aut molestiae earum et vitae commodi? Cum officia ipsum et

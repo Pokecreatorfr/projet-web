@@ -1,3 +1,15 @@
+<?php
+// Initialize the session
+session_start();
+
+// Check if the user is logged in, if not then redirect him to login page
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+      header("Location: ../../login.php");
+      exit;
+}
+// Include config file
+require_once "../../config.php";
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -14,39 +26,133 @@
 <body>
       <div class="container">
             <h1 class="Offre"> Créer une Offre</h1>
-            <div class="mb-3">
-                  <label for="FormInput" class="form-label">Titre</label>
-                  <input type="Titre" class="form-control" id="exampleFormControlInput1" placeholder="">
-            </div>
-            <div class="mb-3">
-                  <label for="FormInput" class="form-label">Promotion</label>
-                  <input type="Promotion" class="form-control" id="exampleFormControlInput1" placeholder="">
-            </div>
-            <div class="mb-3">
-                  <label for="FormInput" class="form-label">Durée de Stage</label>
-                  <input type="Durée de Stage" class="form-control" id="exampleFormControlInput1" placeholder="">
-            </div>
-            <div class="mb-3">
-                  <label for="FormInput" class="form-label Cent">Rémunération</label>
-                  <input type="Rémunération" class="form-control" id="exampleFormControlInput1" placeholder="">
-            </div>
-            <div class="mb-3">
-                  <label for="FormInput" class="form-label Cent">Date de l'Offre</label>
-                  <input type=" Date de l'Offre" class="form-control" id="exampleFormControlInput1" placeholder="">
-            </div>
-            <div class="mb-3">
-                  <label for="FormInput" class="form-label Cent">Nombre de places</label>
-                  <input type="Nombre de places" class="form-control" id="exampleFormControlInput1" placeholder="">
-            </div>
-            <div class="mb-3">
-                  <label for="FormInput" class="form-label Cent">Compétences</label>
-                  <input type=" Compétences" class="form-control" id="exampleFormControlInput1" placeholder="">
-            </div>
-            <button type="button" class="btn btn-primary">Soumettre</button>
+            <?php
+            $req = "SELECT * from entreprise";
+            $entSel = $pdo->query($req);
+
+            $req = "SELECT * from ville";
+            $villeSel = $pdo->query($req);
+
+            if ($entSel && $villeSel) {
+
+            ?>
+            <form action="insertion.php" method="post">
+                  <div class="row">
+                        <div class="col-md-6">
+                              <div class="form-group">
+                                    <div class="mb-3">
+                                          <label for="FormInput" class="form-label Offre">Titre</label>
+                                          <input type="Text" class="form-control" id="exampleFormControlInput1"
+                                                name="Titre" placeholder="">
+                                    </div>
+                              </div>
+                        </div>
+
+                        <div class="col-md-6">
+                              <div class="form-group">
+                                    <div class="mb-3">
+                                          <label for="FormInput" class="form-label Offre">Nom Entreprise</label>
+                                          <select name="entreprise" id="SelectEntreprise" class="form-select"
+                                                aria-label="Default select example">
+                                                <?php 
+                                          while($tab = $entSel->fetch()){
+                                                echo'<option selected>Entreprises</option>';
+                                                echo '<option value="'.$tab[0].'">'.$tab[1].' '.$tab[2].'</option>';
+                                          }
+                                          ?>
+                                          </select>
+                                    </div>
+                              </div>
+                        </div>
+
+                        <div class="col-md-6">
+                              <div class="form-group">
+                                    <div class="mb-3">
+                                          <label for="FormInput" class="form-label Offre">Durée de
+                                                Stage</label>
+                                          <input type="Text" class="form-control" id="exampleFormControlInput1"
+                                                name="Durée_de_Stage" placeholder="">
+                                    </div>
+                              </div>
+                        </div>
+
+                        <div class="col-md-6">
+                              <div class="form-group">
+                                    <div class="mb-3">
+                                          <label for="FormInput" class="form-label Offre">Rémunération</label>
+                                          <input type="Text" class="form-control" id="exampleFormControlInput1"
+                                                name="Rémunération" placeholder="">
+                                    </div>
+                              </div>
+                        </div>
+
+                        <div class="col-md-6">
+                              <div class="form-group">
+                                    <div class="mb-3">
+                                          <label for="FormInput" class="form-label Offre">Date de
+                                                l'Offre</label>
+                                          <input type="date" class="form-control" id="exampleFormControlInput1"
+                                                name="Date_offre" placeholder="">
+                                    </div>
+                              </div>
+                        </div>
+
+                        <div class="col-md-6">
+                              <div class="form-group">
+                                    <div class="mb-3">
+                                          <label for="FormInput" class="form-label Offre">Nombre de
+                                                places</label>
+                                          <input type="Text" class="form-control" id="exampleFormControlInput1"
+                                                name="Nombre_de_places" placeholder="">
+                                    </div>
+                              </div>
+                        </div>
+
+                        <div class="col-md-6">
+                              <div class="form-group">
+                                    <div class="mb-3">
+                                          <label for="FormInput Description"
+                                                class="form-label Offre">Description</label>
+                                          <input type="Text" class="form-control Description"
+                                                id="exampleFormControlInput1" name="competences" placeholder="">
+                                    </div>
+                              </div>
+                        </div>
+
+                        <div class="mb-3">
+                              <label for="FormInput" class="form-label Offre">Site</label>
+                              <div class="row">
+
+                                    <div class="col loc">
+                                          <div class="mb-3">
+                                                <select name="ville" id="SelectVille" class="form-select"
+                                                      aria-label="Default select example">
+                                                      <?php 
+                                          while($tab = $villeSel->fetch()){
+                                                echo'<option selected>Ville</option>';
+                                                echo '<option value="'.$tab[0].'">'.$tab[1].' '.$tab[2].'</option>';
+                                          }
+                                          ?>
+                                                </select>
+                                          </div>
+                                    </div>
+
+                              </div>
+                        </div>
+                  </div>
+                  <button type="submit" name="insertOffre" class="btn btn-primary">Soumettre</button>
+                  <a href="listOffre.php" class="btn btn-outline-danger">Annuler</a>
+
+            </form>
+            <?php
+            } ?>
       </div>
 
-      <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
-      <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+      </script>
+
 </body>
 
 </html>
