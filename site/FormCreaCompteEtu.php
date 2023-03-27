@@ -12,22 +12,24 @@
 </head>
 <body>
    <h1 class="pro">Créer un compte Etudiant</h1>  
- <form action="insertionsample.php" method="post">
+ <form action="InsertionCompteEtu.php" method="post" enctype="multipart/form-data" >
+
    <div class="row"> 
         <div class="col">
         <label for="FormInput" class="form-label" id="Compte">Civilité</label><br>
-            <input class="form-check-input form-label" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <input class="form-check-input form-label" type="radio" name="Sexe" id="flexRadioDefault1">
              <label class="form-check-label" for="flexRadioDefault1">
                 Mme
             </label>
-            <input class="form-check-input form-label" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+            <input class="form-check-input form-label" type="radio" name="Sexe" id="flexRadioDefault2">
             <label class="form-check-label" for="flexRadioDefault2">
                 M
             </label>
         </div>  
+
         <div class="col">
             <img src="" class="profile_img" id="profile_img" alt="Responsive image" id> </img>
-            <input class="form-control form-control-sm inpt" id="image_file" type="file" accept="image/*" /> 
+            <input class="form-control form-control-sm inpt" id="image_file" type="file" accept="image/*" name="profile_img"/> 
         </div>  
     </div>
   
@@ -60,7 +62,8 @@
         <div class="col">
         <label for="FormInput" class="form-label" id="Compte">Prenom</label>
             <input type="text" class="form-control" id="exampleFormControlInput1" name="Prenom" placeholder="">
-        </div>   
+        </div> 
+
         <div class="col colproright">
             <label for="FormInput" class="form-label" id="Compte">Login</label>
             <input type="text" class="form-control" id="exampleFormControlInput1" name="Login" placeholder="">
@@ -79,6 +82,7 @@
             <label for="FormInput" class="form-label" id="Compte">Mot de passe</label>
             <input type="text" class="form-control" id="exampleFormControlInput1" name="Mot_de_passe"  placeholder="">
         </div>   
+
         <div class="col colproright">
             <label for="FormInput" class="form-label " id="Compte" >Promotion </label><br>
             <select name="promo" id="promo-select">

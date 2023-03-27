@@ -12,7 +12,8 @@
 </head>
 <body>
    <h1 class="pro">Créer un compte Pilote</h1>  
- <form action="insertionsample.php" method="post">
+ <form action="InsertionComptePilote.php" method="post" enctype="multipart/form-data" >
+
    <div class="row"> 
         <div class="col">
         <label for="FormInput" class="form-label" id="Compte">Civilité</label><br>
@@ -65,8 +66,7 @@
             <label for="FormInput" class="form-label" id="Compte">Login</label>
             <input type="text" class="form-control" id="exampleFormControlInput1" name="Login" placeholder="">
         </div>   
-       <!-- <img src="" class="profile_img" id="profile_img" alt="Responsive image" id> </img>
-        <input class="form-control form-control-sm inpt" id="image_file" type="file" accept="image/*" />-->
+      
     </div>
   
 
@@ -78,7 +78,8 @@
         <div class="col">
             <label for="FormInput" class="form-label" id="Compte">Mot de passe</label>
             <input type="text" class="form-control" id="exampleFormControlInput1" name="Mot_de_passe"  placeholder="">
-        </div>   
+        </div> 
+
         <div class="col colproright">
             <label for="FormInput" class="form-label " id="Compte" >Promotion Enseignées</label><br>
             <select name="promo" id="promo-select">
@@ -87,6 +88,7 @@
             <option value="update" name="update" >2</option>
         </select>
         </div>   
+
     </div>
 
 

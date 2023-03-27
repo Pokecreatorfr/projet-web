@@ -12,7 +12,7 @@
 </head>
 <body>
    <h1 class="pro">Créer un compte Professionel</h1>  
- <form action="insertionsample.php" method="post">
+ <form action="insertionsample.php" method="post" enctype="multipart/form-data" >
    <div class="row"> 
         <div class="col">
         <label for="FormInput" class="form-label" id="Compte">Civilité</label><br>

@@ -37,11 +37,7 @@
             <label for="FormInput" class="form-label Offre" >Nombre de places</label>
             <input type="Text" class="form-control" id="exampleFormControlInput1" name="Nombre_de_places" placeholder="">
         </div>
-        <div class="mb-3">
-            <label for="FormInput" class="form-label Offre">Compétences</label>
-            <input type="Text" class="form-control" id="exampleFormControlInput1" name="Compétences" placeholder="">
-        </div>
-
+        
         <div class="mb-3">
             <label for="FormInput Description" class="form-label Offre">Description</label>
             <input type="Text" class="form-control Description" id="exampleFormControlInput1" name="Description" placeholder="">

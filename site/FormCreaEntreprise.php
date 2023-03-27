@@ -12,7 +12,7 @@
 </head>
 <body>  
         <h1> Créer une Entreprise</h1>
-
+    <form action="InsertionEntreprise.php" method="post" enctype="multipart/form-data" >
         <div class="mb-3">
             <label for="FormInput" class="form-label" id="NbEtu">Nom de l'entreprise</label>
             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="Nom_entreprise">
@@ -56,6 +56,7 @@
 
         <button type="submit" class="btn btn-primary">Soumettre</button>
     
+    </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>    
 </body>
