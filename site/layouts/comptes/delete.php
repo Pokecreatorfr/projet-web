@@ -18,4 +18,8 @@ $del_c = $pdo->prepare("UPDATE `compte` SET `validite`= 0 WHERE `id_c` = :id");
 $del_c->bindParam(":id", $id);
 $del_c->execute();
 
+$newURL = "listComptes.php";
+
+header('Location: '.$newURL);
+
 ?>

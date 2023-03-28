@@ -148,7 +148,7 @@ if ($_SESSION["id"]!==1 || $_SESSION["loggedin"] !== true) {
                                                       data-bs-target="#compte"><span class="fa fa-eye"></span></a>';
                                                       echo '<a href="update.php?id=' . $row['id_c'] . '" class="ms-3" title="Modifier" data-toggle="tooltip" data-bs-toggle="modal"
                                                       data-bs-target="#ModificationProfil"><span class="fa fa-pencil"></span></a>';
-                                                      echo '<form action="delete.php" method="post">
+                                                      echo '<form action="delete.php" method="post" onSubmit="return confirm(' . "'êtes-vous sûr de vouloir supprimer?' " . ')">
                                                                   <button type="submit" name="id_compte" value="' . $row['id_c'] . '" class="btn-link"><span class="fa fa-trash"></span></button>
                                                             </form>';
                                                       echo "</td>";
