@@ -14,15 +14,14 @@ $tabExtension = explode('.', $name);
 $extension = strtolower(end($tabExtension));
 $uniqueName = uniqid('', true);
 $file = $uniqueName.".".$extension;
-move_uploaded_file($tmpName, 'upload/profile_pics/'.$file);
+move_uploaded_file($tmpName, '../../upload/profile_pics/'.$file);
 
-echo $_FILES;
-
-$photo_profil = 'upload/profile_pics/'.$file;
+$photo_profil = '../../upload/profile_pics/'.$file;
 
 if ($size == 0) {
-    $photo_profil = 'upload/profile_pics/default.png';
+    $photo_profil = '../../upload/profile_pics/default.png';
 }
+
 
 // Set the variables for the person we want to add to the database
 $first_Name = $_POST["nom"];
@@ -47,7 +46,7 @@ $idtype= 3;
 //the photo of profil part of the projet
 
 
-
+$promo = $_POST["promo"];
 
 
 
@@ -76,27 +75,30 @@ $validite = 1;
 
 //creation compte etudiant
 
-$compte_etudiant_creation=$pdo->prepare("INSERT INTO compte (login, photo_profil, mdp, validite, id_personne, id_type) VALUES (:login, :photo_profil, :mdp, :validite, :id_personne, :id_type )");
-$compte_etudiant_creation->bindParam(":login", $login);
-$compte_etudiant_creation->bindParam(":photo_profil", $photo_profil);
-$compte_etudiant_creation->bindParam(":mdp", $motdepasse);
-$compte_etudiant_creation->bindParam(":validite", $validite);
-$compte_etudiant_creation->bindParam(":id_personne", $idpersonne_created);
-$compte_etudiant_creation->bindParam(":id_type", $idtype);
+$compte_pilote_creation=$pdo->prepare("INSERT INTO compte (login, photo_profil, mdp, validite, id_personne, id_type) VALUES (:login, :photo_profil, :mdp, :validite, :id_personne, :id_type )");
+$compte_pilote_creation->bindParam(":login", $login);
+$compte_pilote_creation->bindParam(":photo_profil", $photo_profil);
+$compte_pilote_creation->bindParam(":mdp", $motdepasse);
+$compte_pilote_creation->bindParam(":validite", $validite);
+$compte_pilote_creation->bindParam(":id_personne", $idpersonne_created);
+$compte_pilote_creation->bindParam(":id_type", $idtype);
 
-if($compte_etudiant_creation->execute()){
-  $id_etudiant_created=$pdo->lastInsertId();}
+if($compte_pilote_creation->execute()){
+  $id_pilote_created=$pdo->lastInsertId();}
 
 
 
 //relying compte w his locality whit the table "centre"
 $compte_centre_creation=$pdo->prepare("INSERT INTO centre (id_c, id_ville ) VALUES ( :id_c, :id_ville )");
-$compte_centre_creation->bindParam(":id_c", $id_etudiant_created);
+$compte_centre_creation->bindParam(":id_c", $id_pilote_created);
 $compte_centre_creation->bindParam(":id_ville", $idville_seleced);
 $compte_centre_creation->execute();
 
-
-
-
+for ($i=0; $i < count($promo); $i++) {
+    $promo_creation=$pdo->prepare("INSERT INTO etre_promo (id_c, id_promotion ) VALUES ( :id_c, :id_promo )");
+    $promo_creation->bindParam(":id_c", $id_pilote_created);
+    $promo_creation->bindParam(":id_promo", $promo[$i]);
+    $promo_creation->execute();
+}
 
 ?>
