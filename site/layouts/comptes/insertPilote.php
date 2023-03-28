@@ -40,7 +40,7 @@ $id_entreprise="";
 
 
 //set the variable for the type we want to create
-$idtype= 3;
+$idtype= 4;
 
 
 //the photo of profil part of the projet
