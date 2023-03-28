@@ -138,7 +138,7 @@ require_once "../../config.php";
                                           <label class="form-label">Site</label>
                                           <div class="row">
                                                 <div class="mb-3">
-                                                <input class="form-control" list="datalistOptions" id="exampleDataList" name="ville" placeholder="Commencez à ecrire...">
+                                                <input class="form-control" list="datalistOptions" id="exampleDataList" name="ville" placeholder="Commencez à ecrire..." >
                                                 <datalist id="datalistOptions">
                                                             <?php
                                                                   while ($tab = $villeSel->fetch()) {
