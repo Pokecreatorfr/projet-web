@@ -94,7 +94,7 @@ require_once "../../config.php";
                                     <?php
                                     if (isset($_SESSION['supp'])) {
                                     ?>
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
                                           <?php echo $_SESSION['supp']; ?>
                                           <button type="button" class="btn-close" data-bs-dismiss="alert"
                                                 aria-label="Close"></button>
@@ -116,7 +116,7 @@ require_once "../../config.php";
                               </div>
                               <?php
                               // Attempt select query execution
-                              $sql = "SELECT * FROM offre";
+                              $sql = "SELECT * FROM offre WHERE valide = 1";
                               if ($result = $pdo->query($sql)) {
                                     if ($result->rowCount() > 0) {
                                           echo '<div class="col-md-12">';
@@ -129,6 +129,7 @@ require_once "../../config.php";
                                           echo "<th>Date</th>";
                                           echo "<th>Nombre de place</th>";
                                           echo "<th>Rémunération</th>";
+                                          echo "<th>Description</th>";
                                           echo "<th>Action</th>";
                                           echo "<th></th>";
                                           echo "</tr>";
@@ -142,26 +143,51 @@ require_once "../../config.php";
                                                 echo "<td>" . $row['Date_post'] . "</td>";
                                                 echo "<td>" . $row['nombre_places'] . "</td>";
                                                 echo "<td>" . $row['Remuneration'] . "</td>";
+                                                echo "<td>" . $row['Description'] . "</td>";
                                                 echo "<td>";
                                                 echo '<a href="viewOffre.php?id=' . $row['id_offre'] . '" title="Voir" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                                 if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
                                                       echo '<a href="#" class="ms-3 editbtn"><span class="fa fa-pencil"></span></a>';
-                                                      echo '<a href="#" class="ms-3 deletebtn"><span class="fa fa-trash"></span></a>';
+                                                      echo '<a href="#" class="ms-3" data-bs-toggle="modal" data-bs-target="#deleteOffreModal"><span class="fa fa-trash"></span></a>';
                                                 }
-                                                echo '<a href="delete.php?id=' . $row['id_offre'] . '" title="Statistique" class="ms-3"><span class="fa fa-signal"></span></a>';
+                                                echo '<a href="statOffre.php?id=' . $row['id_offre'] . '" title="Statistique" class="ms-3"><span class="fa fa-signal"></span></a>';
                                                 echo "</td>";
 
                                                 echo "<td>";
                                                 if ($_SESSION['id'] == 1 || $_SESSION['id'] == 3) {
-                                                      echo '<a href="delete.php?id=' . $row['id_offre'] . '" class="btn btn-outline-primary btn-sm ms-3">POSTULER</a>';
-                                                      echo '<a href="delete.php?id=' . $row['id_offre'] . '" class="btn btn-outline-primary btn-sm ms-3">WHISHLIST</a>';
+                                                      echo '<a href="postule.php?id=' . $row['id_offre'] . '" class="btn btn-outline-primary btn-sm ms-3">POSTULER</a>';
+                                                      echo '<a href="wishlist.php?id=' . $row['id_offre'] . '" class="btn btn-outline-primary btn-sm ms-3">WHISHLIST</a>';
                                                 }
                                                 echo "</td>";
                                                 echo "</tr>";
-                                          }
+                              ?>
+                              <!--MODAL DE SUPPRESSION  -->
+                              <div class="modal fade" id="deleteOffreModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                                <div class="modal-header">
+                                                      <h1 class="modal-title fs-5" id="exampleModalLabel">Suppression
+                                                      </h1>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                      <h4>Voulez-vous vraiment supprimer cette offre?</h4>
+                                                </div>
+                                                <div class="modal-footer">
+                                                      <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-dismiss="modal">Annuler</button>
+                                                      <?php echo '<a class="btn btn-danger" href="deletecode.php?id_offre=' . $row['id_offre'] . '">Supprimer</a>' ?>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                              <?php }
                                           echo "</tbody>";
                                           echo "</table>";
-                                          echo "</div>";
+                                          echo "
+                        </div>";
                                           // Free result set
                                           unset($result);
                                     } else {
@@ -178,9 +204,6 @@ require_once "../../config.php";
             </div>
       </div>
 
-      <?php
-      include '../footer.php';
-      ?>
       <!-- Script datatable -->
       <?php
       include '../../datatable.php'
@@ -188,26 +211,6 @@ require_once "../../config.php";
 
       <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
       <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-      <!-- SCRIPT js POUR LA SUPPRESSION -->
-      <script>
-      $(document).ready(function() {
-
-            $('.deletebtn').on('click', function() {
-
-                  $('#deletemodal').modal('show');
-
-                  $tr = $(this).closest('tr');
-
-                  var data = $tr.children("td").map(function() {
-                        return $(this).text();
-                  }).get();
-
-                  $('#id_offre').val(data[0]);
-
-            });
-      });
-      </script>
 
       <!-- SCRIPT js POUR LA MODIFICATION -->
       <script>
@@ -227,11 +230,11 @@ require_once "../../config.php";
 
                   $('#id_offre').val(data[0]);
                   $('#Titre').val(data[1]);
-                  $('#entreprise').val(data[2]);
-                  $('#Durée_de_Stage').val(data[3]);
+                  $('#Date_offre').val(data[3]);
+                  $('#Durée_de_Stage').val(data[2]);
                   $('#Nombre_de_places').val(data[4]);
                   $('#Rémunération').val(data[5]);
-                  $('#Date_offre').val(data[6]);
+                  $('#description').val(data[6]);
             });
       });
       </script>
@@ -264,10 +267,8 @@ require_once "../../config.php";
                   $req = "SELECT * from entreprise";
                   $entSel = $pdo->query($req);
 
-                  $req = "SELECT * from ville";
-                  $villeSel = $pdo->query($req);
 
-                  if ($entSel && $villeSel) {
+                  if ($entSel) {
 
                   ?>
                   <form action="updateOffre.php" method="post">
@@ -287,38 +288,10 @@ require_once "../../config.php";
                                     <div class="col-md-6">
                                           <div class="form-group">
                                                 <div class="mb-3">
-                                                      <label for="FormInput" class="form-label Offre">Nom
-                                                            Entreprise</label>
-                                                      <select name="entreprise" id="SelectEntreprise"
-                                                            class="form-select" aria-label="Default select example">
-                                                            <?php
-                                                                  while ($tab = $entSel->fetch()) {
-                                                                        echo '<option selected>Entreprises</option>';
-                                                                        echo '<option value="' . $tab[0] . '">' . $tab[1] . ' ' . $tab[2] . '</option>';
-                                                                  }
-                                                                  ?>
-                                                      </select>
-                                                </div>
-                                          </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                          <div class="form-group">
-                                                <div class="mb-3">
                                                       <label class="form-label Offre">Durée de
                                                             Stage</label>
                                                       <input type="Text" class="form-control" id="Durée_de_Stage"
                                                             name="Durée_de_Stage" placeholder="">
-                                                </div>
-                                          </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                          <div class="form-group">
-                                                <div class="mb-3">
-                                                      <label class="form-label Offre">Rémunération</label>
-                                                      <input type="Text" class="form-control" id="Rémunération"
-                                                            name="Rémunération" placeholder="">
                                                 </div>
                                           </div>
                                     </div>
@@ -348,26 +321,37 @@ require_once "../../config.php";
                                     <div class="col-md-6">
                                           <div class="form-group">
                                                 <div class="mb-3">
-                                                      <label class="form-label Offre">Description</label>
-                                                      <input type="Text" class="form-control Description"
-                                                            id="competences" name="competences" placeholder="">
+                                                      <label class="form-label Offre">Rémunération</label>
+                                                      <input type="Text" class="form-control" id="Rémunération"
+                                                            name="Rémunération" placeholder="">
                                                 </div>
                                           </div>
                                     </div>
 
-                                    <div class="mb-3">
-                                          <label for="FormInput" class="form-label Offre">Site</label>
-                                          <div class="row">
+                                    <div class="col-md-6">
+                                          <div class="form-group">
                                                 <div class="mb-3">
-                                                      <select name="ville" id="SelectVille" class="form-select"
-                                                            aria-label="Default select example">
+                                                      <label for="FormInput" class="form-label Offre">Nom
+                                                            Entreprise</label>
+                                                      <select name="entreprise" id="SelectEntreprise"
+                                                            class="form-select" aria-label="Default select example">
                                                             <?php
-                                                                        while ($tab = $villeSel->fetch()) {
-                                                                              echo '<option selected>Ville</option>';
-                                                                              echo '<option value="' . $tab[0] . '">' . $tab[1] . ' ' . $tab[2] . '</option>';
-                                                                        }
-                                                                        ?>
+                                                                  while ($tab = $entSel->fetch()) {
+                                                                        echo '<option selected>Entreprises</option>';
+                                                                        echo '<option value="' . $tab[0] . '">' . $tab[1] . ' ' . $tab[2] . '</option>';
+                                                                  }
+                                                                  ?>
                                                       </select>
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                          <div class="form-group">
+                                                <div class="mb-3">
+                                                      <label class="form-label Offre">Description</label>
+                                                      <input type="Text" class="form-control Description"
+                                                            id="description" name="description" placeholder="">
                                                 </div>
                                           </div>
                                     </div>
@@ -394,9 +378,9 @@ require_once "../../config.php";
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Suppression</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <form action="delete.php" method="POST">
+                  <form action="deletecode.php" method="POST">
                         <div class="modal-body">
-                              <input type="hidden" name="delete_id" id="id_offre">
+                              <input type="hidden" name="delete_id" id="delete_id">
                               <h4>Voulez-vous vraiment supprimer cette offre?</h4>
                         </div>
                         <div class="modal-footer">

@@ -59,7 +59,6 @@ require_once "../../config.php";
                                                             class="form-select" aria-label="Default select example">
                                                             <?php 
                                           while($tab = $entSel->fetch()){
-                                                echo'<option selected>Entreprises</option>';
                                                 echo '<option value="'.$tab[0].'">'.$tab[1].' '.$tab[2].'</option>';
                                           }
                                           ?>
@@ -122,7 +121,7 @@ require_once "../../config.php";
                                                       <label for="FormInput Description"
                                                             class="form-label Offre">Description</label>
                                                       <input type="Text" class="form-control Description"
-                                                            id="exampleFormControlInput1" name="competences"
+                                                            id="exampleFormControlInput1" name="description"
                                                             placeholder="">
                                                 </div>
                                           </div>
@@ -138,7 +137,6 @@ require_once "../../config.php";
                                                                   aria-label="Default select example">
                                                                   <?php 
                                           while($tab = $villeSel->fetch()){
-                                                echo'<option selected>Ville</option>';
                                                 echo '<option value="'.$tab[0].'">'.$tab[1].' '.$tab[2].'</option>';
                                           }
                                           ?>

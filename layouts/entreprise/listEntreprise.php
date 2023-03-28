@@ -147,7 +147,7 @@ require_once "../../config.php";
                                           echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" title="Statistique" class="ms-3"><span class="fa fa-signal"></span></a>';
                                           echo "</td>";
                                           echo "<td>";
-                                          echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" class="btn btn-outline-primary btn-sm">EVALUER</a>';
+                                          echo '<a href="evaluer.php?id=' . $row['id_entreprise'] . '" class="btn btn-outline-primary btn-sm">EVALUER</a>';
                                           echo "</td>";
                                           echo "</tr>";
                                     }
@@ -168,10 +168,6 @@ require_once "../../config.php";
                   </div>
             </div>
       </div>
-
-      <?php
-      include '../footer.php';
-      ?>
 
       <!-- Script datatable -->
       <?php
@@ -312,6 +308,32 @@ require_once "../../config.php";
 
 
 <!--MODAL DE SUPPRESSION  -->
+<div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                  <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Suppression
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <form action="delete.php" method="POST">
+                        <div class="modal-body">
+                              <input type="hidden" name="delete_id" id="id_entreprise">
+                              <h4>Voulez-vous vraiment supprimer cette entreprise?</h4>
+                        </div>
+                        <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-secondary"
+                                    data-bs-dismiss="modal">Annuler</button>
+                              <button type="submit" name="deletedata" class="btn btn-danger"> Supprimer
+                              </button>
+                        </div>
+                  </form>
+            </div>
+      </div>
+</div>
+
+<!--MODAL DE EVALUER  -->
 <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">

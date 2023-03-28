@@ -9,7 +9,7 @@ if (isset($_POST['updateOffre'])) {
       $id_offre = $_POST['id_offre'];
       
       $titre = $_POST["Titre"];
-      $competences = $_POST["competences"];
+      $description = $_POST["description"];
       $duree = $_POST["Durée_de_Stage"];
       $date_offre = $_POST["Date_offre"];
       $nombre_de_places = $_POST["Nombre_de_places"];
@@ -30,7 +30,7 @@ if (isset($_POST['updateOffre'])) {
             $site = $pdo->query($Sitereq)->fetch()['id_site'];
       };
 
-      $sql = "UPDATE offre SET Titre='$titre', Compétences='$competences', Durée='$duree', Date_post=' $date_offre', nombre_places=' $nombre_de_places',
+      $sql = "UPDATE offre SET Titre='$titre', Description='$description', Durée='$duree', Date_post=' $date_offre', nombre_places=' $nombre_de_places',
       Remuneration='  $remuneration', valide = '$validite'  WHERE id_offre = '$id_offre'  ";
 
       $stmt = $pdo->exec($sql);

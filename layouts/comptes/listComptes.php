@@ -122,7 +122,7 @@ if ($_SESSION["id"]!==1 || $_SESSION["loggedin"] !== true) {
                                     require_once "../../config.php";
 
                                     // Attempt select query execution
-                                    $sql = "SELECT * FROM personne";
+                                    $sql = "SELECT compte.id_c ,personne.Nom , personne.Prenom , personne.sexe FROM `compte` LEFT JOIN `personne` ON `compte`.`id_personne` = `personne`.`id_personne` WHERE `personne`.`id_personne` = `personne`.`id_personne` AND compte.validite = 1;";
                                     if ($result = $pdo->query($sql)) {
                                           if ($result->rowCount() > 0) {
                                                 echo '<div class="col-md-12">';
@@ -139,43 +139,63 @@ if ($_SESSION["id"]!==1 || $_SESSION["loggedin"] !== true) {
                                                 echo "<tbody>";
                                                 while ($row = $result->fetch()) {
                                                       echo "<tr>";
-                                                      echo "<td>" . $row['id_personne'] . "</td>";
+                                                      echo "<td>" . $row['id_c'] . "</td>";
                                                       echo "<td>" . $row['Nom'] . "</td>";
                                                       echo "<td>" . $row['Prenom'] . "</td>";
                                                       echo "<td>" . $row['sexe'] . "</td>";
                                                       echo "<td>";
-                                                      echo '<a href="viewProfil.php?id=' . $row['id_personne'] . '" title="Details"
+                                                      echo '<a href="viewProfil.php?id=' . $row['id_c'] . '" title="Details"
                                                       data-bs-target="#compte"><span class="fa fa-eye"></span></a>';
-                                                      echo '<a href="update.php?id=' . $row['id_personne'] . '" class="ms-3" title="Modifier" data-toggle="tooltip" data-bs-toggle="modal"
+                                                      echo '<a href="update.php?id=' . $row['id_c'] . '" class="ms-3" title="Modifier" data-toggle="tooltip" data-bs-toggle="modal"
                                                       data-bs-target="#ModificationProfil"><span class="fa fa-pencil"></span></a>';
-                                                      echo '<a href="delete.php?id=' . $row['id_personne'] . '" class="ms-3" title="Supprimer" data-toggle="tooltip" data-bs-toggle="modal"
-                                                      data-bs-target="#Supprimerprofil"><span class="fa fa-trash"></span></a>';
+                                                      echo '<a href="#" class="ms-3" data-bs-toggle="modal" data-bs-target="#deleteCModal"><span class="fa fa-trash"></span></a>';;
                                                       echo "</td>";
                                                       echo "</tr>";
-                                                }
-                                                echo "</tbody>";
-                                                echo "</table>";
-                                                echo "</div>";
-                                                // Free result set
-                                                unset($result);
-                                          } else {
-                                                echo '<div class="alert alert-danger"><em>Aucune donnée</em></div>';
-                                          }
-                                    } else {
-                                          echo "Oops! Réessayer plus tard.";
-                                    }
-                                    // Close connection
-                                    unset($pdo);
-                                    ?>
+                                                      ?>
+                                    <!--MODAL DE SUPPRESSION  -->
+                                    <div class="modal fade" id="deleteCModal" tabindex="-1" role="dialog"
+                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                      <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                                  Suppression
+                                                            </h1>
+                                                            <button type="button" class="btn-close"
+                                                                  data-bs-dismiss="modal" aria-label="Close"></button>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                            <h4>Voulez-vous vraiment supprimer cette Compte?</h4>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                            <button type="button" class="btn btn-outline-secondary"
+                                                                  data-bs-dismiss="modal">Annuler</button>
+                                                            <?php echo '<a class="btn btn-danger" href="delete.php?id_c=' . $row['id_c'] . '">Supprimer</a>' ?>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                    </div>
+                                    <?php }
+                                    echo "</tbody>";
+                                    echo "</table>";
+                                    echo "
+                              </div>";
+                              // Free result set
+                              unset($result);
+                              } else {
+                              echo '<div class="alert alert-danger"><em>Aucune donnée</em></div>';
+                              }
+                              } else {
+                              echo "Oops! Réessayer plus tard.";
+                              }
+                              // Close connection
+                              unset($pdo);
+                              ?>
 
                               </div>
                         </div>
                   </div>
             </div>
-
-            <?php
-            include '../footer.php';
-            ?>
 
             <script src="./assets/vendors/jquery/jquery-3.6.0.min.js"></script>
             <script src="./assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>

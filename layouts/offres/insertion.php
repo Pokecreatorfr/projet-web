@@ -9,7 +9,7 @@ if (isset($_POST['insertOffre'])) {
       $validite = 1;
       
       $titre = $_POST["Titre"];
-      $competences = $_POST["competences"];
+      $description = $_POST["description"];
       $duree = $_POST["Durée_de_Stage"];
       $date_offre = $_POST["Date_offre"];
       $nombre_de_places = $_POST["Nombre_de_places"];
@@ -30,8 +30,8 @@ if (isset($_POST['insertOffre'])) {
             $site = $pdo->query($Sitereq)->fetch()['id_site'];
       };
             
-      $sql = "INSERT INTO offre (Titre,Compétences, Durée, Date_post, nombre_places, Remuneration, valide, id_site) 
-      VALUES('$titre','$competences','$duree', '$date_offre', '$nombre_de_places', '$remuneration', '$validite', '$site')";
+      $sql = "INSERT INTO offre (Titre, Description, Durée, Date_post, nombre_places, Remuneration, valide, id_site) 
+      VALUES('$titre','$description','$duree', '$date_offre', '$nombre_de_places', '$remuneration', '$validite', '$site')";
       
       $stmt = $pdo->exec($sql);
       
@@ -41,4 +41,7 @@ if (isset($_POST['insertOffre'])) {
       } else {
             echo "erreur";
       }
+}
+else {
+      echo "remplir tous les champs";
 }
