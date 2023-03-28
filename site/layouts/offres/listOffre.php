@@ -7,6 +7,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       header("Location: ../../login.php");
       exit;
 }
+
+// Include config file
+require_once "../../config.php";
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +37,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
                   <div class="container-fluid">
                         <!-- Toggle button -->
-                        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                              data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                              aria-expanded="false" aria-label="Toggle navigation">
                               <i class="fas fa-bars"></i>
                         </button>
 
@@ -53,7 +58,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         </div>
 
                         <div class="dropdown">
-                              <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              <button class="btn btn-outline-info dropdown-toggle" type="button"
+                                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <?php echo htmlspecialchars($_SESSION["username"]); ?>
                               </button>
                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -78,11 +84,22 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     <?php
                                     if (isset($_SESSION['status'])) {
                                     ?>
-                                          <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                <?php echo $_SESSION['status']; ?>
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                          </div>
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                          <?php echo $_SESSION['status']; ?>
+                                          <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                    </div>
                                     <?php unset($_SESSION['status']);
+                                    } ?>
+                                    <?php
+                                    if (isset($_SESSION['supp'])) {
+                                    ?>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                          <?php echo $_SESSION['supp']; ?>
+                                          <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <?php unset($_SESSION['supp']);
                                     } ?>
 
                                     <div class="mt-5 mb-3">
@@ -98,9 +115,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                     </div>
                               </div>
                               <?php
-                              // Include config file
-                              require_once "../../config.php";
-
                               // Attempt select query execution
                               $sql = "SELECT * FROM offre";
                               if ($result = $pdo->query($sql)) {
@@ -131,8 +145,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                                 echo "<td>";
                                                 echo '<a href="viewOffre.php?id=' . $row['id_offre'] . '" title="Voir" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                                 if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
-                                                      echo '<a href="update.php?id=' . $row['id_offre'] . '" class="ms-3" title="Modifier" data-toggle="tooltip" data-bs-toggle="modal"
-                                                      data-bs-target="#Modifier" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                                      echo '<a href="#" class="ms-3 editbtn"><span class="fa fa-pencil"></span></a>';
                                                       echo '<a href="#" class="ms-3 deletebtn"><span class="fa fa-trash"></span></a>';
                                                 }
                                                 echo '<a href="delete.php?id=' . $row['id_offre'] . '" title="Statistique" class="ms-3"><span class="fa fa-signal"></span></a>';
@@ -178,30 +191,58 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
       <!-- SCRIPT js POUR LA SUPPRESSION -->
       <script>
-            $(document).ready(function() {
+      $(document).ready(function() {
 
-                  $('.deletebtn').on('click', function() {
+            $('.deletebtn').on('click', function() {
 
-                        $('#deletemodal').modal('show');
+                  $('#deletemodal').modal('show');
 
-                        $tr = $(this).closest('tr');
+                  $tr = $(this).closest('tr');
 
-                        var data = $tr.children("td").map(function() {
-                              return $(this).text();
-                        }).get();
+                  var data = $tr.children("td").map(function() {
+                        return $(this).text();
+                  }).get();
 
-                        $('#id_entreprise').val(data[0]);
+                  $('#id_offre').val(data[0]);
 
-                  });
             });
+      });
       </script>
 
+      <!-- SCRIPT js POUR LA MODIFICATION -->
       <script>
-            window.setTimeout(function() {
-                  $(".alert").fadeTo(500, 0).slideUp(500, function() {
-                        $(this).remove();
-                  });
-            }, 3000);
+      $(document).ready(function() {
+
+            $('.editbtn').on('click', function() {
+
+                  $('#editOffre').modal('show');
+
+                  $tr = $(this).closest('tr');
+
+                  var data = $tr.children("td").map(function() {
+                        return $(this).text();
+                  }).get();
+
+                  console.log(data);
+
+                  $('#id_offre').val(data[0]);
+                  $('#Titre').val(data[1]);
+                  $('#entreprise').val(data[2]);
+                  $('#Durée_de_Stage').val(data[3]);
+                  $('#Nombre_de_places').val(data[4]);
+                  $('#Rémunération').val(data[5]);
+                  $('#Date_offre').val(data[6]);
+            });
+      });
+      </script>
+
+      <!-- MESSAGE DE REUSSITE CREATION (Bootstrap ALERT) -->
+      <script>
+      window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                  $(this).remove();
+            });
+      }, 3000);
       </script>
 
 
@@ -209,26 +250,144 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 </html>
 
-<div class="modal fade" id="Modifier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+
+<!-- MODIFICATION DE L'OFFRE MODAL -->
+<div class="modal fade" id="editOffre" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
             <div class="modal-content">
                   <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Modification du profil</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body">
-                        ...
-                  </div>
-                  <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-primary">Sauvegarder</button>
-                  </div>
+                  <?php
+                  $pdo = new PDO("mysql:host=localhost;dbname=projetWeb", "root", "");
+                  $req = "SELECT * from entreprise";
+                  $entSel = $pdo->query($req);
+
+                  $req = "SELECT * from ville";
+                  $villeSel = $pdo->query($req);
+
+                  if ($entSel && $villeSel) {
+
+                  ?>
+                  <form action="updateOffre.php" method="post">
+                        <div class="modal-body">
+                              <div class="row">
+                                    <input type="hidden" name="id_offre" id="id_offre">
+                                    <div class="col-md-6">
+                                          <div class="form-group">
+                                                <div class="mb-3">
+                                                      <label class="form-label Offre">Titre</label>
+                                                      <input type="Text" class="form-control" id="Titre" name="Titre"
+                                                            placeholder="">
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                          <div class="form-group">
+                                                <div class="mb-3">
+                                                      <label for="FormInput" class="form-label Offre">Nom
+                                                            Entreprise</label>
+                                                      <select name="entreprise" id="SelectEntreprise"
+                                                            class="form-select" aria-label="Default select example">
+                                                            <?php
+                                                                  while ($tab = $entSel->fetch()) {
+                                                                        echo '<option selected>Entreprises</option>';
+                                                                        echo '<option value="' . $tab[0] . '">' . $tab[1] . ' ' . $tab[2] . '</option>';
+                                                                  }
+                                                                  ?>
+                                                      </select>
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                          <div class="form-group">
+                                                <div class="mb-3">
+                                                      <label class="form-label Offre">Durée de
+                                                            Stage</label>
+                                                      <input type="Text" class="form-control" id="Durée_de_Stage"
+                                                            name="Durée_de_Stage" placeholder="">
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                          <div class="form-group">
+                                                <div class="mb-3">
+                                                      <label class="form-label Offre">Rémunération</label>
+                                                      <input type="Text" class="form-control" id="Rémunération"
+                                                            name="Rémunération" placeholder="">
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                          <div class="form-group">
+                                                <div class="mb-3">
+                                                      <label class="form-label Offre">Date de
+                                                            l'Offre</label>
+                                                      <input type="date" class="form-control" id="Date_offre"
+                                                            name="Date_offre" placeholder="">
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                          <div class="form-group">
+                                                <div class="mb-3">
+                                                      <label class="form-label Offre">Nombre de
+                                                            places</label>
+                                                      <input type="Text" class="form-control" id="Nombre_de_places"
+                                                            name="Nombre_de_places" placeholder="">
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                          <div class="form-group">
+                                                <div class="mb-3">
+                                                      <label class="form-label Offre">Description</label>
+                                                      <input type="Text" class="form-control Description"
+                                                            id="competences" name="competences" placeholder="">
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                          <label for="FormInput" class="form-label Offre">Site</label>
+                                          <div class="row">
+                                                <div class="mb-3">
+                                                      <select name="ville" id="SelectVille" class="form-select"
+                                                            aria-label="Default select example">
+                                                            <?php
+                                                                        while ($tab = $villeSel->fetch()) {
+                                                                              echo '<option selected>Ville</option>';
+                                                                              echo '<option value="' . $tab[0] . '">' . $tab[1] . ' ' . $tab[2] . '</option>';
+                                                                        }
+                                                                        ?>
+                                                      </select>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+
+                        </div>
+                        <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-danger"
+                                    data-bs-dismiss="modal">Annuler</button>
+                              <button type="submit" name="updateOffre" class="btn btn-primary">Sauvegarder</button>
+                        </div>
+                  </form>
+                  <?php  } ?>
             </div>
       </div>
 </div>
 
 <!--MODAL DE SUPPRESSION  -->
-<div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
       <div class="modal-dialog" role="document">
             <div class="modal-content">
                   <div class="modal-header">
@@ -237,11 +396,12 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                   </div>
                   <form action="delete.php" method="POST">
                         <div class="modal-body">
-                              <input type="hidden" name="delete_id" id="id_entreprise">
+                              <input type="hidden" name="delete_id" id="id_offre">
                               <h4>Voulez-vous vraiment supprimer cette offre?</h4>
                         </div>
                         <div class="modal-footer">
-                              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
+                              <button type="button" class="btn btn-outline-secondary"
+                                    data-bs-dismiss="modal">Annuler</button>
                               <button type="submit" name="deletedata" class="btn btn-danger"> Supprimer
                               </button>
                         </div>

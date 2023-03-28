@@ -19,12 +19,12 @@ if(isset($_POST['deletedata']))
 
     if($pdo->query($sql))
     {
-          echo '<script> alert("Suppression réussie"); </script>';
-          header("Location: listOffre.php");
+        $_SESSION['supp'] = "Donnée supprimée";
+        header("Location: listOffre.php");
     }
     else
     {
-        echo '<script> alert("Data Not Deleted"); </script>';
+        echo '<script> alert("Veuillez réessayer"); </script>';
     }
 }
 

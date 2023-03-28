@@ -1,0 +1,192 @@
+<?php
+// Initialize the session
+session_start();
+
+// Check if the user is logged in, if not then redirect him to login page
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+      header("Location: ../../login.php");
+      exit;
+}
+// Include config file
+require_once "../../config.php";
+?>
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Création Offre</title>
+      <link rel="stylesheet" href="../../assets/vendors/fontawesome/css/all.min.css">
+      <link rel="stylesheet" href="../../assets/vendors/bootstrap/css/bootstrap.min.css">
+</head>
+
+<body>
+      <div class="container mt-5">
+            <div class="card">
+                  <h1 class="Offre card-header"> Créer un étudiant</h1>
+                  <?php
+                  $req = "SELECT * from entreprise";
+                  $entSel = $pdo->query($req);
+
+                  $req = "SELECT * from ville";
+                  $villeSel = $pdo->query($req);
+
+                  $req = "SELECT * from promotion";
+                  $promoSel = $pdo->query($req);
+
+                  if ($entSel && $villeSel && $promoSel) {
+
+                  ?>
+                  <div class="card-body">
+                        <form action="insertEtudiant.php" method="post">
+                              <div class="row">
+                                    <input type="hidden" name="id_type" id="id_type">
+                                    <div class="col-md-6">
+                                          <label class="form-label" id="civilite">Civilité</label><br>
+                                          <div class="rdiomme">
+                                                <input class="form-check-input form-label" type="radio" name="sexe"
+                                                      id="flexRadioDefault1">
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                      Mme
+                                                </label>
+                                          </div>
+                                          <div class="rdiom">
+                                                <input class="form-check-input form-label" type="radio" name="sexe"
+                                                      id="flexRadioDefault2">
+                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                      M
+                                                </label>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                          <label for="FormInput" class="form-label Offre">Photo de profil
+                                          </label>
+                                          <img src="\upload\profile_pics\default.png" class="profile_img"
+                                                id="profile_img" alt=""> </img>
+                                          <input class="form-control form-control-sm inpt" id="image_file" type="file"
+                                                accept="image/*" name="profile_img" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                          <div class="form-group">
+                                                <div class="mb-3">
+                                                      <label for="FormInput" class="form-label Offre">Nom
+                                                      </label>
+                                                      <input type="text" class="form-control" id="nom" name="nom"
+                                                            placeholder="">
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                          <div class="form-group">
+                                                <div class="mb-3">
+                                                      <label for="FormInput" class="form-label Offre">Prenom
+                                                      </label>
+                                                      <input type="text" class="form-control" id="prenom" name="prenom"
+                                                            placeholder="">
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                          <div class="form-group">
+                                                <div class="mb-3">
+                                                      <label for="Description" class="form-label Offre">Login</label>
+                                                      <input type="Text" class="form-control Description" id="login"
+                                                            name="login" placeholder="">
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                          <div class="form-group">
+                                                <div class="mb-3">
+                                                      <label for="FormInput Description" class="form-label Offre">Mot de
+                                                            passe</label>
+                                                      <input type="Text" class="form-control Description" id="mdp"
+                                                            name="mdp" placeholder="">
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                          <div class="form-group">
+                                                <label class="form-label" id="promo">Promotion</label>
+                                                <select name="promo" id="SelectPromo" class="form-select"
+                                                      aria-label="Default select example">
+                                                      <?php
+                                                                  while ($tab = $promoSel->fetch()) {
+                                                                        echo '<option selected>Promotion</option>';
+                                                                        echo '<option value="' . $tab[0] . '">' . $tab[1] . ' ' . $tab[2] . '</option>';
+                                                                  }
+                                                                  ?>
+                                                </select>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                          <label class="form-label">Site</label>
+                                          <div class="row">
+                                                <div class="mb-3">
+                                                      <select name="ville" id="SelectVille" class="form-select"
+                                                            aria-label="Default select example">
+                                                            <?php
+                                                                        while ($tab = $villeSel->fetch()) {
+                                                                              echo '<option selected>Ville</option>';
+                                                                              echo '<option value="' . $tab[0] . '">' . $tab[1] . ' ' . $tab[2] . '</option>';
+                                                                        }
+                                                                        ?>
+                                                      </select>
+                                                </div>
+                                          </div>
+                                    </div>
+
+                              </div>
+                              <button type="submit" name="insertEtudiant" class="btn btn-primary">Soumettre</button>
+                              <a href="listComptes.php" class="btn btn-outline-danger">Annuler</a>
+
+                        </form>
+                  </div>
+                  <?php
+                  } ?>
+            </div>
+      </div>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+      </script>
+
+      <script>
+      img_file = document.getElementById("image_file");
+      profile_img = document.getElementById("profile_img");
+
+      img_file.addEventListener("change", function() {
+            let file = this.files[0];
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+
+            reader.onload = function(event) {
+                  let img = new Image();
+                  img.src = event.target.result;
+                  img.onload = function() {
+                        let canvas = document.createElement('canvas');
+                        let size = Math.min(img.width, img.height);
+                        canvas.width = size;
+                        canvas.height = size;
+                        let ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, (img.width - size) / 2, (img.height - size) / 2,
+                              size, size, 0, 0, size, size);
+                        profile_img.src = canvas.toDataURL('image/jpeg');
+                  }
+            }
+      });
+      </script>
+
+</body>
+
+</html>
