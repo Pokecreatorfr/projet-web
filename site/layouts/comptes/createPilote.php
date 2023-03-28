@@ -142,7 +142,12 @@ require_once "../../config.php";
                                                 <datalist id="datalistOptions">
                                                             <?php
                                                                   while ($tab = $villeSel->fetch()) {
-                                                                        echo '<option value="' . $tab[1] . '(' . $tab[2]. ')' . '">'  . '</option>';
+                                                                        $code_postal = $tab[2];
+                                                                        /* rajoute un zero devant si le code postal est a 4 chiffres */
+                                                                        if (strlen($code_postal) == 4) {
+                                                                              $code_postal = '0' . $code_postal;
+                                                                        }
+                                                                        echo '<option value="' . $tab[1] . '(' . $code_postal. ')' . '">'  . '</option>';
                                                                   }
                                                             ?>
                                                 </datalist>
