@@ -46,7 +46,7 @@
 
         <div class="col colproright ">
             <label for="exampleDataList" class="form-label">Localité</label>
-            <input class="form-contrl" list="datalistOptions" id="exampleDataList" name="Ville" placeholder="Commencez à ecrire...">
+            <input class="form-control" list="datalistOptions" id="exampleDataList" name="Ville" placeholder="Commencez à ecrire...">
             <datalist id="datalistOptions">
                 <option value="OZAN(01190)"> 
                 <option value="CORMORANCHE-SUR-SAONE(01290)"> 

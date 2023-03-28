@@ -8,7 +8,6 @@ try {
   echo 'Échec de la connexion : ' . $error->getMessage();
 }
 
-echo"attention";
 var_dump($_POST);
 var_dump($_FILES);
 
