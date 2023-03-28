@@ -26,7 +26,7 @@
             </label>
         </div> 
         <div class="col"> 
-            <img src="" class="profile_img" id="profile_img" alt="Responsive image" id> </img>
+            <img src="\upload\profile_pics\default.png" class="profile_img" id="profile_img" alt="Responsive image" id> </img>
             <input class="form-control form-control-sm inpt" id="image_file" type="file" accept="image/*" />
         </div>
     </div>

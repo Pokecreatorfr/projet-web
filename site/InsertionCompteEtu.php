@@ -8,15 +8,34 @@ try {
   echo 'Échec de la connexion : ' . $error->getMessage();
 }
 
+echo"attention";
+var_dump($_POST);
+var_dump($_FILES);
+
+$tmpName = $_FILES['profile_img']['tmp_name'];
+$name = $_FILES['profile_img']['name'];
+$size = $_FILES['profile_img']['size'];
+$error = $_FILES['profile_img']['error'];
+$tabExtension = explode('.', $name);
+$extension = strtolower(end($tabExtension));
+$uniqueName = uniqid('', true);
+$file = $uniqueName.".".$extension;
+move_uploaded_file($tmpName, './upload/profile_pics/'.$file);
+
+$photo_profil = './upload/profile_pics/'.$file;
+
+if ($size == 0) {
+    $photo_profil = './upload/profile_pics/default.png';
+}
+
 // Set the variables for the person we want to add to the database
 $first_Name = $_POST["Nom"];
 $last_Name = $_POST["Prenom"];
 $Sexe = $_POST["Sexe"];
 
 //set the variable for the ville of the person
-$PostalCode = $_POST["CodePostal"];
-$Ville = $_POST["Ville"];
-$Region = $_POST["Région"];
+$Ville = substr($_POST["Ville"] , 0 , -7);
+
 
 
 //set the variable for the compte we want to create
@@ -52,41 +71,32 @@ if($person_creation->execute()){
     $idpersonne_created=$my_Db_Connection->lastInsertId();
 }
 
+$villeid = $my_Db_Connection->prepare("SELECT id_ville FROM ville WHERE ville = :ville");
+$villeid->bindParam(":ville", $Ville);
+$villeid->execute();
+$idville_seleced = $villeid->fetch(PDO::FETCH_ASSOC)['id_ville'];
 
-
-
-//creating the ville compte
-$ville_creation= $my_Db_Connection->prepare("INSERT INTO ville (ville	, code_postal, région) VALUES (:ville, :postalcode, :region)");
-$ville_creation->bindParam(":libellé", $Ville);
-$ville_creation->bindParam(":postalcode", $PostalCode );
-$ville_creation->bindParam(":region", $Region);
-
-
-//recuperating the ville id
-if($ville_creation->execute()){
-   
-    $idville_created=$my_Db_Connection->lastInsertId();}
+$validite = 1;
 
 //creation compte etudiant
 
-$compte_etudiant_creation=$my_Db_Connection->prepare("INSERT INTO compte (login, photo_profil, mdp, validité, id_personne, id_type,) VALUES (:login, :photo_profil, :mdp, validité, id_personne, id_type )");
+$compte_etudiant_creation=$my_Db_Connection->prepare("INSERT INTO compte (login, photo_profil, mdp, validite, id_personne, id_type) VALUES (:login, :photo_profil, :mdp, :validite, :id_personne, :id_type )");
 $compte_etudiant_creation->bindParam(":login", $login);
 $compte_etudiant_creation->bindParam(":photo_profil", $photo_profil);
 $compte_etudiant_creation->bindParam(":mdp", $motdepasse);
-$compte_etudiant_creation->bindParam(":validité", $validité);
+$compte_etudiant_creation->bindParam(":validite", $validite);
 $compte_etudiant_creation->bindParam(":id_personne", $idpersonne_created);
 $compte_etudiant_creation->bindParam(":id_type", $idtype);
 
 if($compte_etudiant_creation->execute()){
-   
   $id_etudiant_created=$my_Db_Connection->lastInsertId();}
 
 
 
 //relying compte w his locality whit the table "centre"
-$compte_centre_creation=$my_Db_Connection->prepare("INSERT INTO compte (id_c, id_ville ) VALUES ( :id_c, :id_ville )");
+$compte_centre_creation=$my_Db_Connection->prepare("INSERT INTO centre (id_c, id_ville ) VALUES ( :id_c, :id_ville )");
 $compte_centre_creation->bindParam(":id_c", $id_etudiant_created);
-$compte_centre_creation->bindParam(":id_ville", $idville_created);
+$compte_centre_creation->bindParam(":id_ville", $idville_seleced);
 $compte_centre_creation->execute();
 
 
