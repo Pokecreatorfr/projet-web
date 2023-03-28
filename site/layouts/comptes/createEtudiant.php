@@ -47,7 +47,7 @@ require_once "../../config.php";
 
                   ?>
                   <div class="card-body">
-                        <form action="insertEtudiant.php" method="post">
+                        <form action="insertEtudiant.php" method="post" enctype="multipart/form-data">
                               <div class="row">
                                     <input type="hidden" name="id_type" id="id_type">
                                     <div class="col-md-6">
@@ -164,7 +164,32 @@ require_once "../../config.php";
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
       </script>
+<script>
+    img_file = document.getElementById("image_file");
+profile_img = document.getElementById("profile_img");
 
+img_file.addEventListener("change", function() {
+  let file = this.files[0];
+  let reader = new FileReader();
+  reader.readAsDataURL(file);
+  
+  reader.onload = function(event) {
+    let img = new Image();
+    img.src = event.target.result;
+    img.onload = function() {
+      let canvas = document.createElement('canvas');
+      let size = Math.min(img.width, img.height);
+      canvas.width = size;
+      canvas.height = size;
+      let ctx = canvas.getContext('2d');
+      ctx.drawImage(img, (img.width - size) / 2, (img.height - size) / 2, size, size, 0, 0, size, size);
+      profile_img.src = canvas.toDataURL('image/jpeg');
+    }
+  }
+   
+
+});
+</script>
 
 
 </body>

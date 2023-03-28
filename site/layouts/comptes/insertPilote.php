@@ -16,6 +16,8 @@ $uniqueName = uniqid('', true);
 $file = $uniqueName.".".$extension;
 move_uploaded_file($tmpName, 'upload/profile_pics/'.$file);
 
+echo $_FILES;
+
 $photo_profil = 'upload/profile_pics/'.$file;
 
 if ($size == 0) {

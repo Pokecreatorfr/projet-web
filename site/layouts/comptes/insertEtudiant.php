@@ -14,13 +14,14 @@ $tabExtension = explode('.', $name);
 $extension = strtolower(end($tabExtension));
 $uniqueName = uniqid('', true);
 $file = $uniqueName.".".$extension;
-move_uploaded_file($tmpName, 'upload/profile_pics/'.$file);
+move_uploaded_file($tmpName, '../../upload/profile_pics/'.$file);
 
-$photo_profil = 'upload/profile_pics/'.$file;
+$photo_profil = '../../upload/profile_pics/'.$file;
 
 if ($size == 0) {
-    $photo_profil = 'upload/profile_pics/default.png';
+    $photo_profil = '../../upload/profile_pics/default.png';
 }
+
 
 // Set the variables for the person we want to add to the database
 $first_Name = $_POST["nom"];
