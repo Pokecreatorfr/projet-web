@@ -358,21 +358,17 @@ require_once "../../config.php";
                                     <div class="mb-3">
                                           <label for="FormInput" class="form-label Offre">Site</label>
                                           <div class="row">
-
-                                                <div class="col loc">
-                                                      <div class="mb-3">
-                                                            <select name="ville" id="SelectVille" class="form-select"
-                                                                  aria-label="Default select example">
-                                                                  <?php
+                                                <div class="mb-3">
+                                                      <select name="ville" id="SelectVille" class="form-select"
+                                                            aria-label="Default select example">
+                                                            <?php
                                                                         while ($tab = $villeSel->fetch()) {
                                                                               echo '<option selected>Ville</option>';
                                                                               echo '<option value="' . $tab[0] . '">' . $tab[1] . ' ' . $tab[2] . '</option>';
                                                                         }
                                                                         ?>
-                                                            </select>
-                                                      </div>
+                                                      </select>
                                                 </div>
-
                                           </div>
                                     </div>
                               </div>

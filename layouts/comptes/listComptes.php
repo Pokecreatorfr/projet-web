@@ -106,9 +106,13 @@ if ($_SESSION["id"]!==1 || $_SESSION["loggedin"] !== true) {
                                                 <?php
 
                                                 if ($_SESSION['id'] == 1) {
-                                                      echo '<a href="createCompte.php" class="btn btn-primary pull-right"><i
+                                                      echo '<a href="" class="btn btn-primary pull-right" data-toggle="tooltip" data-bs-toggle="modal"
+                                                      data-bs-target="#choiceModal"><i
                                                       class="fa fa-plus"></i>
                                                 Créer un compte</a>';
+                                                echo '<div class="modal-dialog modal-dialog-centered">
+                                                ...
+                                              </div>';
                                                 } ?>
 
                                           </div>
@@ -232,6 +236,22 @@ if ($_SESSION["id"]!==1 || $_SESSION["loggedin"] !== true) {
                   <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                         <button type="button" class="btn btn-danger">Supprimer</button>
+                  </div>
+            </div>
+      </div>
+</div>
+
+<div class="modal fade" id="choiceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                  <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body text-center">
+                        <a href="createPilote.php" type="button" class="btn btn-secondary btn-lg">Pilote</a>
+                        <a href="createEtudiant.php" type="button" class="btn btn-secondary btn-lg ms-5">Etudiant</a>
+                  </div>
+                  <div class="modal-footer">
                   </div>
             </div>
       </div>
