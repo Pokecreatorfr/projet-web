@@ -1,3 +1,15 @@
+<?php
+// Initialize the session
+session_start();
+
+// Check if the user is logged in, if not then redirect him to login page
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+      header("Location: ../../login.php");
+      exit;
+}
+// Include config file
+require_once "../../config.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,59 +29,74 @@
 
 <body>
       <div class="container">
-            <h1> Créer une Entreprise</h1>
-            <form action="insertion.php" method="post" enctype="multipart/form-data">
-                  <div class="mb-3">
-                        <label for="FormInput" class="form-label" id="NbEtu">Nom de l'entreprise</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""
-                              name="Nom_entreprise">
-                  </div>
+            <div class="container mt-5">
+                  <div class="card">
+                        <h1 class="card-header"> Créer une Entreprise</h1>
+                        <div class="card-body">
+                              <form action="insertion.php" method="post" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                          <label for="FormInput" class="form-label" id="NbEtu">Nom de
+                                                l'entreprise</label>
+                                          <input type="text" class="form-control" id="exampleFormControlInput1"
+                                                placeholder="" name="Nom_entreprise">
+                                    </div>
 
 
-                  <div class="mb-3 Ent">
-                        <img src="logo.png" class="profile_img" id="profile_img" alt="Responsive image" id> </img>
-                        <input class="form-control form-control-sm inpt" id="image_file" type="file" accept="image/*" />
-                  </div>
+                                    <div class="mb-3 Ent">
+                                          <img src="logo.png" class="profile_img" id="profile_img"
+                                                alt="Responsive image" id>
+                                          </img>
+                                          <input class="form-control form-control-sm inpt" id="image_file" type="file"
+                                                accept="image/*" />
+                                    </div>
 
 
-                  <div class="mb-3">
-                        <label for="FormInput" class="form-label">Localité</label>
-                        <div class="row">
-                              <div class="col loc ">
-                                    <input type="text" class="form-control mr-1 w-60 " id="exampleFormControlInput2"
-                                          name="CodePostal" placeholder="CodePostal">
-                              </div>
-                              <div class="col loc">
-                                    <input type="text" class="form-control mr-1 w-60" id="exampleFormControlInput2"
-                                          name="Ville" placeholder="Ville">
-                              </div>
-                              <div class="col loc">
-                                    <input type="text" class="form-control mr- w-60" id="exampleFormControlInput2"
-                                          name="Region" placeholder="Region">
-                              </div>
+                                    <div class="mb-3">
+                                          <label for="FormInput" class="form-label">Localité</label>
+                                          <div class="row">
+                                                <div class="col loc ">
+                                                      <input type="text" class="form-control mr-1 w-60 "
+                                                            id="exampleFormControlInput2" name="CodePostal"
+                                                            placeholder="CodePostal">
+                                                </div>
+                                                <div class="col loc">
+                                                      <input type="text" class="form-control mr-1 w-60"
+                                                            id="exampleFormControlInput2" name="Ville"
+                                                            placeholder="Ville">
+                                                </div>
+                                                <div class="col loc">
+                                                      <input type="text" class="form-control mr- w-60"
+                                                            id="exampleFormControlInput2" name="Region"
+                                                            placeholder="Region">
+                                                </div>
+                                          </div>
+                                    </div>
+
+
+
+                                    <div class="mb-3">
+                                          <label for="FormInput" class="form-label" id="secAc">Secteur
+                                                d'activité</label>
+                                          <input type="text" class="form-control" id="exampleFormControlInput1"
+                                                placeholder="" name="Secteur_dactivité">
+                                    </div>
+
+
+                                    <div class="mb-3">
+                                          <label for="FormInput" class="form-label Cent" id="NbEtu">Nombre d'etudiants
+                                                CESI</label>
+                                          <input type="text" class="form-control" id="exampleFormControlInput1"
+                                                placeholder="" name="Nombre_etudiants">
+                                    </div>
+
+
+                                    <button type="submit" class="btn btn-primary">Soumettre</button>
+                                    <a href="listEntreprise.php" class="btn btn-outline-danger">Annuler</a>
+
+                              </form>
                         </div>
                   </div>
-
-
-
-                  <div class="mb-3">
-                        <label for="FormInput" class="form-label" id="secAc">Secteur d'activité</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""
-                              name="Secteur_dactivité">
-                  </div>
-
-
-                  <div class="mb-3">
-                        <label for="FormInput" class="form-label Cent" id="NbEtu">Nombre d'etudiants CESI</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""
-                              name="Nombre_etudiants">
-                  </div>
-
-
-                  <button type="submit" class="btn btn-primary">Soumettre</button>
-                  <a href="listEntreprise.php" class="btn btn-outline-danger">Annuler</a>
-
-            </form>
+            </div>
       </div>
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>

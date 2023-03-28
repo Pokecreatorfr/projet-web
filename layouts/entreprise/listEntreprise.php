@@ -7,6 +7,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       header("Location: ../../login.php");
       exit;
 }
+
+// Include config file
+require_once "../../config.php";
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +80,27 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                   <div class="row">
                         <div class="col-12">
                               <h1>Liste des Entreprises</h1>
+                              <?php
+                              if (isset($_SESSION['status'])) {
+                              ?>
+                              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $_SESSION['status']; ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                          aria-label="Close"></button>
+                              </div>
+                              <?php unset($_SESSION['status']);
+                              } ?>
+                              <?php
+                              if (isset($_SESSION['supp'])) {
+                              ?>
+                              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <?php echo $_SESSION['supp']; ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                          aria-label="Close"></button>
+                              </div>
+                              <?php unset($_SESSION['supp']);
+                              } ?>
+
                               <div class="mt-5 mb-3">
                                     <h2 class="pull-left">
                                           <?php
@@ -117,8 +141,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                           echo "<td>";
                                           echo '<a href="viewEnt.php?id=' . $row['id_entreprise'] . '" title="Voir" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                           if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
-                                                echo '<a href="update.php?id=' . $row['id_entreprise'] . '" class="ms-3" title="Modifier" data-toggle="tooltip" data-bs-toggle="modal"
-                                                      data-bs-target="#Modifier" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                                echo '<a href="#" class="ms-3 editbtn"><span class="fa fa-pencil"></span></a>';
                                                 echo '<a href="#" class="ms-3 deletebtn"><span class="fa fa-trash"></span></a>';
                                           }
                                           echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" title="Statistique" class="ms-3"><span class="fa fa-signal"></span></a>';
@@ -178,26 +201,111 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       });
       </script>
 
+      <!-- SCRIPT js POUR LA MODIFICATION -->
+      <script>
+      $(document).ready(function() {
 
+            $('.editbtn').on('click', function() {
+
+                  $('#editEnt').modal('show');
+
+                  $tr = $(this).closest('tr');
+
+                  var data = $tr.children("td").map(function() {
+                        return $(this).text();
+                  }).get();
+
+                  console.log(data);
+
+                  $('#id_entreprise').val(data[0]);
+                  $('#nomEnt').val(data[1]);
+                  $('#nbreEtu').val(data[2]);
+            });
+      });
+      </script>
+
+      <!-- MESSAGE DE REUSSITE CREATION (Bootstrap ALERT) -->
+      <script>
+      window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                  $(this).remove();
+            });
+      }, 3000);
+      </script>
 
 </body>
 
 </html>
 
-<div class="modal fade" id="Modifier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- MODIFICATION DE L'ENTREPRISE MODAL -->
+<div class="modal fade" id="editEnt" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
             <div class="modal-content">
                   <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modification du profil</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modification de l'entreprise</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body">
-                        ...
-                  </div>
-                  <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-primary">Sauvegarder</button>
-                  </div>
+                  <form action="updateEnt.php" method="post">
+                        <div class="modal-body">
+                              <input type="hidden" name="id_entreprise" id="id_entreprise">
+                              <div class="mb-3">
+                                    <div class="form-group">
+                                          <label class="form-label">Nom de
+                                                l'entreprise</label>
+                                          <input type="text" class="form-control" id="nomEnt" placeholder=""
+                                                name="nomEnt">
+                                    </div>
+                              </div>
+
+                              <div class="mb-3 Ent">
+                                    <div class="form-group">
+                                          <input class="form-control form-control-sm inpt" id="logoEnt" type="file"
+                                                accept="image/*" />
+                                    </div>
+                              </div>
+
+                              <!--   <div class="mb-3">
+                                    <label for="FormInput" class="form-label">Localité</label>
+                                    <div class="row">
+                                          <div class="col loc ">
+                                                <input type="text" class="form-control mr-1 w-60 "
+                                                      id="exampleFormControlInput2" name="localite"
+                                                      placeholder="CodePostal">
+                                          </div>
+                                          <div class="col loc">
+                                                <input type="text" class="form-control mr-1 w-60" id="ville"
+                                                      name="ville" placeholder="Ville">
+                                          </div>
+                                          <div class="col loc">
+                                                <input type="text" class="form-control mr- w-60"
+                                                      id="exampleFormControlInput2" name="Region" placeholder="Region">
+                                          </div>
+                                    </div>
+                              </div> -->
+
+                              <!-- <div class="mb-3">
+                                    <label for="FormInput" class="form-label" id="secAc">Secteur
+                                          d'activité</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""
+                                          name="Secteur_dactivité">
+                              </div> -->
+
+                              <div class="mb-3">
+                                    <div class="form-group">
+                                          <label class="form-label Cent">Nombre d'etudiants
+                                                CESI</label>
+                                          <input type="text" class="form-control" id="nbreEtu" placeholder=""
+                                                name="nbreEtu">
+                                    </div>
+                              </div>
+
+                        </div>
+                        <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-danger"
+                                    data-bs-dismiss="modal">Annuler</button>
+                              <button type="submit" name="updateEnt" class="btn btn-primary">Sauvegarder</button>
+                        </div>
+                  </form>
             </div>
       </div>
 </div>
@@ -209,7 +317,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       <div class="modal-dialog" role="document">
             <div class="modal-content">
                   <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Suppression</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Suppression
+                        </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <form action="delete.php" method="POST">
