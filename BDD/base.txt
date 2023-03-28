@@ -36847,3 +36847,23 @@ INSERT INTO ville (ville, code_postal, région) VALUES ('TSINGONI', '97680', 'Ma
 INSERT INTO ville (ville, code_postal, région) VALUES ('SAINT BARTHELEMY', '97133', 'Guadeloupe');
 INSERT INTO ville (ville, code_postal, région) VALUES ('SAINT MARTIN', '97150', 'Guadeloupe');
 INSERT INTO ville (ville, code_postal, région) VALUES ('SAINT PIERRE ET MIQUELON', '97500', 'Saint-Pierre-et-Miquelon');
+
+INSERT INTO promotion (nom_promo) VALUES ('CPI A1');
+INSERT INTO promotion (nom_promo) VALUES ('CPI A2 GEN');
+INSERT INTO promotion (nom_promo) VALUES ('CPI A2 BTP');
+INSERT INTO promotion (nom_promo) VALUES ('CPI A2 INFO');
+INSERT INTO promotion (nom_promo) VALUES ('FISE A3 GEN');
+INSERT INTO promotion (nom_promo) VALUES ('FISE A3 INFO');
+INSERT INTO promotion (nom_promo) VALUES ('FISA A3 GEN');
+INSERT INTO promotion (nom_promo) VALUES ('FISA A3 BTP');
+INSERT INTO promotion (nom_promo) VALUES ('FISA A3 INFO');
+INSERT INTO promotion (nom_promo) VALUES ('FISE A4 GEN');
+INSERT INTO promotion (nom_promo) VALUES ('FISE A4 INFO');
+INSERT INTO promotion (nom_promo) VALUES ('FISA A4 GEN');
+INSERT INTO promotion (nom_promo) VALUES ('FISA A4 BTP');
+INSERT INTO promotion (nom_promo) VALUES ('FISA A4 INFO');
+INSERT INTO promotion (nom_promo) VALUES ('FISE A5 GEN');
+INSERT INTO promotion (nom_promo) VALUES ('FISE A5 INFO');
+INSERT INTO promotion (nom_promo) VALUES ('FISA A5 GEN');
+INSERT INTO promotion (nom_promo) VALUES ('FISA A5 BTP');
+INSERT INTO promotion (nom_promo) VALUES ('FISA A5 INFO');
