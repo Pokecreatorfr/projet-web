@@ -118,7 +118,7 @@ require_once "../../config.php";
                         require_once "../../config.php";
 
                         // Attempt select query execution
-                        $sql = "SELECT * FROM entreprise";
+                        $sql = "SELECT * FROM entreprise WHERE validite = 1";
                         if ($result = $pdo->query($sql)) {
                               if ($result->rowCount() > 0) {
                                     echo '<div class="col-md-12">';
@@ -142,7 +142,9 @@ require_once "../../config.php";
                                           echo '<a href="viewEnt.php?id=' . $row['id_entreprise'] . '" title="Voir" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                           if ($_SESSION['id'] == 1 || $_SESSION['id'] == 4) {
                                                 echo '<a href="#" class="ms-3 editbtn"><span class="fa fa-pencil"></span></a>';
-                                                echo '<a href="#" class="ms-3 deletebtn"><span class="fa fa-trash"></span></a>';
+                                                echo '<form action="delete.php" method="post" onSubmit="return confirm(' . "'êtes-vous sûr de vouloir supprimer?' " . ')">
+                                                                  <button type="submit" name="id_entreprise" value="' . $row['id_entreprise'] . '" class="btn-link"><span class="fa fa-trash"></span></button>
+                                                      </form>';
                                           }
                                           echo '<a href="delete.php?id=' . $row['id_entreprise'] . '" title="Statistique" class="ms-3"><span class="fa fa-signal"></span></a>';
                                           echo "</td>";
