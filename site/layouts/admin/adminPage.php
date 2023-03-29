@@ -7,6 +7,8 @@ if ($_SESSION["id"] !==1 || $_SESSION["loggedin"] !== true) {
       header("Location: ../../login.php");
       exit;
 }
+
+require_once "../../config.php";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -27,7 +29,12 @@ if ($_SESSION["id"] !==1 || $_SESSION["loggedin"] !== true) {
 </head>
 
 <body>
+      <?php
+            $req = $pdo->prepare("SELECT COUNT(id_c) FROM `compte` WHERE validite = 1");
+            $req->execute();
+            $nbcompte = $req->fetchColumn();
 
+      ?>
       <!-- Navbar -->
       <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
@@ -94,7 +101,7 @@ if ($_SESSION["id"] !==1 || $_SESSION["loggedin"] !== true) {
                                                                         class="btn btn-primary"> Gérer les
                                                                         comptes</a>
                                                                   <div class="h2 mb-0 font-weight-bold text-gray-800">
-                                                                        50
+                                                                        <?php echo $nbcompte; ?>
                                                                   </div>
                                                             </div>
                                                       </div>
