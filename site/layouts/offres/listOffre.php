@@ -153,7 +153,9 @@ require_once "../../config.php";
 
                                                 echo "<td>";
                                                 if ($_SESSION['id'] == 1 || $_SESSION['id'] == 3) {
-                                                      echo '<a href="delete.php?id=' . $row['id_offre'] . '" class="btn btn-outline-primary btn-sm ms-3">POSTULER</a>';
+                                                      echo '<form action="Postuler.php" method="post">
+                                                                  <button type="submit" name="id_offre" value="' . $row['id_offre'] . '" class="btn-link">POSTULER</button>
+                                                            </form>';
                                                       echo '<form action="wishlist.php" method="post">
                                                                   <button type="submit" name="id_offre" value="' . $row['id_offre'] . '" class="btn-link">WHISHLIST</button>
                                                             </form>';
