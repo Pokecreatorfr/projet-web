@@ -59,8 +59,7 @@ require_once "../../config.php";
                                                             class="form-select" aria-label="Default select example">
                                                             <?php 
                                           while($tab = $entSel->fetch()){
-                                                echo'<option selected>Entreprises</option>';
-                                                echo '<option value="'.$tab[0].'">'.$tab[1].' '.$tab[2].'</option>';
+                                                echo '<option value="'.$tab[0].'">'.$tab[1].'</option>';
                                           }
                                           ?>
                                                       </select>
@@ -130,22 +129,20 @@ require_once "../../config.php";
 
                                     <div class="mb-3">
                                           <label for="FormInput" class="form-label Offre">Site</label>
-                                          <div class="row">
-
-                                                <div class="col loc">
-                                                      <div class="mb-3">
-                                                            <select name="ville" id="SelectVille" class="form-select"
-                                                                  aria-label="Default select example">
-                                                                  <?php 
-                                          while($tab = $villeSel->fetch()){
-                                                echo'<option selected>Ville</option>';
-                                                echo '<option value="'.$tab[0].'">'.$tab[1].' '.$tab[2].'</option>';
-                                          }
-                                          ?>
-                                                            </select>
-                                                      </div>
-                                                </div>
-
+                                          <div class="mb-3">
+                                                <input class="form-control" list="datalistOptions" id="exampleDataList" name="ville" placeholder="Commencez à ecrire..." >
+                                                <datalist id="datalistOptions">
+                                                            <?php
+                                                                  while ($tab = $villeSel->fetch()) {
+                                                                        $code_postal = $tab[2];
+                                                                        /* rajoute un zero devant si le code postal est a 4 chiffres */
+                                                                        if (strlen($code_postal) == 4) {
+                                                                              $code_postal = '0' . $code_postal;
+                                                                        }
+                                                                        echo '<option value="' . $tab[1] . '(' . $code_postal. ')' . '">'  . '</option>';
+                                                                  }
+                                                            ?>
+                                                </datalist>
                                           </div>
                                     </div>
                               </div>
