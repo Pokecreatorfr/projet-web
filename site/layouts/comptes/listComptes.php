@@ -251,6 +251,7 @@ if ($_SESSION["id"]!==1 || $_SESSION["loggedin"] !== true) {
                   <div class="modal-body text-center">
                         <a href="createPilote.php" type="button" class="btn btn-secondary btn-lg">Pilote</a>
                         <a href="createEtudiant.php" type="button" class="btn btn-secondary btn-lg ms-5">Etudiant</a>
+                        <a href="createPro.php" type="button" class="btn btn-secondary btn-lg ms-5">Pro</a>
                   </div>
                   <div class="modal-footer">
                   </div>
