@@ -27,6 +27,7 @@ if ($size == 0) {
 $first_Name = $_POST["nom"];
 $last_Name = $_POST["prenom"];
 $Sexe = $_POST["sexe"];
+$promo = $_POST["promo"];
 
 //set the variable for the ville of the person
 $Ville = substr($_POST["ville"] , 0 , -7);
@@ -94,7 +95,10 @@ $compte_centre_creation->bindParam(":id_c", $id_etudiant_created);
 $compte_centre_creation->bindParam(":id_ville", $idville_seleced);
 $compte_centre_creation->execute();
 
-
+$promo_creation=$pdo->prepare("INSERT INTO etre_promo (id_c, id_promotion ) VALUES ( :id_c, :id_promo )");
+$promo_creation->bindParam(":id_c", $id_etudiant_created);
+$promo_creation->bindParam(":id_promo", $promo);
+$promo_creation->execute();
 
 
 

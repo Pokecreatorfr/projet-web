@@ -125,8 +125,7 @@ require_once "../../config.php";
                                                       aria-label="Default select example">
                                                       <?php
                                                                   while ($tab = $promoSel->fetch()) {
-                                                                        echo '<option selected>Promotion</option>';
-                                                                        echo '<option value="' . $tab[0] . '">' . $tab[1] . ' ' . $tab[2] . '</option>';
+                                                                        echo '<option value="' . $tab[0] . '">' . $tab[1] . '</option>';
                                                                   }
                                                                   ?>
                                                 </select>
